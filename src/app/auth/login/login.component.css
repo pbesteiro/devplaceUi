@@ -1,0 +1,60 @@
+.login-container {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+mat-card-header {
+  justify-content: center;
+}
+
+mat-card-title {
+  font-size: 3em !important;
+  padding-bottom: 25px;
+}
+
+.card-login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.field-login {
+  min-width: 450px;
+}
+
+.password-icon {
+  cursor: pointer !important;
+}
+
+.email-icon {
+  margin-right: 6px;
+}
+
+.login-button {
+  min-width: 250px;
+}
+
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner .8s linear infinite;
+}

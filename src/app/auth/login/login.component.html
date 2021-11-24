@@ -1,0 +1,43 @@
+<div class="login-container">
+
+  <mat-card>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+      <mat-card-header>
+        <mat-card-title> DevPlaces </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content class="card-login-container">
+
+        <!-- Email -->
+        <mat-form-field appearance="fill" class="field-login">
+          <mat-label for="name">Enter your email</mat-label>
+          <input id="email" matInput placeholder="pat@example.com" required formControlName="email">
+          <mat-icon class="email-icon" matSuffix>'email'</mat-icon>
+        </mat-form-field>
+
+        <!-- Password -->
+        <mat-form-field appearance="fill" class="field-login">
+          <mat-label for="password">Enter your password</mat-label>
+          <input required id="password" matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+          <span mat-icon-button class="password-icon" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </span>
+        </mat-form-field>
+
+        <mat-card-actions>
+
+          <!-- Submit -->
+          <button class="login-button" [class.spinner]="loading" [disabled]="loading" mat-raised-button color="primary" type="submit">Login</button>
+
+        </mat-card-actions>
+
+      </mat-card-content>
+
+    </form>
+
+  </mat-card>
+
+</div>
