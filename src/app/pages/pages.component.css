@@ -10,5 +10,13 @@
   justify-content: flex-start;
 }
 .example-sidenav {
-  padding: 20px;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  cursor: pointer;
+  padding: 15px;
 }

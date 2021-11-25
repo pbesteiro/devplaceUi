@@ -7,12 +7,27 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { RouterModule } from "@angular/router";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatIconModule } from "@angular/material/icon";
+import {CalendarComponent} from "./calendar/calendar.component";
+import {FullCalendarModule} from "@fullcalendar/angular";
+
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import interactionPlugin from '@fullcalendar/interaction';
+
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  timeGridPlugin,
+  listPlugin,
+  interactionPlugin
+])
 
 @NgModule({
   declarations: [
     PagesComponent,
     UsersComponent,
-    DashboardComponent
+    DashboardComponent,
+    CalendarComponent,
   ],
   imports: [
     CommonModule,
@@ -20,6 +35,7 @@ import { MatIconModule } from "@angular/material/icon";
     MatIconModule,
     MatSidenavModule,
     RouterModule,
+    FullCalendarModule,
   ],
   exports: [
   ]
