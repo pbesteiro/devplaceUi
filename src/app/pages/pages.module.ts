@@ -14,6 +14,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
+import {MatMenuModule} from "@angular/material/menu";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -33,6 +34,7 @@ FullCalendarModule.registerPlugins([
     CommonModule,
     ComponentsModule,
     MatIconModule,
+    MatMenuModule,
     MatSidenavModule,
     RouterModule,
     FullCalendarModule,
