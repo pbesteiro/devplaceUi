@@ -11,20 +11,19 @@ export const INITIAL_EVENTS: EventInput[] = [
     startRecur: '2021-11-20',
     endRecur: '2021-12-25',
   }
-  /*
-  {
-    id: createEventId(),
-    title: 'All-day event',
-    allDay: false,
-    start: '2021-11-25',
-    end: '2021-12-25',
-    startTime: '10:00',
-    endTime: '13:00',
-    daysOfWeek: [ '4' ], // these recurrent events move separately
-    color: 'red'
-  },
-  */
 ];
+
+export function createEvent(title: string, from: any, to: any, days: any, hourFrom: any, hourTo: any) {
+  const newEvent = {
+    title: title,
+    daysOfWeek: days,
+    startTime: hourFrom,
+    endTime: hourTo,
+    startRecur: from,
+    endRecur: to,
+  }
+  INITIAL_EVENTS.push(newEvent)
+}
 
 export function createEventId() {
   return String(eventGuid++);

@@ -15,6 +15,16 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import {MatMenuModule} from "@angular/material/menu";
+import {MatDialogModule} from "@angular/material/dialog";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {CreateEditComponent} from "./courses/create-edit/create-edit.component";
+import {MatCardModule} from "@angular/material/card";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule, MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -29,15 +39,27 @@ FullCalendarModule.registerPlugins([
     UsersComponent,
     DashboardComponent,
     CalendarComponent,
+    CreateEditComponent,
   ],
   imports: [
     CommonModule,
     ComponentsModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatIconModule,
     MatMenuModule,
     MatSidenavModule,
     RouterModule,
     FullCalendarModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   exports: [
   ]

@@ -12,6 +12,7 @@ import { AuthenticationService } from "./services/auth.service";
 import { appInitializer } from "./helpers/app.initializer";
 import { ErrorInterceptor } from "./interceptors/error.interceptor";
 import { jwtInterceptorProvider } from "./interceptors/jwt.interceptor";
+import {MAT_DATE_LOCALE} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -35,8 +36,10 @@ import { jwtInterceptorProvider } from "./interceptors/jwt.interceptor";
   providers: [
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthenticationService] },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    jwtInterceptorProvider
-  ],
+    jwtInterceptorProvider,
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
