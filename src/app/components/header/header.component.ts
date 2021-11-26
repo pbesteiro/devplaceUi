@@ -21,11 +21,13 @@ export class HeaderComponent implements OnInit {
       title: 'Cerrar sesión',
       text: "¿Desea cerrar su sesión?",
       icon: 'warning',
+      backdrop: 'rgba(103, 58, 183, 0.3)',
+      heightAuto: false,
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
         this.authService.logout()

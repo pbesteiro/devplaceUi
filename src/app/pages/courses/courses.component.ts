@@ -15,11 +15,7 @@ export class CoursesComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(CreateEditComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+    this.dialog.open(CreateEditComponent);
   }
 
 }

@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {createEvent} from "../../../events/event-utils";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {CoursesComponent} from "../courses.component";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-create-edit',
@@ -30,7 +33,9 @@ export class CreateEditComponent implements OnInit {
 
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<CoursesComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +52,19 @@ export class CreateEditComponent implements OnInit {
     const days = this.courseForm.value.days
 
     createEvent(title, from, to, days, hourFrom, hourTo)
+
+    this.dialogRef.close();
+
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'curso creado',
+      backdrop: 'rgba(103, 58, 183, 0.3)',
+      heightAuto: false,
+      showConfirmButton: false,
+      timer: 1500
+    })
+
   }
 
 }
