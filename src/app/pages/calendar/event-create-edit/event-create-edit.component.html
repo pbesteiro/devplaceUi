@@ -1,0 +1,88 @@
+<div class="create-edit-container">
+  <mat-card>
+
+    <form [formGroup]="courseForm" (ngSubmit)="createEditCourse()">
+
+      <mat-card-header>
+        <mat-card-title> Cursos </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content class="card-create-edit-container">
+
+        <mat-form-field appearance="fill" class="field-create-edit-modal">
+          <mat-label>Curso</mat-label>
+          <mat-select formControlName="name">
+            <mat-option *ngFor="let course of courses" [value]="course._id">
+              {{course.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Inicia</mat-label>
+            <input matInput [matDatepicker]="dateFrom" formControlName="dateFrom">
+            <mat-datepicker-toggle matSuffix [for]="dateFrom"></mat-datepicker-toggle>
+            <mat-datepicker #dateFrom></mat-datepicker>
+          </mat-form-field>
+          <span class="separator-dates"></span>
+          <mat-form-field appearance="fill">
+            <mat-label>Finaliza</mat-label>
+            <input matInput [matDatepicker]="dateTo" formControlName="dateTo">
+            <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
+            <mat-datepicker #dateTo></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field>
+          <mat-label>Dias</mat-label>
+          <mat-select formControlName="days" multiple>
+            <mat-option *ngFor="let day of daysList" [value]="day.id">
+              {{day.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div>
+          <mat-form-field appearance="fill" class="field-hour-create-edit-modal">
+            <mat-label for="hourFrom">Horario</mat-label>
+            <input
+              id="hourFrom"
+              matInput
+              type="time"
+              formControlName="hourFrom"
+            >
+          </mat-form-field>
+          <span class="separator-hours"></span>
+          <mat-form-field appearance="fill" class="field-hour-create-edit-modal">
+            <mat-label for="hourTo">Horario</mat-label>
+            <input
+              id="hourTo"
+              matInput
+              type="time"
+              formControlName="hourTo"
+            >
+          </mat-form-field>
+        </div>
+
+      </mat-card-content>
+
+
+
+      <div>
+        <mat-dialog-actions align="center">
+          <button mat-button
+                  [disabled]="courseForm.invalid"
+          >Confirmar
+          </button>
+        </mat-dialog-actions>
+      </div>
+
+    </form>
+
+  </mat-card>
+
+
+
+</div>

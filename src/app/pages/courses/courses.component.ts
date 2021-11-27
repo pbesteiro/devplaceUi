@@ -4,8 +4,11 @@ import {CreateEditComponent} from "./create-edit/create-edit.component";
 import {UserModel} from "../../models/user.model";
 import {MatTableDataSource} from "@angular/material/table";
 import {INITIAL_EVENTS} from "../../events/event-utils";
+import {first} from "rxjs";
+import {CourseModel} from "../../models/course.model";
+import {CourseService} from "../../services/course.services";
 
-const ELEMENT_DATA: any[] = [];
+const courses: CourseModel[] = [];
 
 @Component({
   selector: 'app-courses',
@@ -15,11 +18,12 @@ const ELEMENT_DATA: any[] = [];
 export class CoursesComponent implements OnInit {
 
   constructor(
+    private courseService: CourseService,
     private dialog: MatDialog
   ) { }
 
-  displayedColumns: string[] = ['title'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  displayedColumns: string[] = ['name'];
+  dataSource = new MatTableDataSource(courses);
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -27,7 +31,12 @@ export class CoursesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataSource.data = INITIAL_EVENTS
+    this.courseService.getAll()
+      .pipe(
+        first()
+      ).subscribe( (response: any) => {
+      this.dataSource.data = response
+    })
   }
 
   openDialog() {

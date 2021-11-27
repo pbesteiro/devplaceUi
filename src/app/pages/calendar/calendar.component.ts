@@ -3,6 +3,11 @@ import {CalendarOptions, DateSelectArg, EventClickArg, EventInput} from "@fullca
 import {EventApi} from "@fullcalendar/core";
 import {createEventId, INITIAL_EVENTS} from "../../events/event-utils";
 import esLocale from "@fullcalendar/core/locales/es-us"
+import {CreateEditComponent} from "../courses/create-edit/create-edit.component";
+import {EventCreateEditComponent} from "./event-create-edit/event-create-edit.component";
+import {MatDialog} from "@angular/material/dialog";
+import {first} from "rxjs";
+import {CalendarEventsService} from "../../services/calendar-events.service";
 
 @Component({
   selector: 'app-calendar',
@@ -13,16 +18,35 @@ export class CalendarComponent implements OnInit {
 
   calendarVisible = true;
   currentEvents: EventApi[] = [];
+  calendarEvents: any[] = []
   initialLocaleCode = 'es';
-  public calendarOptions: CalendarOptions = this.initCalendar();
+  public calendarOptions: any = this.initCalendar();
 
   ngOnInit(): void {
+    this.calendarEvensService.getAll()
+      .subscribe( (response: any) => {
+        response.forEach( (calendarEvent: any) => {
+          console.log(calendarEvent)
+          this.calendarEvents.push({
+            title: calendarEvent['course'],
+            daysOfWeek: calendarEvent['days'],
+            startTime: calendarEvent['timeFrom'],
+            endTime: calendarEvent['timeTo'],
+            startRecur: calendarEvent['dateFrom'],
+            endRecur: calendarEvent['dateTo'],
+          })
+        })
+      })
     setTimeout(() => {
       this.calendarOptions.footerToolbar = false;
+      console.log(this.calendarEvents)
     }, 100)
   }
 
-  constructor() {
+  constructor(
+    private dialog: MatDialog,
+    private calendarEvensService: CalendarEventsService
+  ) {
   }
 
   private initCalendar(): CalendarOptions {
@@ -36,6 +60,7 @@ export class CalendarComponent implements OnInit {
       },
       locale: esLocale,
       initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+      // initialEvents: this.calendarEvents,
       contentHeight: 'auto',
       buttonIcons: false,
       weekends: true,
@@ -81,6 +106,10 @@ export class CalendarComponent implements OnInit {
 
   handleEvents(events: EventApi[]) {
     this.currentEvents = events;
+  }
+
+  openDialog() {
+    this.dialog.open(EventCreateEditComponent);
   }
 
 }
