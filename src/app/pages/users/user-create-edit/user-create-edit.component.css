@@ -1,0 +1,8 @@
+.field-user-create-edit-modal {
+  min-width: 450px;
+}
+
+.card-user-create-edit-container {
+  display: flex;
+  flex-direction: column;
+}

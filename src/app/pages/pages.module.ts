@@ -26,6 +26,8 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule, MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {CoursesComponent} from "./courses/courses.component";
+import {MatTableModule} from "@angular/material/table";
+import {UserCreateEditComponent} from "./users/user-create-edit/user-create-edit.component";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -42,6 +44,7 @@ FullCalendarModule.registerPlugins([
     CalendarComponent,
     CreateEditComponent,
     CoursesComponent,
+    UserCreateEditComponent,
   ],
   imports: [
     CommonModule,
@@ -61,7 +64,8 @@ FullCalendarModule.registerPlugins([
     MatDatepickerModule,
     MatNativeDateModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule
   ],
   exports: [
   ]
