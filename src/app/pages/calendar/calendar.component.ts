@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {CalendarOptions, DateSelectArg, EventClickArg, EventInput} from "@fullcalendar/angular";
 import {EventApi} from "@fullcalendar/core";
 import {createEventId, INITIAL_EVENTS} from "../../events/event-utils";
@@ -20,13 +20,13 @@ export class CalendarComponent implements OnInit {
   currentEvents: EventApi[] = [];
   calendarEvents: any[] = []
   initialLocaleCode = 'es';
-  public calendarOptions: any = this.initCalendar();
+  // public calendarOptions: any = this.initCalendar();
+  public calendarOptions: any;
 
   ngOnInit(): void {
     this.calendarEvensService.getAll()
       .subscribe( (response: any) => {
         response.forEach( (calendarEvent: any) => {
-          console.log(calendarEvent)
           this.calendarEvents.push({
             title: calendarEvent['course'],
             daysOfWeek: calendarEvent['days'],
@@ -37,10 +37,17 @@ export class CalendarComponent implements OnInit {
           })
         })
       })
+
+    setTimeout( () => {
+      this.calendarOptions = this.initCalendar();
+    }, 100)
+
+    /*
     setTimeout(() => {
       this.calendarOptions.footerToolbar = false;
       console.log(this.calendarEvents)
     }, 100)
+    */
   }
 
   constructor(
@@ -59,8 +66,8 @@ export class CalendarComponent implements OnInit {
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
       locale: esLocale,
-      initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
-      // initialEvents: this.calendarEvents,
+      //initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+      events: this.calendarEvents,
       contentHeight: 'auto',
       buttonIcons: false,
       weekends: true,
