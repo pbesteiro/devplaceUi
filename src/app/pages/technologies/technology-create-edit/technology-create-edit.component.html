@@ -1,0 +1,34 @@
+<div class="technology-create-edit-container">
+
+  <mat-card>
+
+    <form [formGroup]="technologyForm" (ngSubmit)="createEditTechnology()">
+
+      <mat-card-header>
+        <mat-card-title> Tecnología </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content class="card-technology-create-edit-container">
+
+        <!-- Name -->
+        <mat-form-field appearance="fill" class="field-login" class="field-technology-create-edit-modal">
+          <mat-label for="name">Nombre</mat-label>
+          <input id="name" matInput placeholder="Ej: javascript" required formControlName="name">
+        </mat-form-field>
+
+      </mat-card-content>
+
+      <div>
+        <mat-dialog-actions align="center">
+          <button mat-button
+                  [disabled]="technologyForm.invalid"
+          >Confirmar
+          </button>
+        </mat-dialog-actions>
+      </div>
+
+    </form>
+
+  </mat-card>
+
+</div>

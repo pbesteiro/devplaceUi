@@ -1,0 +1,12 @@
+.field-course-create-edit-modal {
+  min-width: 450px;
+}
+
+.card-course-create-edit-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-area-course-create-edit-modal {
+  min-height: 120px;
+}

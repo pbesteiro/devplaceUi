@@ -28,7 +28,7 @@ export class CalendarComponent implements OnInit {
       .subscribe( (response: any) => {
         response.forEach( (calendarEvent: any) => {
           this.calendarEvents.push({
-            title: calendarEvent['course'],
+            title: calendarEvent['course']['name'],
             daysOfWeek: calendarEvent['days'],
             startTime: calendarEvent['timeFrom'],
             endTime: calendarEvent['timeTo'],

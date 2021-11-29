@@ -4,7 +4,7 @@ export class CourseModel {
   photo: string;
   requirements: string;
   description: string;
-  contents: boolean;
+  contents: string;
   technology: string[];
 
   constructor(
@@ -13,7 +13,7 @@ export class CourseModel {
     photo: string,
     requirements: string,
     description: string,
-    contents: boolean,
+    contents: string,
     technology: string[],
   ) {
     this._id = _id;

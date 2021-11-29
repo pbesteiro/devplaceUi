@@ -10,4 +10,8 @@ export class CourseService {
   getAll() {
     return this.http.get<CourseModel[]>(`${environment.apiUrl}/courses`);
   }
+
+  create(course: CourseModel) {
+    return this.http.post(`${environment.apiUrl}/courses`, course);
+  }
 }

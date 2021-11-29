@@ -17,6 +17,8 @@ const courses: CourseModel[] = [];
 })
 export class CoursesComponent implements OnInit {
 
+  course: CourseModel = new CourseModel('', '', '', '', '', '', [])
+
   constructor(
     private courseService: CourseService,
     private dialog: MatDialog
@@ -40,7 +42,17 @@ export class CoursesComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(CreateEditComponent);
+    const dialogRef = this.dialog.open(CreateEditComponent, {
+      data: { course: this.course}
+    });
+
+    dialogRef.afterClosed()
+      .subscribe( result => {
+        const data = this.dataSource.data;
+        this.course = result;
+        data.push(this.course)
+        this.dataSource.data = data;
+      })
   }
 
 }

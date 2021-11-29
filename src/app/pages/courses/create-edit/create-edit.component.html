@@ -1,0 +1,62 @@
+<div class="course-create-edit-container">
+
+  <mat-card>
+
+    <form [formGroup]="courseForm" (ngSubmit)="createEditCourse()">
+
+      <mat-card-header>
+        <mat-card-title> Curso </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content class="card-course-create-edit-container">
+
+        <!-- Name -->
+        <mat-form-field appearance="fill" class="field-course-create-edit-modal">
+          <mat-label for="name">Nombre</mat-label>
+          <input id="name" autocomplete="off" matInput placeholder="Ej: Curso de introducción a la programación" required formControlName="name">
+        </mat-form-field>
+
+        <!-- Technology -->
+        <mat-form-field appearance="fill" class="field-course-create-edit-modal">
+          <mat-label>Tecnología</mat-label>
+          <mat-select formControlName="technologyId">
+            <mat-option *ngFor="let technology of technologies" [value]="technology._id">
+              {{technology.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Contents -->
+        <mat-form-field appearance="fill" class="field-course-create-edit-modal">
+          <mat-label for="contents">Contenidos</mat-label>
+          <textarea class="text-area-course-create-edit-modal" id="contents" autocomplete="off" matInput placeholder="Ej: Este es elcontenido" required formControlName="contents"></textarea>
+        </mat-form-field>
+
+        <!-- Description -->
+        <mat-form-field appearance="fill" class="field-course-create-edit-modal">
+          <mat-label for="description">Descripción</mat-label>
+          <textarea class="text-area-course-create-edit-modal" id="description" autocomplete="off" matInput placeholder="Ej: Esta es la descripcion" required formControlName="description"></textarea>
+        </mat-form-field>
+
+        <!-- Requirements -->
+        <mat-form-field appearance="fill" class="field-course-create-edit-modal">
+          <mat-label for="requirements">Requisitos</mat-label>
+          <textarea class="text-area-course-create-edit-modal" id="requirements" autocomplete="off" matInput placeholder="Ej: Estos son los requisitos" required formControlName="requirements"></textarea>
+        </mat-form-field>
+
+      </mat-card-content>
+
+      <div>
+        <mat-dialog-actions align="center">
+          <button mat-button
+                  [disabled]="courseForm.invalid"
+          >Confirmar
+          </button>
+        </mat-dialog-actions>
+      </div>
+
+    </form>
+
+  </mat-card>
+
+</div>

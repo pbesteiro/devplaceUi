@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import {CourseService} from "../../../services/course.services";
 import {first} from "rxjs";
 import {CourseModel} from "../../../models/course.model";
+import {CalendarEventsService} from "../../../services/calendar-events.service";
 
 @Component({
   selector: 'app-event-create-edit',
@@ -38,6 +39,7 @@ export class EventCreateEditComponent implements OnInit {
 
 
   constructor(
+    private calendarEventsService: CalendarEventsService,
     private courseService: CourseService,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<CoursesComponent>,
@@ -56,27 +58,31 @@ export class EventCreateEditComponent implements OnInit {
   createEditCourse() {
     console.log(this.courseForm.value);
 
-    const title = this.courseForm.value.name;
-    const from = this.courseForm.value.dateFrom;
-    const to = this.courseForm.value.dateTo;
-    const hourFrom = this.courseForm.value.hourFrom;
-    const hourTo = this.courseForm.value.hourTo;
-    const days = this.courseForm.value.days
+    const newCalendarEvent = {
+      course: this.courseForm.value.name,
+      dateFrom: this.courseForm.value.dateFrom.toISOString().split('T')[0],
+      dateTo: this.courseForm.value.dateTo.toISOString().split('T')[0],
+      timeFrom: this.courseForm.value.hourFrom,
+      timeTo: this.courseForm.value.hourTo,
+      days: this.courseForm.value.days,
+    }
 
-    createEvent(title, from, to, days, hourFrom, hourTo)
+    console.log(newCalendarEvent)
 
-    this.dialogRef.close();
-
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'curso creado',
-      backdrop: 'rgba(103, 58, 183, 0.3)',
-      heightAuto: false,
-      showConfirmButton: false,
-      timer: 1500
-    })
-
+    // createEvent(title, from, to, days, hourFrom, hourTo)
+    this.calendarEventsService.create(newCalendarEvent)
+      .subscribe( () => {
+        this.dialogRef.close();
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'curso creado',
+          backdrop: 'rgba(103, 58, 183, 0.3)',
+          heightAuto: false,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
   }
 
 }
