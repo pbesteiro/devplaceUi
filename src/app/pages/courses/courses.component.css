@@ -14,3 +14,7 @@ table {
 .courses-toolbar {
   display: flex;
 }
+
+.mat-row {
+  cursor: pointer;
+}

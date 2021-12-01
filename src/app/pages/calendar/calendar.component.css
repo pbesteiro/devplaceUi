@@ -1,3 +1,9 @@
+.calendar-toolbar {
+  display: flex;
+  flex-direction: row-reverse;
+  padding-bottom: 25px;
+}
+
 .fc .fc-scrollgrid-section-liquid {
   height : 1px !important;
 }

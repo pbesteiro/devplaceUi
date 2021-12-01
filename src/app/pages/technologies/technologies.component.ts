@@ -15,7 +15,7 @@ const technologies: TechnologyModel[] = []
 })
 export class TechnologiesComponent implements OnInit {
 
-  technology: TechnologyModel = new TechnologyModel('');
+  technology: TechnologyModel = new TechnologyModel('', '', false);
 
   constructor(
     private dialog: MatDialog,

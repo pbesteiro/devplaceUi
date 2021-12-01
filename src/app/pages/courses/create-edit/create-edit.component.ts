@@ -16,13 +16,14 @@ import {TechnologyModel} from "../../../models/technology.model";
 export class CreateEditComponent implements OnInit {
 
   technologies: TechnologyModel[] = [];
+  messageTitle: string = '';
 
   public courseForm: FormGroup = this.fb.group({
-    name: new FormControl('', [Validators.required]),
-    technologyId: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
-    contents: new FormControl('', [Validators.required]),
-    requirements: new FormControl('', [Validators.required]),
+    name: new FormControl(this.data.course.name, [Validators.required]),
+    technologyId: new FormControl(this.data.course.technology ? this.data.course.technology._id : '', [Validators.required]),
+    description: new FormControl(this.data.course.description, [Validators.required]),
+    contents: new FormControl(this.data.course.contents, [Validators.required]),
+    requirements: new FormControl(this.data.course.requirements, [Validators.required]),
   })
 
   constructor(
@@ -39,26 +40,48 @@ export class CreateEditComponent implements OnInit {
         first()
       ).subscribe( response => {
         this.technologies = response;
-      console.log(this.technologies)
     })
   }
 
   createEditCourse() {
-    console.log(this.courseForm.value)
-    this.courseService.create(this.courseForm.value)
-      .subscribe( () => {
-        this.dialogRef.close(this.courseForm.value)
-      })
 
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Curso creado',
-        backdrop: 'rgba(103, 58, 183, 0.3)',
-        heightAuto: false,
-        showConfirmButton: false,
-        timer: 1500
+    // GET technology by ID
+    const technology = this.technologies.find( tech => tech._id === this.courseForm.value.technologyId);
+
+    // EDIT
+    if (this.data.editAction) {
+      this.messageTitle = 'Curso Actualizado';
+      // TODO: this.courseService.update()
+      this.dialogRef.close({
+        formValue: this.courseForm.value,
+        technology,
+        edited: true,
+        courseId: this.data.courseId,
       })
+    }
+    // CREATE
+    else {
+      this.messageTitle = 'Curso Creado';
+      this.courseService.create(this.courseForm.value)
+        .subscribe( () => {
+          this.dialogRef.close({
+            formValue: this.courseForm.value,
+            technology,
+            edited: false
+          })
+        })
+    }
+
+    // Comunication
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: this.messageTitle,
+      backdrop: 'rgba(103, 58, 183, 0.3)',
+      heightAuto: false,
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 
 }

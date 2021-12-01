@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {CreateEditComponent} from "./create-edit/create-edit.component";
-import {UserModel} from "../../models/user.model";
 import {MatTableDataSource} from "@angular/material/table";
-import {INITIAL_EVENTS} from "../../events/event-utils";
 import {first} from "rxjs";
 import {CourseModel} from "../../models/course.model";
 import {CourseService} from "../../services/course.services";
+import {TechnologyModel} from "../../models/technology.model";
 
 const courses: CourseModel[] = [];
 
@@ -17,11 +16,12 @@ const courses: CourseModel[] = [];
 })
 export class CoursesComponent implements OnInit {
 
-  course: CourseModel = new CourseModel('', '', '', '', '', '', [])
+  course: CourseModel = new CourseModel('', '', '', '', '', '', new TechnologyModel('', '', false))
+  editAction: boolean = false;
 
   constructor(
     private courseService: CourseService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) { }
 
   displayedColumns: string[] = ['name'];
@@ -41,17 +41,27 @@ export class CoursesComponent implements OnInit {
     })
   }
 
-  openDialog() {
+  openDialog(course?: CourseModel) {
+
+    if (course) {
+      this.course = course;
+      this.editAction = true
+    }
+
     const dialogRef = this.dialog.open(CreateEditComponent, {
-      data: { course: this.course}
+      disableClose: true,
+      data: {
+        course: this.course,
+        editAction: this.editAction,
+        courseId: this.course._id,
+      }
     });
 
     dialogRef.afterClosed()
       .subscribe( result => {
-        const data = this.dataSource.data;
-        this.course = result;
-        data.push(this.course)
-        this.dataSource.data = data;
+        if ( result ) {
+          window.location.reload();
+        }
       })
   }
 

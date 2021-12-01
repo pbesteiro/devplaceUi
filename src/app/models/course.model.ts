@@ -1,3 +1,5 @@
+import {TechnologyModel} from "./technology.model";
+
 export class CourseModel {
   _id: string;
   name: string;
@@ -5,7 +7,7 @@ export class CourseModel {
   requirements: string;
   description: string;
   contents: string;
-  technology: string[];
+  technology: TechnologyModel;
 
   constructor(
     _id: string,
@@ -14,7 +16,7 @@ export class CourseModel {
     requirements: string,
     description: string,
     contents: string,
-    technology: string[],
+    technology: TechnologyModel,
   ) {
     this._id = _id;
     this.name = name;
@@ -22,6 +24,6 @@ export class CourseModel {
     this.requirements = requirements;
     this.description = description;
     this.contents = contents;
-    this.technology = []
+    this.technology = new TechnologyModel('', '', false)
   }
 }
