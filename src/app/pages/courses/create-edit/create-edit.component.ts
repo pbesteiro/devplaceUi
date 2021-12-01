@@ -52,12 +52,15 @@ export class CreateEditComponent implements OnInit {
     if (this.data.editAction) {
       this.messageTitle = 'Curso Actualizado';
       // TODO: this.courseService.update()
-      this.dialogRef.close({
-        formValue: this.courseForm.value,
-        technology,
-        edited: true,
-        courseId: this.data.courseId,
-      })
+      this.courseService.update(this.data.courseId, this.courseForm.value)
+        .subscribe( () => {
+          this.dialogRef.close({
+            formValue: this.courseForm.value,
+            technology,
+            edited: true,
+            courseId: this.data.courseId,
+          })
+        })
     }
     // CREATE
     else {

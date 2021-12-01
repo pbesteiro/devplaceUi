@@ -7,3 +7,7 @@
 .fc .fc-scrollgrid-section-liquid {
   height : 1px !important;
 }
+
+.fc-daygrid-day-events .fc-daygrid-event-harness {
+  cursor: pointer !important;
+}

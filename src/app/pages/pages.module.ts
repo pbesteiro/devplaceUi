@@ -31,6 +31,9 @@ import {UserCreateEditComponent} from "./users/user-create-edit/user-create-edit
 import {EventCreateEditComponent} from "./calendar/event-create-edit/event-create-edit.component";
 import {TechnologiesComponent} from "./technologies/technologies.component";
 import {TechnologyCreateEditComponent} from "./technologies/technology-create-edit/technology-create-edit.component";
+import {EventDetailComponent} from "./calendar/event-detail/event-detail.component";
+import {StudentsComponent} from "./students/students.component";
+import {MentorsComponent} from "./mentors/mentors.component";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -51,6 +54,9 @@ FullCalendarModule.registerPlugins([
     EventCreateEditComponent,
     TechnologiesComponent,
     TechnologyCreateEditComponent,
+    EventDetailComponent,
+    StudentsComponent,
+    MentorsComponent,
   ],
   imports: [
     CommonModule,

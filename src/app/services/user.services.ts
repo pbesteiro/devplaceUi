@@ -10,4 +10,16 @@ export class UserService {
   getAll() {
     return this.http.get<UserModel[]>(`${environment.apiUrl}/users`);
   }
+
+  getAllManagers() {
+    return this.http.get<UserModel[]>(`${environment.apiUrl}/users?role=MANAGER`);
+  }
+
+  getAllStudents() {
+    return this.http.get<UserModel[]>(`${environment.apiUrl}/users?role=STUDENT`);
+  }
+
+  getAllMentors() {
+    return this.http.get<UserModel[]>(`${environment.apiUrl}/users?role=MENTOR`);
+  }
 }

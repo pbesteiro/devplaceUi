@@ -8,6 +8,7 @@ import {EventCreateEditComponent} from "./event-create-edit/event-create-edit.co
 import {MatDialog} from "@angular/material/dialog";
 import {first} from "rxjs";
 import {CalendarEventsService} from "../../services/calendar-events.service";
+import {EventDetailComponent} from "./event-detail/event-detail.component";
 
 @Component({
   selector: 'app-calendar',
@@ -34,6 +35,7 @@ export class CalendarComponent implements OnInit {
             endTime: calendarEvent['timeTo'],
             startRecur: calendarEvent['dateFrom'],
             endRecur: calendarEvent['dateTo'],
+            extendedProps: { course: calendarEvent}
           })
         })
       })
@@ -71,13 +73,13 @@ export class CalendarComponent implements OnInit {
       contentHeight: 'auto',
       buttonIcons: false,
       weekends: true,
-      editable: true,
-      selectable: true,
+      editable: false,
+      selectable: false,
       selectMirror: true,
       dayMaxEvents: true,
-      select: this.handleDateSelect.bind(this),
+      // select: this.handleDateSelect.bind(this),
       eventClick: this.handleEventClick.bind(this),
-      eventsSet: this.handleEvents.bind(this)
+      // eventsSet: this.handleEvents.bind(this)
       /*
       you can update a remote database when these fire:
       eventAdd:
@@ -87,32 +89,21 @@ export class CalendarComponent implements OnInit {
     };
   }
 
-  handleDateSelect(selectInfo: DateSelectArg) {
-    const title = prompt('Please enter a new title for your event');
-    const calendarApi = selectInfo.view.calendar;
-
-    calendarApi.unselect(); // clear date selection
-
-    if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay
-      });
-    }
-  }
-
   handleEventClick(clickInfo: EventClickArg) {
+
+    const dialogRef = this.dialog.open(EventDetailComponent, {
+      // disableClose: true,
+      data: {
+        calendarEvent: clickInfo.event._def
+      }
+    });
+
+    /*
     if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
       clickInfo.event.remove();
     }
     console.log(clickInfo.event._def)
-  }
-
-  handleEvents(events: EventApi[]) {
-    this.currentEvents = events;
+    */
   }
 
   openDialog() {

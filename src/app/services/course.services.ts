@@ -14,4 +14,8 @@ export class CourseService {
   create(course: CourseModel) {
     return this.http.post(`${environment.apiUrl}/courses`, course);
   }
+
+  update(id: string, course: CourseModel) {
+    return this.http.patch(`${environment.apiUrl}/courses/${id}`, course)
+  }
 }

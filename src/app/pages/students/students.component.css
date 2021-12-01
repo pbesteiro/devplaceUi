@@ -1,0 +1,15 @@
+:host {
+  width: 100%;
+}
+table {
+  width: 100% !important;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.users-toolbar {
+  display: flex;
+}

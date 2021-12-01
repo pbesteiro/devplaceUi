@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from "../../services/user.services";
-import { first } from "rxjs";
-import {MatTableDataSource} from "@angular/material/table";
+import {UserService} from "../../services/user.services";
 import {UserModel} from "../../models/user.model";
+import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
-import {UserCreateEditComponent} from "./user-create-edit/user-create-edit.component";
+import {UserCreateEditComponent} from "../users/user-create-edit/user-create-edit.component";
 
 const ELEMENT_DATA: UserModel[] = [];
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  selector: 'app-students',
+  templateUrl: './students.component.html',
+  styleUrls: ['./students.component.css']
 })
-export class UsersComponent implements OnInit {
+export class StudentsComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'lastName', 'email'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -29,20 +28,17 @@ export class UsersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userService.getAllManagers()
-      .pipe(
-        first()
-      ).subscribe( response => {
-      this.dataSource.data = response
-    })
+    this.userService.getAllStudents()
+      .subscribe( (response) => {
+        this.dataSource.data = response
+      })
   }
 
   openDialog() {
     this.dialog.open(UserCreateEditComponent, {
       data: {
-        role: 'MANAGER'
+        role: 'STUDENT'
       }
     });
   }
-
 }
