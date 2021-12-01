@@ -34,6 +34,11 @@ import {TechnologyCreateEditComponent} from "./technologies/technology-create-ed
 import {EventDetailComponent} from "./calendar/event-detail/event-detail.component";
 import {StudentsComponent} from "./students/students.component";
 import {MentorsComponent} from "./mentors/mentors.component";
+import {MatTabsModule} from "@angular/material/tabs";
+import {TabAssistantsComponent} from "./calendar/event-detail/tab-assistants/tab-assistants.component";
+import {TabDetailComponent} from "./calendar/event-detail/tab-detail/tab-detail.component";
+import {AddAssistantsComponent} from "./calendar/event-detail/tab-assistants/add-assistants/add-assistants.component";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -57,6 +62,9 @@ FullCalendarModule.registerPlugins([
     EventDetailComponent,
     StudentsComponent,
     MentorsComponent,
+    TabAssistantsComponent,
+    TabDetailComponent,
+    AddAssistantsComponent,
   ],
   imports: [
     CommonModule,
@@ -77,7 +85,9 @@ FullCalendarModule.registerPlugins([
     MatNativeDateModule,
     MatOptionModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    MatTabsModule,
+    MatAutocompleteModule,
   ],
   exports: [
   ]

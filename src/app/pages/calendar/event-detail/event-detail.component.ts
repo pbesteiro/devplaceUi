@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, SimpleChanges} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {CoursesComponent} from "../../courses/courses.component";
 import {CalendarComponent} from "../calendar.component";
@@ -10,20 +10,23 @@ import {CalendarComponent} from "../calendar.component";
 })
 export class EventDetailComponent implements OnInit {
 
-  longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
-  from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
-  originally bred for hunting.`;
+  currentTab = 0;
 
   constructor(
     public dialogRef: MatDialogRef<CalendarComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
-  course: any;
   calendarEvent: any;
 
+  ngOnChanges(changes: SimpleChanges): void {}
+
+  changeTab(event: any) {
+    this.currentTab = event.index;
+  }
+
   ngOnInit(): void {
-    console.log(this.data)
+    this.calendarEvent = this.data.calendarEvent;
   }
 
 }

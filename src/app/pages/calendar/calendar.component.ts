@@ -35,7 +35,7 @@ export class CalendarComponent implements OnInit {
             endTime: calendarEvent['timeTo'],
             startRecur: calendarEvent['dateFrom'],
             endRecur: calendarEvent['dateTo'],
-            extendedProps: { course: calendarEvent}
+            extendedProps: { calendarEvent}
           })
         })
       })
@@ -93,6 +93,7 @@ export class CalendarComponent implements OnInit {
 
     const dialogRef = this.dialog.open(EventDetailComponent, {
       // disableClose: true,
+      width: '800px',
       data: {
         calendarEvent: clickInfo.event._def
       }
