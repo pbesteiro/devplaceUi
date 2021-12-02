@@ -27,6 +27,7 @@ export class EventDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.calendarEvent = this.data.calendarEvent;
+    console.log(this.data.calendarEvent)
   }
 
 }

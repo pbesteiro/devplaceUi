@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {UserService} from "../../../../../services/user.services";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Observable, startWith} from "rxjs";
 import {map} from "rxjs/operators";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {CoursesComponent} from "../../../../courses/courses.component";
 
 @Component({
   selector: 'app-add-assistants',
@@ -19,7 +21,9 @@ export class AddAssistantsComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    public dialogRef: MatDialogRef<CoursesComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   ngOnInit(): void {
@@ -42,11 +46,12 @@ export class AddAssistantsComponent implements OnInit {
 
   private _filter(name: string): any[] {
     const filterValue = name.toLowerCase();
-
     return this.students.filter(option => option.name.toLowerCase().includes(filterValue));
   }
 
   addStudent() {
-    console.log(this.myControl.value)
+    this.dialogRef.close({
+      studentAdded: this.myControl.value
+    })
   }
 }

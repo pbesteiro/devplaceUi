@@ -29,12 +29,12 @@ export class EventCreateEditComponent implements OnInit {
 
 
   public courseForm: FormGroup = this.fb.group({
-    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    dateFrom: new FormControl(new Date(), [Validators.required]),
-    dateTo: new FormControl(new Date(), [Validators.required]),
-    hourTo: new FormControl('', [Validators.required]),
-    hourFrom: new FormControl('', [Validators.required]),
-    days: new FormControl([''], [Validators.required]),
+    name: new FormControl(this.data.calendarEvent.course._id, [Validators.required, Validators.minLength(4)]),
+    dateFrom: new FormControl(this.data.calendarEvent.dateFrom, [Validators.required]),
+    dateTo: new FormControl(this.data.calendarEvent.dateTo, [Validators.required]),
+    hourTo: new FormControl(this.data.calendarEvent.timeTo, [Validators.required]),
+    hourFrom: new FormControl(this.data.calendarEvent.timeFrom, [Validators.required]),
+    days: new FormControl(this.data.calendarEvent.days, [Validators.required]),
   })
 
 

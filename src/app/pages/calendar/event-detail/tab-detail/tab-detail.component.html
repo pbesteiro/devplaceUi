@@ -1,1 +1,7 @@
-<h1> {{ calendarEvent.title  }}</h1>
+<div class="courses-toolbar">
+  <h1> {{ calendarEvent.course.name  }}</h1>
+  <span class="separator"></span>
+  <button mat-fab color="primary" (click)="openDialog()">
+    <mat-icon>edit</mat-icon>
+  </button>
+</div>

@@ -95,7 +95,7 @@ export class CalendarComponent implements OnInit {
       // disableClose: true,
       width: '800px',
       data: {
-        calendarEvent: clickInfo.event._def
+        calendarEvent: clickInfo.event._def.extendedProps['calendarEvent']
       }
     });
 
@@ -108,7 +108,16 @@ export class CalendarComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(EventCreateEditComponent);
+    this.dialog.open(EventCreateEditComponent, {
+      data: {
+        calendarEvent: {
+          course: {
+            _id: '',
+            name: ''
+          }
+        }
+      }
+    });
   }
 
 }

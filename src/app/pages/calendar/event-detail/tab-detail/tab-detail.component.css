@@ -1,0 +1,13 @@
+:host {
+  width: 100%;
+}
+
+.separator {
+
+}
+.courses-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 15px;
+}

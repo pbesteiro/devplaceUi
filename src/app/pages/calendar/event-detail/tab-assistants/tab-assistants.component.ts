@@ -31,8 +31,7 @@ export class TabAssistantsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.dataSource.data = this.calendarEvent.extendedProps.calendarEvent.students;
-    console.log(this.calendarEvent)
+    this.dataSource.data = this.calendarEvent.students;
   }
 
   openDialog() {
@@ -45,7 +44,9 @@ export class TabAssistantsComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe( result => {
         if ( result ) {
-          console.log(result)
+          const data = this.dataSource.data
+          data.push(result.studentAdded)
+          this.dataSource.data = data;
         }
       })
   }

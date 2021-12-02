@@ -3,7 +3,9 @@
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
   </mat-form-field>
-  <button mat-fab color="primary" (click)="openDialog()">+</button>
+  <button mat-fab color="primary" (click)="openDialog()">
+    <mat-icon>person_add</mat-icon>
+  </button>
 </div>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
