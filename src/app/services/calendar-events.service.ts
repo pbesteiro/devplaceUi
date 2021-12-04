@@ -16,4 +16,8 @@ export class CalendarEventsService {
     return this.http.post(`${environment.apiUrl}/calendar-events`, calendarEvent);
   }
 
+  update(calendarEventId: string, assistants: any) {
+    return this.http.patch(`${environment.apiUrl}/calendar-events/${calendarEventId}`, assistants);
+  }
+
 }

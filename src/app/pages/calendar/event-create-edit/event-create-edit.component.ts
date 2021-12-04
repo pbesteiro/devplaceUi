@@ -35,6 +35,7 @@ export class EventCreateEditComponent implements OnInit {
     hourTo: new FormControl(this.data.calendarEvent.timeTo, [Validators.required]),
     hourFrom: new FormControl(this.data.calendarEvent.timeFrom, [Validators.required]),
     days: new FormControl(this.data.calendarEvent.days, [Validators.required]),
+    capacity: new FormControl(this.data.calendarEvent.capacity, [Validators.required]),
   })
 
 
@@ -65,6 +66,7 @@ export class EventCreateEditComponent implements OnInit {
       timeFrom: this.courseForm.value.hourFrom,
       timeTo: this.courseForm.value.hourTo,
       days: this.courseForm.value.days,
+      capacity: parseInt(this.courseForm.value.capacity),
     }
 
     console.log(newCalendarEvent)
