@@ -1,13 +1,13 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {CoursesComponent} from "../../courses/courses.component";
-import {createEvent} from "../../../events/event-utils";
-import Swal from "sweetalert2";
-import {CourseService} from "../../../services/course.services";
-import {first} from "rxjs";
-import {CourseModel} from "../../../models/course.model";
-import {CalendarEventsService} from "../../../services/calendar-events.service";
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CoursesComponent } from '../../courses/courses.component';
+import Swal from 'sweetalert2';
+import { CourseService } from '../../../services/course.services';
+import { first } from 'rxjs';
+import { CourseModel } from '../../../models/course.model';
+import { CalendarEventsService } from '../../../services/calendar-events.service';
+import { UserService } from '../../../services/user.services';
 
 @Component({
   selector: 'app-event-create-edit',
@@ -36,11 +36,15 @@ export class EventCreateEditComponent implements OnInit {
     hourFrom: new FormControl(this.data.calendarEvent.timeFrom, [Validators.required]),
     days: new FormControl(this.data.calendarEvent.days, [Validators.required]),
     capacity: new FormControl(this.data.calendarEvent.capacity, [Validators.required]),
+    mentor: new FormControl(this.data.calendarEvent.mentor._id, [Validators.required]),
   })
 
+  mentors: any[] = []
+  selectedMentors = this.mentors;
 
   constructor(
     private calendarEventsService: CalendarEventsService,
+    private userService: UserService,
     private courseService: CourseService,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<CoursesComponent>,
@@ -54,12 +58,18 @@ export class EventCreateEditComponent implements OnInit {
       ).subscribe( response => {
       this.courses = response
     })
+
+    this.userService.getAllMentors()
+      .subscribe( ( response: any ) => {
+
+        this.mentors = response;
+
+
+      })
   }
 
   createEditCourse() {
-    console.log(this.courseForm.value);
-
-    const newCalendarEvent = {
+      const newCalendarEvent = {
       course: this.courseForm.value.name,
       dateFrom: this.courseForm.value.dateFrom.toISOString().split('T')[0],
       dateTo: this.courseForm.value.dateTo.toISOString().split('T')[0],
@@ -67,9 +77,8 @@ export class EventCreateEditComponent implements OnInit {
       timeTo: this.courseForm.value.hourTo,
       days: this.courseForm.value.days,
       capacity: parseInt(this.courseForm.value.capacity),
+      mentorId: this.courseForm.value.mentor,
     }
-
-    console.log(newCalendarEvent)
 
     // createEvent(title, from, to, days, hourFrom, hourTo)
     this.calendarEventsService.create(newCalendarEvent)
@@ -85,6 +94,12 @@ export class EventCreateEditComponent implements OnInit {
           timer: 1500
         })
       })
+
+    setTimeout( () => {
+      window.location.reload();
+    }, 1400)
   }
+
+
 
 }

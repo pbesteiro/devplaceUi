@@ -1,6 +1,16 @@
 :host {
+  height: 100%;
   width: 100%;
 }
+
+.assistants-container {
+  min-height: 350px;
+}
+
+.assitants-table {
+  max-height: 350px;
+}
+
 table {
   width: 100% !important;
 }

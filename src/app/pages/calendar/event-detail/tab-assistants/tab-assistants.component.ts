@@ -10,7 +10,7 @@ import {CoursesComponent} from "../../../courses/courses.component";
 import {EventDetailComponent} from "../event-detail.component";
 import Swal from "sweetalert2";
 
-const ELEMENT_DATA: UserModel[] = [];
+const ELEMENT_DATA: any[] = [];
 
 @Component({
   selector: 'app-tab-assistants',
@@ -20,7 +20,7 @@ const ELEMENT_DATA: UserModel[] = [];
 export class TabAssistantsComponent implements OnInit {
 
   @Input() calendarEvent: any = null;
-  displayedColumns: string[] = ['name', 'lastName', 'email'];
+  displayedColumns: string[] = ['name', 'lastName', 'action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   studentIds: string[] = []
 
@@ -44,7 +44,8 @@ export class TabAssistantsComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(AddAssistantsComponent, {
       data: {
-        role: 'STUDENT'
+        role: 'STUDENT',
+        students: this.calendarEvent.students,
       }
     });
 
@@ -55,12 +56,25 @@ export class TabAssistantsComponent implements OnInit {
           const data = this.dataSource.data
           data.push(result.studentAdded)
           this.dataSource.data = data;
-
           for (let student of data) {
             this.studentIds.push(student._id)
           }
         }
       })
+
+  }
+
+  removeAssistant(student: any) {
+    let data = this.dataSource.data
+    let el = data.find( s => s._id === student._id)
+    const index = data.indexOf( el )
+    data.splice( index, 1 )
+    this.dataSource.data = data;
+  }
+
+  cancelAssistants() {
+    this.dialogRef.close();
+    window.location.reload();
   }
 
   saveAssistants() {

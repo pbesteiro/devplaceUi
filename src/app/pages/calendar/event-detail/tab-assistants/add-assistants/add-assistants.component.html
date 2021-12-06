@@ -1,4 +1,4 @@
-<div>
+<div class="assistan-container" >
 
   <form class="example-form" (ngSubmit)="addStudent()">
 
@@ -9,11 +9,11 @@
     <mat-card-content class="card-user-create-edit-container">
 
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Assignee</mat-label>
+        <mat-label>Estudiante</mat-label>
         <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{option.email}}
+            {{ option.name }}  {{ option.lastName }}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>

@@ -113,7 +113,11 @@ export class CalendarComponent implements OnInit {
         calendarEvent: {
           course: {
             _id: '',
-            name: ''
+            name: '',
+          },
+          mentor: {
+            _id: '',
+            name: '',
           }
         }
       }

@@ -15,7 +15,6 @@ export class AddAssistantsComponent implements OnInit {
 
   myControl = new FormControl(null, Validators.required);
   filteredOptions: Observable<any[]> | undefined;
-
   students: any[] = []
   selectedStudents = this.students;
 
@@ -31,7 +30,22 @@ export class AddAssistantsComponent implements OnInit {
 
     this.userService.getAllStudents()
       .subscribe( (response) => {
+
         this.students = response
+
+        // exclir this.data.students
+        for ( const student of this.students ) {
+          for ( const el of this.data.students ) {
+
+            if ( el._id === student._id ) {
+              const index = this.students.indexOf( student )
+              this.students.splice( index, 1 )
+            }
+
+          }
+
+        }
+
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
           map(value => (typeof value === 'string' ? value : value.name)),
@@ -53,5 +67,6 @@ export class AddAssistantsComponent implements OnInit {
     this.dialogRef.close({
       studentAdded: this.myControl.value
     })
+
   }
 }

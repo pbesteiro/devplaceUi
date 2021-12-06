@@ -1,13 +1,32 @@
 :host {
+  height: 100%;
   width: 100%;
+}
+
+.detail-container {
+  min-height: 350px;
 }
 
 .separator {
 
 }
-.courses-toolbar {
+
+.tab-detail-card-calendar-event {
   display: flex;
+  flex-direction: row-reverse;
   justify-content: space-between;
-  align-items: baseline;
-  padding: 15px;
+}
+
+mat-card-content {
+  padding: 20px;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
 }
