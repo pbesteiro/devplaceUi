@@ -23,3 +23,11 @@ table {
 .users-toolbar {
   display: flex;
 }
+
+.delete-assistant {
+  cursor: pointer;
+}
+
+.red-icon {
+  color: red;
+}

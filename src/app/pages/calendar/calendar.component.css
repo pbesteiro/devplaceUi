@@ -11,3 +11,8 @@
 .fc-daygrid-day-events .fc-daygrid-event-harness {
   cursor: pointer !important;
 }
+
+::ng-deep .fc-event{
+  cursor: pointer;
+}
+

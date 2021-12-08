@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit, SimpleChanges} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {CoursesComponent} from "../../courses/courses.component";
 import {CalendarComponent} from "../calendar.component";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-event-detail',
@@ -19,7 +19,9 @@ export class EventDetailComponent implements OnInit {
 
   calendarEvent: any;
 
-  ngOnChanges(changes: SimpleChanges): void {}
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
+  }
 
   changeTab(event: any) {
     this.currentTab = event.index;
@@ -27,6 +29,28 @@ export class EventDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.calendarEvent = this.data.calendarEvent;
+  }
+
+  cancelAssistants() {
+
+    Swal.fire({
+      titleText: '¿Quiere abandonar la edición?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Descartar cambios',
+      cancelButtonText: 'Cancelar',
+      backdrop: 'rgba(103, 58, 183, 0.3)',
+      heightAuto: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.dialogRef.close();
+        window.location.reload();
+      }
+    })
+
+
   }
 
 }

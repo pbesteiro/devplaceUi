@@ -1,12 +1,9 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
-import {UserModel} from "../../../../models/user.model";
 import {UserService} from "../../../../services/user.services";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {UserCreateEditComponent} from "../../../users/user-create-edit/user-create-edit.component";
 import {AddAssistantsComponent} from "./add-assistants/add-assistants.component";
 import {CalendarEventsService} from "../../../../services/calendar-events.service";
-import {CoursesComponent} from "../../../courses/courses.component";
 import {EventDetailComponent} from "../event-detail.component";
 import Swal from "sweetalert2";
 
@@ -23,6 +20,7 @@ export class TabAssistantsComponent implements OnInit {
   displayedColumns: string[] = ['name', 'lastName', 'action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   studentIds: string[] = []
+  isEdited = false;
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -52,6 +50,7 @@ export class TabAssistantsComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe( result => {
         if ( result ) {
+          this.isEdited = true;
           this.studentIds = [];
           const data = this.dataSource.data
           data.push(result.studentAdded)
@@ -65,34 +64,84 @@ export class TabAssistantsComponent implements OnInit {
   }
 
   removeAssistant(student: any) {
-    let data = this.dataSource.data
-    let el = data.find( s => s._id === student._id)
-    const index = data.indexOf( el )
-    data.splice( index, 1 )
-    this.dataSource.data = data;
+
+    Swal.fire({
+      title: 'Quiere quitar al estudiante',
+      text: `${student.name} ${student.lastName}`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Quitar',
+      cancelButtonText: 'Cancelar',
+      backdrop: 'rgba(103, 58, 183, 0.3)',
+      heightAuto: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.isEdited = true;
+        let data = this.dataSource.data
+        let el = data.find( s => s._id === student._id)
+        const index = data.indexOf( el )
+        data.splice( index, 1 )
+        this.dataSource.data = data;
+      }
+    })
   }
 
   cancelAssistants() {
-    this.dialogRef.close();
-    window.location.reload();
+
+    Swal.fire({
+      title: '¿Quiere abandonar la edición?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Descartar cambios',
+      cancelButtonText: 'Cancelar',
+      backdrop: 'rgba(103, 58, 183, 0.3)',
+      heightAuto: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.isEdited = false;
+        this.dialogRef.close();
+        window.location.reload();
+      }
+    })
+
+
   }
 
   saveAssistants() {
-    this.calendarventService.update(this.calendarEvent._id, {
-      studentIds: this.studentIds
-    })
-      .subscribe( () => {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Comisión actualizada',
-          backdrop: 'rgba(103, 58, 183, 0.3)',
-          heightAuto: false,
-          showConfirmButton: false,
-          timer: 1500
+
+    Swal.fire({
+      title: '¿Confirma los cambios?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      backdrop: 'rgba(103, 58, 183, 0.3)',
+      heightAuto: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.calendarventService.update(this.calendarEvent._id, {
+          studentIds: this.studentIds
         })
-        this.dialogRef.close()
-      })
+          .subscribe( () => {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Comisión actualizada',
+              backdrop: 'rgba(103, 58, 183, 0.3)',
+              heightAuto: false,
+              showConfirmButton: false,
+              timer: 1500
+            })
+            this.dialogRef.close()
+          })
+      }
+    })
   }
 
 }

@@ -16,21 +16,28 @@
         </mat-card-header>
 
         <mat-card-content>
-          <p>Dias:
+
+          <div class="detail-title-container">
+            <span class="detail-title"> Dias: </span>
             <span *ngFor="let day of calendarEvent['days']">
               {{ hashWeek[day] }}
             </span>
-          </p>
-          <p>Horario:
+          </div>
+
+          <div class="detail-title-container">
+            <span class="detail-title"> Horario: </span>
             <span>
               {{ calendarEvent.timeFrom }} - {{ calendarEvent.timeTo }}
             </span>
-          </p>
-          <p>Mentor:
+          </div>
+
+          <div class="detail-title-container">
+            <span class="detail-title"> Mentor: </span>
             <span>
               {{ calendarEvent.mentor.name }} {{ calendarEvent.mentor.lastName }}
             </span>
-          </p>
+          </div>
+
         </mat-card-content>
 
       </div>

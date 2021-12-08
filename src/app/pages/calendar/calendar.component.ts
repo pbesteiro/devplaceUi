@@ -92,7 +92,7 @@ export class CalendarComponent implements OnInit {
   handleEventClick(clickInfo: EventClickArg) {
 
     const dialogRef = this.dialog.open(EventDetailComponent, {
-      // disableClose: true,
+      disableClose: true,
       width: '800px',
       data: {
         calendarEvent: clickInfo.event._def.extendedProps['calendarEvent']
