@@ -69,31 +69,64 @@ export class EventCreateEditComponent implements OnInit {
   }
 
   createEditCourse() {
-      const newCalendarEvent = {
-      course: this.courseForm.value.name,
-      dateFrom: this.courseForm.value.dateFrom.toISOString().split('T')[0],
-      dateTo: this.courseForm.value.dateTo.toISOString().split('T')[0],
-      timeFrom: this.courseForm.value.hourFrom,
-      timeTo: this.courseForm.value.hourTo,
-      days: this.courseForm.value.days,
-      capacity: parseInt(this.courseForm.value.capacity),
-      mentorId: this.courseForm.value.mentor,
-    }
 
-    // createEvent(title, from, to, days, hourFrom, hourTo)
-    this.calendarEventsService.create(newCalendarEvent)
-      .subscribe( () => {
-        this.dialogRef.close();
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'curso creado',
-          backdrop: 'rgba(103, 58, 183, 0.3)',
-          heightAuto: false,
-          showConfirmButton: false,
-          timer: 1500
+    if ( this.data.calendarEvent.course._id !== '') {
+
+      const updatedCalendarEvent = {
+        capacity: this.courseForm.value.capacity,
+        dateFrom: this.courseForm.value.dateFrom,
+        dateTo: this.courseForm.value.dateTo,
+        days: this.courseForm.value.days,
+        timeFrom: this.courseForm.value.hourFrom,
+        timeTo: this.courseForm.value.hourTo,
+        mentor: this.courseForm.value.mentor,
+        course: this.courseForm.value.name,
+      }
+
+
+      this.calendarEventsService.update(
+        this.data.calendarEvent._id,
+        updatedCalendarEvent
+      )
+        .subscribe( () => {
+          this.dialogRef.close();
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'curso actualizado',
+            backdrop: 'rgba(103, 58, 183, 0.3)',
+            heightAuto: false,
+            showConfirmButton: false,
+            timer: 1500
+          })
         })
-      })
+    } else {
+
+      const newCalendarEvent = {
+        course: this.courseForm.value.name,
+        dateFrom: this.courseForm.value.dateFrom.toISOString().split('T')[0],
+        dateTo: this.courseForm.value.dateTo.toISOString().split('T')[0],
+        timeFrom: this.courseForm.value.hourFrom,
+        timeTo: this.courseForm.value.hourTo,
+        days: this.courseForm.value.days,
+        capacity: parseInt(this.courseForm.value.capacity),
+        mentorId: this.courseForm.value.mentor,
+      }
+
+      this.calendarEventsService.create(newCalendarEvent)
+        .subscribe( () => {
+          this.dialogRef.close();
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'curso creado',
+            backdrop: 'rgba(103, 58, 183, 0.3)',
+            heightAuto: false,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        })
+    }
 
     setTimeout( () => {
       window.location.reload();
