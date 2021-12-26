@@ -20,4 +20,8 @@ export class CalendarEventsService {
     return this.http.patch(`${environment.apiUrl}/calendar-events/${calendarEventId}`, assistants);
   }
 
+  remove(calendarEventId: string) {
+    return this.http.delete(`${environment.apiUrl}/calendar-events/${calendarEventId}`);
+  }
+
 }

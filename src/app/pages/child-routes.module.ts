@@ -7,6 +7,7 @@ import {CoursesComponent} from "./courses/courses.component";
 import {TechnologiesComponent} from "./technologies/technologies.component";
 import {StudentsComponent} from "./students/students.component";
 import {MentorsComponent} from "./mentors/mentors.component";
+import {CommissionsComponent} from "./commissions/commissions.component";
 
 const childRoutes: Routes = [
   { path: '', component: DashboardComponent },
@@ -16,6 +17,7 @@ const childRoutes: Routes = [
   { path: 'technologies', component: TechnologiesComponent },
   { path: 'students', component: StudentsComponent },
   { path: 'mentors', component: MentorsComponent },
+  { path: 'commissions', component: CommissionsComponent },
 ]
 
 @NgModule({

@@ -1,6 +1,12 @@
+
 <div class="course-create-edit-container">
 
   <mat-card>
+    <div class="close-dialog-button">
+      <mat-icon (click)="closeDialog()" color="primary">
+        close
+      </mat-icon>
+    </div>
 
     <form [formGroup]="courseForm" (ngSubmit)="createEditCourse()">
 
@@ -48,7 +54,6 @@
 
       <div>
         <mat-dialog-actions align="center">
-          <button mat-button mat-dialog-close>Cancelar</button>
           <button mat-button
             [disabled]="courseForm.invalid"
           >Confirmar

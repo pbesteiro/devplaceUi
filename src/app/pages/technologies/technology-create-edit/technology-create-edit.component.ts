@@ -12,8 +12,10 @@ import {TechnologyService} from "../../../services/technology.service";
 })
 export class TechnologyCreateEditComponent implements OnInit {
 
+  messageTitle: string = '';
+
   public technologyForm: FormGroup = this.fb.group({
-    name: new FormControl('', [Validators.required, Validators.minLength(2)])
+    name: new FormControl(this.data.technology.name, [Validators.required, Validators.minLength(2)])
   })
 
   constructor(
@@ -28,23 +30,54 @@ export class TechnologyCreateEditComponent implements OnInit {
 
   createEditTechnology() {
 
-    const newTechnologyName = this.technologyForm.value.name
+    // EDIT
+    if (this.data.editAction) {
+      this.messageTitle = 'Curso Actualizado';
+      // TODO: UPDATE
+    }
+    // CREATE
+    else {
+      this.messageTitle = 'Curso Creado';
+      this.technologyService.create(this.technologyForm.value.name)
+        .subscribe( () => {
+          this.dialogRef.close({
+            edited: false
+          });
 
-    this.technologyService.create(newTechnologyName)
-      .subscribe( () => {
-
-        this.dialogRef.close(newTechnologyName);
-
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Tecnología creada',
-          backdrop: 'rgba(103, 58, 183, 0.3)',
-          heightAuto: false,
-          showConfirmButton: false,
-          timer: 1500
         })
-      })
+    }
+
+    // Communication
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: this.messageTitle,
+      backdrop: 'rgba(103, 58, 183, 0.3)',
+      heightAuto: false,
+      showConfirmButton: false,
+      timer: 1500
+    })
+    // const newTechnologyName = this.technologyForm.value.name
+
+  }
+
+  closeDialog() {
+    Swal.fire({
+      titleText: '¿Quiere abandonar la edición?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Descartar cambios',
+      cancelButtonText: 'Cancelar',
+      backdrop: 'rgba(103, 58, 183, 0.3)',
+      heightAuto: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.dialogRef.close();
+        window.location.reload();
+      }
+    })
   }
 
 }

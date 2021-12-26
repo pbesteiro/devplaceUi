@@ -2,6 +2,12 @@
 
   <mat-card>
 
+    <div class="close-dialog-button">
+      <mat-icon (click)="closeDialog()" color="primary">
+        close
+      </mat-icon>
+    </div>
+
     <form [formGroup]="technologyForm" (ngSubmit)="createEditTechnology()">
 
       <mat-card-header>

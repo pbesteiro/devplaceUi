@@ -1,0 +1,28 @@
+:host {
+  width: 100%;
+}
+
+table {
+  width: 100% !important;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.courses-toolbar {
+  display: flex;
+}
+
+.delete-assistant {
+  cursor: pointer;
+}
+
+.red-icon {
+  color: red;
+}
+
+.blue-icon {
+  color: #5757a4;
+}

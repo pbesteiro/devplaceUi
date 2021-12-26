@@ -70,17 +70,20 @@ export class EventCreateEditComponent implements OnInit {
 
   createEditCourse() {
 
+    console.log( this.data.commissionId )
+
     if ( this.data.calendarEvent.course._id !== '') {
 
       const updatedCalendarEvent = {
         capacity: this.courseForm.value.capacity,
-        dateFrom: this.courseForm.value.dateFrom,
-        dateTo: this.courseForm.value.dateTo,
+        dateFrom: this.courseForm.value.dateFrom.toISOString().split('T')[0],
+        dateTo: this.courseForm.value.dateTo.toISOString().split('T')[0],
         days: this.courseForm.value.days,
         timeFrom: this.courseForm.value.hourFrom,
         timeTo: this.courseForm.value.hourTo,
         mentor: this.courseForm.value.mentor,
         course: this.courseForm.value.name,
+        commissionId: this.data.commissionId,
       }
 
 
@@ -111,6 +114,7 @@ export class EventCreateEditComponent implements OnInit {
         days: this.courseForm.value.days,
         capacity: parseInt(this.courseForm.value.capacity),
         mentorId: this.courseForm.value.mentor,
+        commissionId: this.data.commissionId,
       }
 
       this.calendarEventsService.create(newCalendarEvent)
@@ -131,6 +135,7 @@ export class EventCreateEditComponent implements OnInit {
     setTimeout( () => {
       window.location.reload();
     }, 1400)
+
   }
 
 

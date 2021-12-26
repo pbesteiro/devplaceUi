@@ -1,0 +1,14 @@
+<div class="close-dialog-button">
+  <mat-icon (click)="closeEdit()" color="primary">
+    close
+  </mat-icon>
+</div>
+
+<mat-tab-group (selectedTabChange)="changeTab($event)">
+  <mat-tab label="Detalles">
+    <app-commission-tab-detail [commissionId]="commissionId"></app-commission-tab-detail>
+  </mat-tab>
+  <mat-tab label="Asistentes">
+    <app-commission-tab-assistants [commissionId]="commissionId"></app-commission-tab-assistants>
+  </mat-tab>
+</mat-tab-group>

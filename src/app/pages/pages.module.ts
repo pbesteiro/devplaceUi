@@ -39,6 +39,15 @@ import {TabAssistantsComponent} from "./calendar/event-detail/tab-assistants/tab
 import {TabDetailComponent} from "./calendar/event-detail/tab-detail/tab-detail.component";
 import {AddAssistantsComponent} from "./calendar/event-detail/tab-assistants/add-assistants/add-assistants.component";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {CommissionsComponent} from "./commissions/commissions.component";
+import {CommissionCreateEditComponent} from "./commissions/commission-create-edit/commission-create-edit.component";
+import {CommissionDetailComponent} from "./commissions/commission-detail/commission-detail.component";
+import {
+  CommissionTabDetailComponent
+} from "./commissions/commission-detail/commission-tab-detail/commission-tab-detail.component";
+import {
+  CommissionTabAssistantsComponent
+} from "./commissions/commission-detail/commission-tab-assistants/commission-tab-assistants.component";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -65,6 +74,11 @@ FullCalendarModule.registerPlugins([
     TabAssistantsComponent,
     TabDetailComponent,
     AddAssistantsComponent,
+    CommissionsComponent,
+    CommissionCreateEditComponent,
+    CommissionDetailComponent,
+    CommissionTabDetailComponent,
+    CommissionTabAssistantsComponent,
   ],
   imports: [
     CommonModule,

@@ -35,6 +35,8 @@ export class TabDetailComponent implements OnInit {
   }
 
   openDialog() {
+    console.log('ESTE')
+    console.log(this.calendarEvent)
     const dialogRef = this.dialog.open(EventCreateEditComponent, {
       data: {
         calendarEvent: this.calendarEvent

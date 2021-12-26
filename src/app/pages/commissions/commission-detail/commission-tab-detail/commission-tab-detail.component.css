@@ -1,0 +1,5 @@
+.calendar-toolbar {
+  display: flex;
+  flex-direction: row-reverse;
+  padding-bottom: 25px;
+}

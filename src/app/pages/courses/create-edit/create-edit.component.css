@@ -10,3 +10,8 @@
 .text-area-course-create-edit-modal {
   min-height: 120px;
 }
+
+.close-dialog-button {
+  cursor: pointer;
+  float: right;
+}

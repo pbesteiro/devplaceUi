@@ -24,7 +24,7 @@ export class CoursesComponent implements OnInit {
     private dialog: MatDialog,
   ) { }
 
-  displayedColumns: string[] = ['name'];
+  displayedColumns: string[] = ['name', 'technology', 'actionEdit', 'actionDelete'];
   dataSource = new MatTableDataSource(courses);
 
   applyFilter(event: Event) {

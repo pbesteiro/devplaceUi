@@ -51,7 +51,6 @@ export class CreateEditComponent implements OnInit {
     // EDIT
     if (this.data.editAction) {
       this.messageTitle = 'Curso Actualizado';
-      // TODO: this.courseService.update()
       this.courseService.update(this.data.courseId, this.courseForm.value)
         .subscribe( () => {
           this.dialogRef.close({
@@ -84,6 +83,25 @@ export class CreateEditComponent implements OnInit {
       heightAuto: false,
       showConfirmButton: false,
       timer: 1500
+    })
+  }
+
+  closeDialog() {
+    Swal.fire({
+      titleText: '¿Quiere abandonar la edición?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Descartar cambios',
+      cancelButtonText: 'Cancelar',
+      backdrop: 'rgba(103, 58, 183, 0.3)',
+      heightAuto: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.dialogRef.close();
+        window.location.reload();
+      }
     })
   }
 

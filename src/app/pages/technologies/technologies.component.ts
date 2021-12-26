@@ -16,13 +16,14 @@ const technologies: TechnologyModel[] = []
 export class TechnologiesComponent implements OnInit {
 
   technology: TechnologyModel = new TechnologyModel('', '', false);
+  editAction: boolean = false;
 
   constructor(
     private dialog: MatDialog,
     private technologiesService: TechnologyService
   ) { }
 
-  displayedColumns: string[] = ['name'];
+  displayedColumns: string[] = ['name', 'actionEdit', 'actionDelete'];
   dataSource = new MatTableDataSource(technologies);
 
   applyFilter(event: Event) {
@@ -39,17 +40,26 @@ export class TechnologiesComponent implements OnInit {
     })
   }
 
-  openDialog() {
+  openDialog(technology?: TechnologyModel) {
+
+    if (technology) {
+      this.technology = technology;
+      this.editAction = true;
+    }
+
     const dialogRef = this.dialog.open(TechnologyCreateEditComponent, {
-      data: { name: this.technology }
+      disableClose: true,
+      data: {
+        technology: this.technology,
+        editAction: this.editAction,
+      }
     });
 
     dialogRef.afterClosed()
       .subscribe( result => {
-        const data = this.dataSource.data
-        this.technology.name = result
-        data.push(this.technology)
-        this.dataSource.data = data;
+        if ( result ) {
+          window.location.reload();
+        }
       })
   }
 
