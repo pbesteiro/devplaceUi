@@ -39,3 +39,20 @@ mat-card-content {
   font-weight: 500;
   margin-right: 15px;
 }
+
+.title-commission {
+
+}
+
+.subtitle-course {
+
+}
+
+.buttons-action {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  margin-bottom: 10px;
+}

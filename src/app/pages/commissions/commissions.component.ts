@@ -60,12 +60,13 @@ export class CommissionsComponent implements OnInit {
 
     }
 
-  editCommission(id: string) {
+  editCommission(id: string, commission: any) {
     const dialogRef = this.dialog.open(CommissionDetailComponent, {
       disableClose: true,
       width: '800px',
       data: {
-        commissionId: id
+        commissionId: id,
+        commission,
       }
     })
   }

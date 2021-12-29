@@ -76,8 +76,8 @@ export class EventCreateEditComponent implements OnInit {
 
       const updatedCalendarEvent = {
         capacity: this.courseForm.value.capacity,
-        dateFrom: this.courseForm.value.dateFrom.toISOString().split('T')[0],
-        dateTo: this.courseForm.value.dateTo.toISOString().split('T')[0],
+        dateFrom: this.courseForm.value.dateFrom,
+        dateTo: this.courseForm.value.dateTo,
         days: this.courseForm.value.days,
         timeFrom: this.courseForm.value.hourFrom,
         timeTo: this.courseForm.value.hourTo,
@@ -135,7 +135,6 @@ export class EventCreateEditComponent implements OnInit {
     setTimeout( () => {
       window.location.reload();
     }, 1400)
-
   }
 
 

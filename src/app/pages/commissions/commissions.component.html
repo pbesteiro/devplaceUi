@@ -24,7 +24,7 @@
   <!-- Edit Column -->
   <ng-container matColumnDef="actionView">
     <th mat-header-cell *matHeaderCellDef> </th>
-    <td mat-cell (click)="editCommission(element._id)" *matCellDef="let element" class="delete-assistant">
+    <td mat-cell (click)="editCommission(element._id, element)" *matCellDef="let element" class="delete-assistant">
       <mat-icon class="blue-icon">edit</mat-icon>
     </td>
   </ng-container>

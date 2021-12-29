@@ -1,9 +1,12 @@
   <mat-card class="detail-container">
     <div class="tab-detail-card-calendar-event">
 
-      <div>
+      <div class="buttons-action">
         <button mat-fab color="primary" (click)="openDialog()">
           <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-fab color="warn">
+          <mat-icon>delete_outline</mat-icon>
         </button>
       </div>
 
@@ -11,8 +14,8 @@
       <div>
 
         <mat-card-header>
-          <mat-card-title> {{ calendarEvent.course.name  }} </mat-card-title>
-          <mat-card-subtitle> {{ calendarEvent.course.technology.name }} </mat-card-subtitle>
+          <mat-card-title> <span class="title-commission"> Comisión: </span> {{ calendarEvent.commission.name  }} </mat-card-title>
+          <mat-card-subtitle> <span class="subtitle-course"> Curso: </span> {{ calendarEvent.course.name }} </mat-card-subtitle>
         </mat-card-header>
 
         <mat-card-content>

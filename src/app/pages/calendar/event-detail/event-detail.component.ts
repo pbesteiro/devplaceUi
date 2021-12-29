@@ -32,7 +32,8 @@ export class EventDetailComponent implements OnInit {
   }
 
   cancelAssistants() {
-
+    this.dialogRef.close();
+    /*
     Swal.fire({
       titleText: '¿Quiere abandonar la edición?',
       icon: 'warning',
@@ -49,7 +50,7 @@ export class EventDetailComponent implements OnInit {
         window.location.reload();
       }
     })
-
+    */
 
   }
 

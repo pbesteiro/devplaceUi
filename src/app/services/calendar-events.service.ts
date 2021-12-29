@@ -24,4 +24,8 @@ export class CalendarEventsService {
     return this.http.delete(`${environment.apiUrl}/calendar-events/${calendarEventId}`);
   }
 
+  getOne(calendarEventId: string) {
+    return this.http.get(`${environment.apiUrl}/calendar-events/${calendarEventId}`);
+  }
+
 }

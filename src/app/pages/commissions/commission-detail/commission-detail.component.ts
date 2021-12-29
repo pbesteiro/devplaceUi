@@ -13,6 +13,7 @@ export class CommissionDetailComponent implements OnInit {
 
   currentTab = 0;
   commissionId: any;
+  commission: any;
 
   constructor(
     public dialogRef: MatDialogRef<CommissionsComponent>,
@@ -22,6 +23,8 @@ export class CommissionDetailComponent implements OnInit {
 
   ngOnInit() {
     this.commissionId = this.data.commissionId;
+    this.commission = this.data.commission;
+    console.log(this.data.commission)
   }
 
   changeTab(event: any) {

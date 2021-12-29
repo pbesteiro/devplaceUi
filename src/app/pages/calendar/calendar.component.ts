@@ -29,7 +29,7 @@ export class CalendarComponent implements OnInit {
       .subscribe( (response: any) => {
         response.forEach( (calendarEvent: any) => {
           this.calendarEvents.push({
-            title: calendarEvent['course']['name'],
+            title: `${calendarEvent['commission']['name']} - ${calendarEvent['course']['name']}`,
             daysOfWeek: calendarEvent['days'],
             startTime: calendarEvent['timeFrom'],
             endTime: calendarEvent['timeTo'],
@@ -92,7 +92,6 @@ export class CalendarComponent implements OnInit {
   handleEventClick(clickInfo: EventClickArg) {
 
     const dialogRef = this.dialog.open(EventDetailComponent, {
-      disableClose: true,
       width: '800px',
       data: {
         calendarEvent: clickInfo.event._def.extendedProps['calendarEvent']
