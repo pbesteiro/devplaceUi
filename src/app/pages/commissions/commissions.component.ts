@@ -41,6 +41,7 @@ export class CommissionsComponent implements OnInit {
   ngOnInit(): void {
     this.commissionService.getAll()
       .subscribe( (response) => {
+        console.log(response)
         this.dataSource.data = response
       })
   }

@@ -12,8 +12,8 @@ export class CalendarEventsService {
     return this.http.get<any[]>(`${environment.apiUrl}/calendar-events`)
   }
 
-  create(calendarEvent: any) {
-    return this.http.post(`${environment.apiUrl}/calendar-events`, calendarEvent);
+  create(classes: any) {
+    return this.http.post(`${environment.apiUrl}/classes`, classes);
   }
 
   update(calendarEventId: string, assistants: any) {
@@ -25,7 +25,7 @@ export class CalendarEventsService {
   }
 
   getOne(calendarEventId: string) {
-    return this.http.get(`${environment.apiUrl}/calendar-events/${calendarEventId}`);
+    return this.http.get(`${environment.apiUrl}/classes/${calendarEventId}`);
   }
 
 }

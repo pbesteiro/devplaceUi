@@ -4,13 +4,13 @@
     <form [formGroup]="courseForm" (ngSubmit)="createEditCourse()">
 
       <mat-card-header>
-        <mat-card-title> Evento </mat-card-title>
+        <mat-card-title> Clase </mat-card-title>
       </mat-card-header>
 
       <mat-card-content class="card-create-edit-container">
 
         <mat-form-field appearance="fill" class="field-create-edit-modal">
-          <mat-label>Curso</mat-label>
+          <mat-label> Tipo de clase </mat-label>
           <mat-select formControlName="name">
             <mat-option *ngFor="let course of courses" [value]="course._id">
               {{course.name}}

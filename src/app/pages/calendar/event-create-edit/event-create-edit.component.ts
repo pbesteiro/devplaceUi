@@ -71,6 +71,22 @@ export class EventCreateEditComponent implements OnInit {
   createEditCourse() {
 
     console.log( this.data.commissionId )
+    console.log( this.courseForm.value )
+
+    const recurrentDaysStrArr = this.generateRecurrentDaysArr( this.courseForm.value.dateFrom, this.courseForm.value.dateTo, this.courseForm.value.days)
+    console.log(recurrentDaysStrArr)
+
+    if ( this.data.calendarEvent.course._id !== '' ) {
+      console.log( 'Update!' )
+    } else {
+      console.log( 'create!')
+      this.createNewClass( this.courseForm.value, recurrentDaysStrArr)
+    }
+    setTimeout( () => {
+      window.location.reload();
+    }, 1400)
+
+    /*
 
     if ( this.data.calendarEvent.course._id !== '') {
 
@@ -135,8 +151,62 @@ export class EventCreateEditComponent implements OnInit {
     setTimeout( () => {
       window.location.reload();
     }, 1400)
+
+     */
   }
 
+  createNewClass(courseForm: any, days: string[]) {
+
+    const newClass: any = {
+      classes: []
+    }
+
+    for ( const dayClass of days) {
+
+      newClass.classes.push({
+        courseId: this.courseForm.value.name,
+        date: dayClass,
+        timeFrom: this.courseForm.value.hourFrom,
+        timeTo: this.courseForm.value.hourTo,
+        mentorId: this.courseForm.value.mentor,
+        commissionId: this.data.commissionId,
+        capacity: parseInt(this.courseForm.value.capacity),
+        linkContentClass: "",
+        active: true,
+      })
+
+    }
+    console.log(newClass)
+    this.calendarEventsService.create(newClass)
+      .subscribe( () => {
+        this.dialogRef.close();
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'curso creado',
+          backdrop: 'rgba(103, 58, 183, 0.3)',
+          heightAuto: false,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
+
+  }
+
+  generateRecurrentDaysArr(dateFrom: Date, dateTo: Date, days: number[]) {
+    // @ts-ignore
+    const diffInMs = dateTo - dateFrom
+    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+    let classesDate: any[] = []
+    const date = dateFrom
+    for (let i = 0; i < diffInDays; i++) {
+      if ( days.includes(date.getDay())) {
+        classesDate.push( date.toISOString().split('T')[0] )
+      }
+      date.setDate(date.getDate() + 1);
+    }
+    return classesDate;
+  }
 
 
 }

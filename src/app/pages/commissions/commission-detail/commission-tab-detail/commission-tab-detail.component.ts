@@ -22,7 +22,7 @@ export class CommissionTabDetailComponent implements OnInit {
   @Input() commissionId: string = '';
   @Input() commission: any = null;
 
-  displayedColumns: string[] = ['name', 'actionView', 'actionDelete'];
+  displayedColumns: string[] = ['class', 'name', 'mentor', 'actionView', 'actionDelete'];
   dataSource = new MatTableDataSource(events);
 
   constructor(
@@ -32,8 +32,8 @@ export class CommissionTabDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.commission)
-    this.dataSource.data = this.commission.calendarEvents
+    console.log(this.commission.classes)
+    this.dataSource.data = this.commission.classes
   }
 
   editCalendarEvent(calendarEventId: any) {
