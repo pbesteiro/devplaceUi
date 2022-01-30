@@ -8,6 +8,8 @@ import Swal from "sweetalert2";
 import {CommissionService} from "../../services/commission.service";
 import {CommissionCreateEditComponent} from "./commission-create-edit/commission-create-edit.component";
 import {CommissionDetailComponent} from "./commission-detail/commission-detail.component";
+import {CommissionViewDetailComponent} from "./commission-view-detail/commission-view-detail.component";
+import {CommissionAddStudentsComponent} from "./commission-add-students/commission-add-students.component";
 
 export interface CommissionElement {
   id: string;
@@ -21,11 +23,11 @@ const commissions: CommissionElement[] = [];
 @Component({
   selector: 'app-commissions',
   templateUrl: './commissions.component.html',
-  styleUrls: ['./commissions.component.css']
+  styleUrls: ['./commissions.component.css'],
 })
 export class CommissionsComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'actionView', 'actionDelete'];
+  displayedColumns: string[] = ['id', 'name', 'actionEdit', 'actionAddStudent', 'actionDelete'];
   dataSource = new MatTableDataSource(commissions);
 
   applyFilter(event: Event) {
@@ -41,7 +43,6 @@ export class CommissionsComponent implements OnInit {
   ngOnInit(): void {
     this.commissionService.getAll()
       .subscribe( (response) => {
-        console.log(response)
         this.dataSource.data = response
       })
   }
@@ -59,17 +60,43 @@ export class CommissionsComponent implements OnInit {
         }
       })
 
-    }
+  }
+
+  viewCommissionDetails(id:string, commission: any) {
+    const dialogRef = this.dialog.open(CommissionViewDetailComponent, {
+      width: '800px',
+      data: {
+        commissionId: id,
+        commission
+      }
+    })
+  }
 
   editCommission(id: string, commission: any) {
     const dialogRef = this.dialog.open(CommissionDetailComponent, {
-      disableClose: true,
+      // disableClose: true,
       width: '800px',
       data: {
         commissionId: id,
         commission,
       }
     })
+  }
+
+  addStudents(id: string, commission: any) {
+    const dialogRef = this.dialog.open(CommissionAddStudentsComponent, {
+      // disableClose: true,
+      width: '800px',
+      data: {
+        commissionId: id,
+        commission,
+      }
+    })
+
+    dialogRef.afterClosed()
+      .subscribe( () => {
+        window.location.reload();
+      })
   }
 
 

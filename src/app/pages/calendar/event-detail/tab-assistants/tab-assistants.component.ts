@@ -6,6 +6,7 @@ import {AddAssistantsComponent} from "./add-assistants/add-assistants.component"
 import {CalendarEventsService} from "../../../../services/calendar-events.service";
 import {EventDetailComponent} from "../event-detail.component";
 import Swal from "sweetalert2";
+import {CommissionService} from "../../../../services/commission.service";
 
 const ELEMENT_DATA: any[] = [];
 
@@ -17,6 +18,7 @@ const ELEMENT_DATA: any[] = [];
 export class TabAssistantsComponent implements OnInit {
 
   @Input() calendarEvent: any = null;
+  @Input() commissionId: any = null;
   displayedColumns: string[] = ['name', 'lastName', 'action'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   studentIds: string[] = []
@@ -30,20 +32,22 @@ export class TabAssistantsComponent implements OnInit {
   constructor(
     private userService: UserService,
     private calendarventService: CalendarEventsService,
+    private commissionService: CommissionService,
     private dialog: MatDialog,
     public dialogRef: MatDialogRef<EventDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     ) { }
 
   ngOnInit(): void {
-    this.dataSource.data = this.calendarEvent.students;
+    console.log(this.data)
+    this.dataSource.data = this.data.commission.students;
   }
 
   openDialog() {
     const dialogRef = this.dialog.open(AddAssistantsComponent, {
       data: {
         role: 'STUDENT',
-        students: this.calendarEvent.students,
+        students: this.data.commission.students,
       }
     });
 
@@ -125,7 +129,7 @@ export class TabAssistantsComponent implements OnInit {
       heightAuto: false,
     }).then((result) => {
       if (result.isConfirmed) {
-        this.calendarventService.update(this.calendarEvent._id, {
+        this.commissionService.update(this.commissionId, {
           studentIds: this.studentIds
         })
           .subscribe( () => {

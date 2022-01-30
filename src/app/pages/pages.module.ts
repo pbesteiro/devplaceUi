@@ -48,6 +48,10 @@ import {
 import {
   CommissionTabAssistantsComponent
 } from "./commissions/commission-detail/commission-tab-assistants/commission-tab-assistants.component";
+import {CommissionViewDetailComponent} from "./commissions/commission-view-detail/commission-view-detail.component";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {CommissionAddStudentsComponent} from "./commissions/commission-add-students/commission-add-students.component";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -79,6 +83,8 @@ FullCalendarModule.registerPlugins([
     CommissionDetailComponent,
     CommissionTabDetailComponent,
     CommissionTabAssistantsComponent,
+    CommissionViewDetailComponent,
+    CommissionAddStudentsComponent,
   ],
   imports: [
     CommonModule,
@@ -102,6 +108,8 @@ FullCalendarModule.registerPlugins([
     MatTableModule,
     MatTabsModule,
     MatAutocompleteModule,
+    MatTooltipModule,
+    MatCheckboxModule,
   ],
   exports: [
   ]

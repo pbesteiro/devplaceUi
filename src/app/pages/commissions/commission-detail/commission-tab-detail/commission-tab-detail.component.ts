@@ -19,10 +19,20 @@ const events: EventElement[] = [];
 })
 export class CommissionTabDetailComponent implements OnInit {
 
+  daysMap: any = {
+    0: 'Domingo',
+    1: 'Lunes',
+    2: 'Martes',
+    3: 'Miercoles',
+    4: 'Jueves',
+    5: 'Viernes',
+    6: 'Sabado',
+  }
+
   @Input() commissionId: string = '';
   @Input() commission: any = null;
 
-  displayedColumns: string[] = ['class', 'name', 'mentor', 'actionView', 'actionDelete'];
+  displayedColumns: string[] = ['class', 'dayWeek', 'name', 'mentor', 'actionView', 'actionDelete'];
   dataSource = new MatTableDataSource(events);
 
   constructor(
@@ -32,18 +42,22 @@ export class CommissionTabDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.commission.classes)
     this.dataSource.data = this.commission.classes
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   editCalendarEvent(calendarEventId: any) {
     // TODO: Traer calendarEvent
-    console.log( calendarEventId )
     this.calendarEventService.getOne(calendarEventId)
       .subscribe( (calendarEvent) => {
         const dialogRef = this.dialog.open(EventCreateEditComponent, {
           data: {
-            calendarEvent: calendarEvent
+            calendarEvent: calendarEvent,
+            isEdit: true
           }
         });
       })
@@ -67,4 +81,13 @@ export class CommissionTabDetailComponent implements OnInit {
       }
     });
   }
+
+
+  dayOfWeek(dateStr: string) {
+    const date = new Date( dateStr.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3") );
+    date.setDate(date.getDate() + 1)
+    let numberWeekDay = +date.getDay()
+    return this.daysMap[numberWeekDay]
+  }
+
 }

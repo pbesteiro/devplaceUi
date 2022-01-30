@@ -1,14 +1,16 @@
+.calendar-toolbar {
+  display: flex;
+  flex-direction: row-reverse;
+  padding-bottom: 25px;
+  align-items: center;
+}
+
+.button-label {
+  margin-right: 15px;
+}
+
 :host {
-  height: 100%;
   width: 100%;
-}
-
-.assistants-container {
-  min-height: 350px;
-}
-
-.assitants-table {
-  max-height: 350px;
 }
 
 table {
@@ -20,7 +22,7 @@ table {
   width: 100%;
 }
 
-.users-toolbar {
+.courses-toolbar {
   display: flex;
 }
 
@@ -30,4 +32,8 @@ table {
 
 .red-icon {
   color: red;
+}
+
+.blue-icon {
+  color: #5757a4;
 }

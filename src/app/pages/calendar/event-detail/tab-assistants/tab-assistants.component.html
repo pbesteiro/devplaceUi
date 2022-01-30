@@ -1,14 +1,15 @@
-<mat-card class="assistants-container">
+<div class="calendar-toolbar">
+  <button mat-fab color="primary" (click)="openDialog()">
+    <mat-icon>person_add</mat-icon>
+  </button>
+  <span class="button-label">Agregar Estudiante</span>
+</div>
 
-    <mat-card-content>
       <div class="users-toolbar">
         <mat-form-field appearance="standard">
           <mat-label>Filtrar</mat-label>
           <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
         </mat-form-field>
-        <button mat-fab color="primary" (click)="openDialog()">
-          <mat-icon>person_add</mat-icon>
-        </button>
       </div>
 
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -41,9 +42,8 @@
           <td class="mat-cell" colspan="3">No hay estudiantes "{{input.value}}"</td>
         </tr>
       </table>
-    </mat-card-content>
 
-      <mat-dialog-actions align="center">
+      <div>
         <!--
         <button mat-button
           (click)="cancelAssistants()"
@@ -54,7 +54,6 @@
                 (click)="saveAssistants()"
         >Aplicar cambios
         </button>
-      </mat-dialog-actions>
+      </div>
 
-  </mat-card>
 

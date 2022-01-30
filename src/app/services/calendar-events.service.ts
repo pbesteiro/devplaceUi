@@ -17,7 +17,7 @@ export class CalendarEventsService {
   }
 
   update(calendarEventId: string, assistants: any) {
-    return this.http.patch(`${environment.apiUrl}/calendar-events/${calendarEventId}`, assistants);
+    return this.http.patch(`${environment.apiUrl}/classes/${calendarEventId}`, assistants);
   }
 
   remove(calendarEventId: string) {

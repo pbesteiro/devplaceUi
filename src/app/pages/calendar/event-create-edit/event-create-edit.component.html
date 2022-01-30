@@ -18,13 +18,16 @@
           </mat-select>
         </mat-form-field>
 
+        <div>
+          <mat-checkbox formControlName="disabledCheckBox" #checkbox>Clase unica</mat-checkbox>
+        </div>
 
         <div>
           <mat-form-field appearance="fill">
             <mat-label>Inicia</mat-label>
-            <input matInput [matDatepicker]="dateFrom" formControlName="dateFrom">
-            <mat-datepicker-toggle matSuffix [for]="dateFrom"></mat-datepicker-toggle>
-            <mat-datepicker #dateFrom></mat-datepicker>
+            <input matInput [matDatepicker]="date" formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+            <mat-datepicker #date></mat-datepicker>
           </mat-form-field>
           <span class="separator-dates"></span>
           <mat-form-field appearance="fill">
@@ -69,6 +72,11 @@
         <mat-form-field appearance="fill" class="field-capacity-create-edit-modal">
           <mat-label for="capacity">Capacidad</mat-label>
           <input type="number" id="capacity" matInput required formControlName="capacity">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="field-capacity-create-edit-modal">
+          <mat-label for="linkContentClass">Link clase</mat-label>
+          <input type="text" id="linkContentClass" matInput required formControlName="linkContentClass">
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="field-create-edit-modal">

@@ -16,6 +16,8 @@ import { UserService } from '../../../services/user.services';
 })
 export class EventCreateEditComponent implements OnInit {
 
+  isDisabled: boolean = false
+  uniqueClass: boolean = false
   courses: CourseModel[] = []
   daysList: any[] = [
     {id: 0, value: 'Domingo'},
@@ -29,13 +31,15 @@ export class EventCreateEditComponent implements OnInit {
 
 
   public courseForm: FormGroup = this.fb.group({
+    disabledCheckBox: new FormControl(this.isDisabled),
     name: new FormControl(this.data.calendarEvent.course._id, [Validators.required, Validators.minLength(4)]),
-    dateFrom: new FormControl(this.data.calendarEvent.dateFrom, [Validators.required]),
+    date: new FormControl(this.fixDatePicker(), [Validators.required]),
     dateTo: new FormControl(this.data.calendarEvent.dateTo, [Validators.required]),
     hourTo: new FormControl(this.data.calendarEvent.timeTo, [Validators.required]),
     hourFrom: new FormControl(this.data.calendarEvent.timeFrom, [Validators.required]),
     days: new FormControl(this.data.calendarEvent.days, [Validators.required]),
     capacity: new FormControl(this.data.calendarEvent.capacity, [Validators.required]),
+    linkContentClass: new FormControl(this.data.calendarEvent.linkContentClass, [Validators.required]),
     mentor: new FormControl(this.data.calendarEvent.mentor._id, [Validators.required]),
   })
 
@@ -51,7 +55,18 @@ export class EventCreateEditComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
+
+  fixDatePicker() {
+    const realDate = new Date( this.data.calendarEvent.date );
+    realDate.setMinutes( realDate.getMinutes() + realDate.getTimezoneOffset() )
+    return realDate
+  }
+
   ngOnInit(): void {
+
+    this.data.calendarEvent.date = null
+    this.manageUniqueClass()
+
     this.courseService.getAll()
       .pipe(
         first()
@@ -61,101 +76,85 @@ export class EventCreateEditComponent implements OnInit {
 
     this.userService.getAllMentors()
       .subscribe( ( response: any ) => {
-
         this.mentors = response;
-
-
       })
   }
 
   createEditCourse() {
 
-    console.log( this.data.commissionId )
-    console.log( this.courseForm.value )
+    if ( this.uniqueClass ) {
 
-    const recurrentDaysStrArr = this.generateRecurrentDaysArr( this.courseForm.value.dateFrom, this.courseForm.value.dateTo, this.courseForm.value.days)
-    console.log(recurrentDaysStrArr)
-
-    if ( this.data.calendarEvent.course._id !== '' ) {
-      console.log( 'Update!' )
-    } else {
-      console.log( 'create!')
-      this.createNewClass( this.courseForm.value, recurrentDaysStrArr)
-    }
-    setTimeout( () => {
-      window.location.reload();
-    }, 1400)
-
-    /*
-
-    if ( this.data.calendarEvent.course._id !== '') {
-
-      const updatedCalendarEvent = {
-        capacity: this.courseForm.value.capacity,
-        dateFrom: this.courseForm.value.dateFrom,
-        dateTo: this.courseForm.value.dateTo,
-        days: this.courseForm.value.days,
-        timeFrom: this.courseForm.value.hourFrom,
-        timeTo: this.courseForm.value.hourTo,
-        mentor: this.courseForm.value.mentor,
-        course: this.courseForm.value.name,
-        commissionId: this.data.commissionId,
+      if ( this.data.isEdit ) {
+        this.editClass(this.courseForm.value.dateFrom)
+      } else {
+        this.createNewClass(this.courseForm.value.dateFrom)
       }
 
-
-      this.calendarEventsService.update(
-        this.data.calendarEvent._id,
-        updatedCalendarEvent
-      )
-        .subscribe( () => {
-          this.dialogRef.close();
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'curso actualizado',
-            backdrop: 'rgba(103, 58, 183, 0.3)',
-            heightAuto: false,
-            showConfirmButton: false,
-            timer: 1500
-          })
-        })
     } else {
-
-      const newCalendarEvent = {
-        course: this.courseForm.value.name,
-        dateFrom: this.courseForm.value.dateFrom.toISOString().split('T')[0],
-        dateTo: this.courseForm.value.dateTo.toISOString().split('T')[0],
-        timeFrom: this.courseForm.value.hourFrom,
-        timeTo: this.courseForm.value.hourTo,
-        days: this.courseForm.value.days,
-        capacity: parseInt(this.courseForm.value.capacity),
-        mentorId: this.courseForm.value.mentor,
-        commissionId: this.data.commissionId,
-      }
-
-      this.calendarEventsService.create(newCalendarEvent)
-        .subscribe( () => {
-          this.dialogRef.close();
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'curso creado',
-            backdrop: 'rgba(103, 58, 183, 0.3)',
-            heightAuto: false,
-            showConfirmButton: false,
-            timer: 1500
-          })
-        })
+      const recurrentDaysStrArr = this.generateRecurrentDaysArr( this.courseForm.value.date, this.courseForm.value.dateTo, this.courseForm.value.days)
+      this.createNewListClass( this.courseForm.value, recurrentDaysStrArr)
     }
 
     setTimeout( () => {
       window.location.reload();
     }, 1400)
-
-     */
   }
 
-  createNewClass(courseForm: any, days: string[]) {
+  editClass(courseForm: any) {
+    let parseDate = this.courseForm.value.date
+    // @ts-ignore
+    if ( typeof parseDate === 'object') {
+      parseDate = parseDate.toISOString().split('T')[0]
+    }
+
+    const updatedClass = {
+      courseId: this.courseForm.value.name,
+      date: parseDate,
+      timeFrom: this.courseForm.value.hourFrom,
+      timeTo: this.courseForm.value.hourTo,
+      mentorId: this.courseForm.value.mentor,
+      commissionId: this.data.commissionId,
+      capacity: parseInt(this.courseForm.value.capacity),
+      linkContentClass: this.courseForm.value.linkContentClass,
+      active: true,
+    }
+
+    this.calendarEventsService.update(this.data.calendarEvent._id, updatedClass)
+      .subscribe( () => {
+        this.dialogRef.close();
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'clase actualizada',
+          backdrop: 'rgba(103, 58, 183, 0.3)',
+          heightAuto: false,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
+
+  }
+
+  createNewClass(courseForm: any) {
+    const newClass: any = {
+      classes: []
+    }
+
+    newClass.classes.push({
+      courseId: this.courseForm.value.name,
+      date: this.courseForm.value.date.toISOString().split('T')[0],
+      timeFrom: this.courseForm.value.hourFrom,
+      timeTo: this.courseForm.value.hourTo,
+      mentorId: this.courseForm.value.mentor,
+      commissionId: this.data.commissionId,
+      capacity: parseInt(this.courseForm.value.capacity),
+      linkContentClass: this.courseForm.value.linkContentClass,
+      active: true,
+    })
+    this.createClass(newClass)
+  }
+
+  createNewListClass(courseForm: any, days: string[]) {
 
     const newClass: any = {
       classes: []
@@ -171,12 +170,14 @@ export class EventCreateEditComponent implements OnInit {
         mentorId: this.courseForm.value.mentor,
         commissionId: this.data.commissionId,
         capacity: parseInt(this.courseForm.value.capacity),
-        linkContentClass: "",
+        linkContentClass: this.courseForm.value.linkContentClass,
         active: true,
       })
-
     }
-    console.log(newClass)
+    this.createClass(newClass)
+  }
+
+  private createClass(newClass: any) {
     this.calendarEventsService.create(newClass)
       .subscribe( () => {
         this.dialogRef.close();
@@ -190,10 +191,46 @@ export class EventCreateEditComponent implements OnInit {
           timer: 1500
         })
       })
-
   }
 
-  generateRecurrentDaysArr(dateFrom: Date, dateTo: Date, days: number[]) {
+  private manageUniqueClass() {
+    if (this.data.isEdit) {
+      // @ts-ignore
+      this.courseForm.get('disabledCheckBox').setValue(true)
+      // @ts-ignore
+      this.courseForm.get('dateTo').disable()
+      // @ts-ignore
+      this.courseForm.get('days').disable()
+      this.isDisabled = true
+      this.uniqueClass = true
+      // @ts-ignore
+      this.courseForm.get('disabledCheckBox').disable()
+    } else {
+      // @ts-ignore
+      this.courseForm.get('disabledCheckBox')
+        .valueChanges
+        .subscribe( (check) => {
+          if (check) {
+            // @ts-ignore
+            this.courseForm.get('dateTo').disable()
+            // @ts-ignore
+            this.courseForm.get('days').disable()
+            this.isDisabled = true
+            this.uniqueClass = true
+          } else {
+            // @ts-ignore
+            this.courseForm.get('dateTo').enable()
+            // @ts-ignore
+            this.courseForm.get('days').enable()
+            this.isDisabled = false
+            this.uniqueClass = false
+          }
+          this.isDisabled = check
+        })
+    }
+  }
+
+  private generateRecurrentDaysArr(dateFrom: Date, dateTo: Date, days: number[]) {
     // @ts-ignore
     const diffInMs = dateTo - dateFrom
     const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
