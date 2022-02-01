@@ -37,3 +37,15 @@ table {
 .blue-icon {
   color: #5757a4;
 }
+
+.buttons-action {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-detail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}

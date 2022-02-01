@@ -43,14 +43,22 @@ export class CommissionsComponent implements OnInit {
   ngOnInit(): void {
     this.commissionService.getAll()
       .subscribe( (response) => {
-        this.dataSource.data = response
+        this.dataSource.data = response.filter( (commission: any) => {
+          if (commission.active) {
+            return commission
+          }
+        })
       })
   }
 
   openDialog() {
 
     const dialogRef = this.dialog.open(CommissionCreateEditComponent, {
-        data: {}
+        data: {
+          commission: {
+            name: ''
+          }
+        }
       });
 
     dialogRef.afterClosed()
@@ -125,6 +133,38 @@ export class CommissionsComponent implements OnInit {
     })
   }
   */
+  removeCommission(commissionId: string) {
+    Swal.fire({
+      title: '¿Quiere eliminar la comision?',
+      text: ``,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar',
+      backdrop: 'rgba(103, 58, 183, 0.3)',
+      heightAuto: false,
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        this.commissionService.update( commissionId, { active: false } )
+          .subscribe( () => {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Comisión eliminada',
+              backdrop: 'rgba(103, 58, 183, 0.3)',
+              heightAuto: false,
+              showConfirmButton: false,
+              timer: 1500
+            })
+            setTimeout( () => {
+              window.location.reload();
+            }, 1400)
+          })
 
+      }
+    })
+  }
 
 }

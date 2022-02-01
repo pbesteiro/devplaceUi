@@ -37,3 +37,13 @@ table {
 .blue-icon {
   color: #5757a4;
 }
+
+.saveButtonContent {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.saveButton {
+  background-color: rgb(87, 87, 164, 0.5);
+}

@@ -41,6 +41,7 @@ export class TabAssistantsComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.data)
     this.dataSource.data = this.data.commission.students;
+    this.getStudentsIds(this.data.commission.students)
   }
 
   openDialog() {
@@ -87,6 +88,7 @@ export class TabAssistantsComponent implements OnInit {
         let el = data.find( s => s._id === student._id)
         const index = data.indexOf( el )
         data.splice( index, 1 )
+        this.getStudentsIds(data)
         this.dataSource.data = data;
       }
     })
@@ -146,6 +148,10 @@ export class TabAssistantsComponent implements OnInit {
           })
       }
     })
+  }
+
+  private getStudentsIds(students: any) {
+    this.studentIds = students.map( (student: any) => student._id )
   }
 
 }

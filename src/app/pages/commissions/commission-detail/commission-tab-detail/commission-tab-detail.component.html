@@ -1,6 +1,19 @@
-<div class="calendar-toolbar">
-  <button mat-fab color="primary" (click)="addEvent()">+</button>
-  <span class="button-label">Agregar clase</span>
+<div class="header-detail">
+  <div>
+    <h2>Comision {{ commission.name }}</h2>
+  </div>
+  <div class="calendar-toolbar">
+    <button matTooltip="Editar comision"
+            matTooltipClass="tooltip-primary"
+            mat-fab color="primary" (click)="editCommission()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button matTooltip="Agregar nuevas clases"
+            matTooltipClass="tooltip-primary"
+            mat-fab color="primary" (click)="addEvent()">
+      <mat-icon>class</mat-icon>
+    </button>
+  </div>
 </div>
 
 <div class="users-toolbar">
@@ -40,15 +53,21 @@
     <ng-container matColumnDef="actionView">
       <th mat-header-cell *matHeaderCellDef> </th>
       <td mat-cell *matCellDef="let element" (click)="editCalendarEvent(element._id)" class="delete-assistant">
-        <mat-icon class="blue-icon">edit</mat-icon>
+        <mat-icon
+          matTooltip="Editar clase"
+          matTooltipClass="tooltip-primary"
+          class="blue-icon">edit</mat-icon>
       </td>
     </ng-container>
 
     <!-- Delete Column -->
     <ng-container matColumnDef="actionDelete">
       <th mat-header-cell *matHeaderCellDef> </th>
-      <td mat-cell *matCellDef="let element" class="delete-assistant">
-        <mat-icon class="red-icon">delete_outline</mat-icon>
+      <td mat-cell (click)="removeClass(element._id)" *matCellDef="let element" class="delete-assistant">
+        <mat-icon
+          matTooltip="Eliminar clase"
+          matTooltipClass="tooltip-danger"
+          class="red-icon">delete_outline</mat-icon>
       </td>
     </ng-container>
 

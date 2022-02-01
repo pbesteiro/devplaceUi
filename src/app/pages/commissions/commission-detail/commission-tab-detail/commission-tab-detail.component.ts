@@ -3,6 +3,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {EventCreateEditComponent} from "../../../calendar/event-create-edit/event-create-edit.component";
 import {MatTableDataSource} from "@angular/material/table";
 import { CalendarEventsService } from "../../../../services/calendar-events.service";
+import Swal from "sweetalert2";
+import {CommissionCreateEditComponent} from "../../commission-create-edit/commission-create-edit.component";
 
 export interface EventElement {
   name:string;
@@ -42,7 +44,12 @@ export class CommissionTabDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataSource.data = this.commission.classes
+    this.dataSource.data = this.commission.classes.filter( (c: any) => {
+      console.log( c )
+      if ( c.active ) {
+        return c
+      }
+    })
   }
 
   applyFilter(event: Event) {
@@ -88,6 +95,49 @@ export class CommissionTabDetailComponent implements OnInit {
     date.setDate(date.getDate() + 1)
     let numberWeekDay = +date.getDay()
     return this.daysMap[numberWeekDay]
+  }
+
+  removeClass(classId: string) {
+    Swal.fire({
+      title: '¿Quiere eliminar la clase?',
+      text: ``,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar',
+      backdrop: 'rgba(103, 58, 183, 0.3)',
+      heightAuto: false,
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        this.calendarEventService.update( classId, { active: false } )
+          .subscribe( () => {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Clase eliminada',
+              backdrop: 'rgba(103, 58, 183, 0.3)',
+              heightAuto: false,
+              showConfirmButton: false,
+              timer: 1500
+            })
+            setTimeout( () => {
+              window.location.reload();
+            }, 1400)
+          })
+
+      }
+    })
+  }
+
+  editCommission() {
+    this.dialog.open(CommissionCreateEditComponent, {
+      data: {
+        commission: this.commission,
+        isEdit: true,
+      }
+    });
   }
 
 }
