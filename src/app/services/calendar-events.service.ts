@@ -9,7 +9,7 @@ export class CalendarEventsService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-    return this.http.get<any[]>(`${environment.apiUrl}/calendar-events`)
+    return this.http.get<any[]>(`${environment.apiUrl}/classes`)
   }
 
   create(classes: any) {

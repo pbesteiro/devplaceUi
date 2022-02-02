@@ -20,7 +20,6 @@ export class EventDetailComponent implements OnInit {
   calendarEvent: any;
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
   }
 
   changeTab(event: any) {

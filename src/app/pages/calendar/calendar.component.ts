@@ -28,28 +28,27 @@ export class CalendarComponent implements OnInit {
     this.calendarEvensService.getAll()
       .subscribe( (response: any) => {
         response.forEach( (calendarEvent: any) => {
-          this.calendarEvents.push({
-            title: `${calendarEvent['commission']['name']} - ${calendarEvent['course']['name']}`,
-            daysOfWeek: calendarEvent['days'],
-            startTime: calendarEvent['timeFrom'],
-            endTime: calendarEvent['timeTo'],
-            startRecur: calendarEvent['dateFrom'],
-            endRecur: calendarEvent['dateTo'],
-            extendedProps: { calendarEvent}
-          })
+
+          if ( calendarEvent['active']) {
+            this.calendarEvents.push({
+              title: `${calendarEvent['commission']['name']} - ${calendarEvent['course']['name']}`,
+              // daysOfWeek: calendarEvent['days'],
+              date: `${calendarEvent['date']}T${calendarEvent['timeFrom']}:00`,
+              end: `${calendarEvent['date']}T${calendarEvent['timeTo']}:00`,
+              // startTime: calendarEvent['timeFrom'],
+              // endTime: calendarEvent['timeTo'],
+              // startRecur: calendarEvent['dateFrom'],
+              // endRecur: calendarEvent['dateTo'],
+              extendedProps: { calendarEvent}
+            })
+          }
+
         })
       })
 
     setTimeout( () => {
       this.calendarOptions = this.initCalendar();
     }, 100)
-
-    /*
-    setTimeout(() => {
-      this.calendarOptions.footerToolbar = false;
-      console.log(this.calendarEvents)
-    }, 100)
-    */
   }
 
   constructor(
@@ -91,19 +90,13 @@ export class CalendarComponent implements OnInit {
 
   handleEventClick(clickInfo: EventClickArg) {
 
-    const dialogRef = this.dialog.open(EventDetailComponent, {
+    this.dialog.open(EventDetailComponent, {
       width: '800px',
       data: {
+        isEdit: true,
         calendarEvent: clickInfo.event._def.extendedProps['calendarEvent']
       }
     });
-
-    /*
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove();
-    }
-    console.log(clickInfo.event._def)
-    */
   }
 
   openDialog() {
@@ -118,8 +111,9 @@ export class CalendarComponent implements OnInit {
             _id: '',
             name: '',
           }
-        }
-      }
+        },
+        isEdit: true,
+      },
     });
   }
 

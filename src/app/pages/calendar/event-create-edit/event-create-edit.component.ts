@@ -8,6 +8,8 @@ import { first } from 'rxjs';
 import { CourseModel } from '../../../models/course.model';
 import { CalendarEventsService } from '../../../services/calendar-events.service';
 import { UserService } from '../../../services/user.services';
+import {CalendarComponent} from "../calendar.component";
+import {EventDetailComponent} from "../event-detail/event-detail.component";
 
 @Component({
   selector: 'app-event-create-edit',
@@ -51,7 +53,7 @@ export class EventCreateEditComponent implements OnInit {
     private userService: UserService,
     private courseService: CourseService,
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<CoursesComponent>,
+    public dialogRef: MatDialogRef<EventDetailComponent | CoursesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
@@ -79,6 +81,7 @@ export class EventCreateEditComponent implements OnInit {
         this.mentors = response;
       })
   }
+
 
   createEditCourse() {
 
