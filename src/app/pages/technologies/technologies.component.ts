@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatTableDataSource} from "@angular/material/table";
 import {first} from "rxjs";
 import {TechnologyCreateEditComponent} from "./technology-create-edit/technology-create-edit.component";
+import Swal from "sweetalert2";
 
 const technologies: TechnologyModel[] = []
 
@@ -36,7 +37,11 @@ export class TechnologiesComponent implements OnInit {
       .pipe(
         first()
       ).subscribe( (response: any) => {
-      this.dataSource.data = response
+      this.dataSource.data = response.filter( (technology: any) => {
+        if (technology.active) {
+          return technology;
+        }
+      })
     })
   }
 
@@ -48,7 +53,7 @@ export class TechnologiesComponent implements OnInit {
     }
 
     const dialogRef = this.dialog.open(TechnologyCreateEditComponent, {
-      disableClose: true,
+      // disableClose: true,
       data: {
         technology: this.technology,
         editAction: this.editAction,
@@ -61,6 +66,40 @@ export class TechnologiesComponent implements OnInit {
           window.location.reload();
         }
       })
+  }
+
+  removeTechnology(id: string) {
+    Swal.fire({
+      title: '¿Quiere eliminar la tecnologia?',
+      text: ``,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar',
+      backdrop: 'rgba(103, 58, 183, 0.3)',
+      heightAuto: false,
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        this.technologiesService.update(id, { active: false })
+          .subscribe( () => {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Curso eliminado',
+              backdrop: 'rgba(103, 58, 183, 0.3)',
+              heightAuto: false,
+              showConfirmButton: false,
+              timer: 1500
+            })
+            setTimeout( () => {
+              window.location.reload();
+            }, 1400)
+          })
+
+      }
+    })
   }
 
 }

@@ -32,7 +32,7 @@
   <!-- Delete Column -->
   <ng-container matColumnDef="actionDelete">
     <th mat-header-cell *matHeaderCellDef> </th>
-    <td mat-cell *matCellDef="let element" class="action-column">
+    <td mat-cell (click)="removeCourse(element)" *matCellDef="let element" class="action-column">
       <mat-icon class="red-icon">delete_outline</mat-icon>
     </td>
   </ng-container>

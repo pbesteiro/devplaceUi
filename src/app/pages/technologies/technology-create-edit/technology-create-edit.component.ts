@@ -32,12 +32,19 @@ export class TechnologyCreateEditComponent implements OnInit {
 
     // EDIT
     if (this.data.editAction) {
-      this.messageTitle = 'Curso Actualizado';
-      // TODO: UPDATE
+      this.messageTitle = 'Tecnología actualizada';
+      this.technologyService.update(this.data.technology._id, this.technologyForm.value)
+        .subscribe( () => {
+          this.dialogRef.close({
+            formValue: this.technologyForm.value,
+            edited: true,
+            technologyId: this.data.technology._id,
+          })
+        })
     }
     // CREATE
     else {
-      this.messageTitle = 'Curso Creado';
+      this.messageTitle = 'Tecnología Creada';
       this.technologyService.create(this.technologyForm.value.name)
         .subscribe( () => {
           this.dialogRef.close({
@@ -62,22 +69,7 @@ export class TechnologyCreateEditComponent implements OnInit {
   }
 
   closeDialog() {
-    Swal.fire({
-      titleText: '¿Quiere abandonar la edición?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Descartar cambios',
-      cancelButtonText: 'Cancelar',
-      backdrop: 'rgba(103, 58, 183, 0.3)',
-      heightAuto: false,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.dialogRef.close();
-        window.location.reload();
-      }
-    })
+    this.dialogRef.close();
   }
 
 }

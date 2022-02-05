@@ -5,6 +5,10 @@
   align-items: center;
 }
 
+.action-buttons {
+  margin-right: 4px;
+}
+
 .button-label {
   margin-right: 15px;
 }

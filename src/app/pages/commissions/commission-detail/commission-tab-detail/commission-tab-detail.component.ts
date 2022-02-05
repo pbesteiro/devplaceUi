@@ -45,7 +45,6 @@ export class CommissionTabDetailComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource.data = this.commission.classes.filter( (c: any) => {
-      console.log( c )
       if ( c.active ) {
         return c
       }

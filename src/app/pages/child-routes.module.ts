@@ -10,9 +10,9 @@ import {MentorsComponent} from "./mentors/mentors.component";
 import {CommissionsComponent} from "./commissions/commissions.component";
 
 const childRoutes: Routes = [
-  { path: '', component: DashboardComponent },
+  { path: '', component: CalendarComponent },
   { path: 'users', component: UsersComponent },
-  { path: 'calendar', component: CalendarComponent },
+  // { path: 'calendar', component: CalendarComponent },
   { path: 'cursos', component: CoursesComponent },
   { path: 'technologies', component: TechnologiesComponent },
   { path: 'students', component: StudentsComponent },

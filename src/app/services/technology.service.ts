@@ -16,4 +16,8 @@ export class TechnologyService {
   create(technology: string) {
     return this.http.post(`${environment.apiUrl}/technologies`, {name: technology})
   }
+
+  update(id: string, body: any) {
+    return this.http.patch(`${environment.apiUrl}/technologies/${id}`, body)
+  }
 }

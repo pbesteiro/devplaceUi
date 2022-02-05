@@ -15,7 +15,7 @@ export class CourseService {
     return this.http.post(`${environment.apiUrl}/courses`, course);
   }
 
-  update(id: string, course: CourseModel) {
+  update(id: string, course: any) {
     return this.http.patch(`${environment.apiUrl}/courses/${id}`, course)
   }
 }

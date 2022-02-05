@@ -6,6 +6,7 @@ import {first} from "rxjs";
 import {CourseModel} from "../../models/course.model";
 import {CourseService} from "../../services/course.services";
 import {TechnologyModel} from "../../models/technology.model";
+import Swal from "sweetalert2";
 
 const courses: CourseModel[] = [];
 
@@ -37,7 +38,11 @@ export class CoursesComponent implements OnInit {
       .pipe(
         first()
       ).subscribe( (response: any) => {
-      this.dataSource.data = response
+      this.dataSource.data = response.filter((course:any) => {
+        if (course.active) {
+          return course
+        }
+      })
     })
   }
 
@@ -49,7 +54,7 @@ export class CoursesComponent implements OnInit {
     }
 
     const dialogRef = this.dialog.open(CreateEditComponent, {
-      disableClose: true,
+      // disableClose: true,
       data: {
         course: this.course,
         editAction: this.editAction,
@@ -63,6 +68,40 @@ export class CoursesComponent implements OnInit {
           window.location.reload();
         }
       })
+  }
+
+  removeCourse(course: any) {
+    Swal.fire({
+      title: '¿Quiere eliminar el curso?',
+      text: ``,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar',
+      backdrop: 'rgba(103, 58, 183, 0.3)',
+      heightAuto: false,
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        this.courseService.update(course._id, { active: false })
+          .subscribe( () => {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Tecnología eliminada',
+              backdrop: 'rgba(103, 58, 183, 0.3)',
+              heightAuto: false,
+              showConfirmButton: false,
+              timer: 1500
+            })
+            setTimeout( () => {
+              window.location.reload();
+            }, 1400)
+          })
+
+      }
+    })
   }
 
 }
