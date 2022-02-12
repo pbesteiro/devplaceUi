@@ -4,6 +4,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {UserModel} from "../../models/user.model";
 import {MatDialog} from "@angular/material/dialog";
 import {UserCreateEditComponent} from "../users/user-create-edit/user-create-edit.component";
+import {MentorCreateEditComponent} from "./mentor-create-edit/mentor-create-edit.component";
 
 const ELEMENT_DATA: UserModel[] = [];
 
@@ -35,7 +36,7 @@ export class MentorsComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(UserCreateEditComponent, {
+    this.dialog.open(MentorCreateEditComponent, {
       data: {
         role: 'MENTOR'
       }
