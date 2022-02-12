@@ -22,3 +22,8 @@
   max-height: 50px;
   max-width: 50px;
 }
+
+::ng-deep .tooltip-primary {
+  background: rgba(103, 58, 183, 0.9) !important;
+  font-size: 1em;
+}

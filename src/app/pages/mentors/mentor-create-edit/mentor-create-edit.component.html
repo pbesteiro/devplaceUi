@@ -46,17 +46,6 @@
           <input autocomplete="off" id="phone" matInput placeholder="Ej: xxxxxxxx" required formControlName="phone">
         </mat-form-field>
 
-        <!-- pincture mentor field -->
-        <div>
-          <img [src]="userForm.value.picture" class="profile-pic"/>
-          <input
-            type="file"
-            name=""
-            accept=".png,.jpg,.jpeg"
-            (change)="addImage($event)"
-          />
-        </div>
-
         <mat-form-field>
           <mat-label>Asignaturas</mat-label>
           <mat-select formControlName="technologies" multiple>
@@ -77,6 +66,29 @@
           <mat-label for="comments">Observaciones</mat-label>
           <input autocomplete="off" id="comments" matInput formControlName="comments">
         </mat-form-field>
+
+        <!-- pincture mentor field -->
+        <button mat-raised-button color="primary" (click)="imgFileInput.click()">
+          <mat-icon
+            matTooltip="Subir foto de perfil"
+            matTooltipClass="tooltip-primary"
+            class="blue-icon">photo_camera</mat-icon>
+        </button>
+        <div>
+          <img *ngIf="userForm.value.picture" alt="profile" [src]="userForm.value.picture" class="profile-pic"/>
+        </div>
+        <input accept=".png,.jpg,.jpeg" hidden type="file" #imgFileInput (change)="addImage($event)"/>
+        <!--
+        <div>
+          <img [src]="userForm.value.picture" class="profile-pic"/>
+          <input
+            type="file"
+            name=""
+            accept=".png,.jpg,.jpeg"
+            (change)="addImage($event)"
+          />
+        </div>
+        -->
 
       </mat-card-content>
 
