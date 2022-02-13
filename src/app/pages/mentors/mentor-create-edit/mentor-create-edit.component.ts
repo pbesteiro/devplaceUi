@@ -6,6 +6,8 @@ import {MentorsComponent} from "../mentors.component";
 import {first} from "rxjs";
 import {TechnologyService} from "../../../services/technology.service";
 import {TechnologyModel} from "../../../models/technology.model";
+import Swal from "sweetalert2";
+import {UserService} from "../../../services/user.services";
 
 @Component({
   selector: 'app-mentor-create-edit',
@@ -34,6 +36,7 @@ export class MentorCreateEditComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     private technologyService: TechnologyService,
+    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
@@ -46,7 +49,52 @@ export class MentorCreateEditComponent implements OnInit {
   }
 
   createEditUser() {
-    console.log(this.userForm.value)
+    if ( this.data.isEdit ) {
+      this.editMentor(this.userForm.value)
+    } else {
+      this.createMentor()
+    }
+
+    /*
+    setTimeout( () => {
+      window.location.reload();
+    }, 1400)
+    */
+  }
+
+  editMentor(mentor: any) {
+
+  }
+
+  createMentor() {
+
+    const user = {
+      name: this.userForm.value.name,
+      lastName: this.userForm.value.lastname,
+      email: this.userForm.value.email,
+      dni: this.userForm.value.dni,
+      phone: this.userForm.value.phone,
+      linkedinProfile: this.userForm.value.linkedin,
+      comments: this.userForm.value.comments,
+      roles: ['MENTOR'],
+      techologiesId: this.userForm.value.technologies,
+      active: true,
+    }
+    console.log(user)
+    this.userService.create(user)
+      .subscribe( () => {
+        this.dialogRef.close();
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Mentor creado',
+          backdrop: 'rgba(103, 58, 183, 0.3)',
+          heightAuto: false,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
+
   }
 
   closeDialog() {

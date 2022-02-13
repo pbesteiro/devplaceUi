@@ -22,4 +22,8 @@ export class UserService {
   getAllMentors() {
     return this.http.get<UserModel[]>(`${environment.apiUrl}/users?role=MENTOR`);
   }
+
+  create(user: any) {
+    return this.http.post(`${environment.apiUrl}/users`, user)
+  }
 }
