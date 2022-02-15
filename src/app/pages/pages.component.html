@@ -5,24 +5,27 @@
   <mat-drawer #drawer class="sidenav" mode="side" opened>
     <ul>
       <li routerLink="/campus">
+        Dashboard
+      </li>
+      <li *ngIf="isAdmin || isManager" routerLink="/campus/caelndar">
         Calendar
       </li>
-      <li routerLink="/campus/commissions">
+      <li *ngIf="isAdmin || isManager" routerLink="/campus/commissions">
         Comisiones
       </li>
-      <li routerLink="/campus/cursos">
+      <li *ngIf="isAdmin || isManager" routerLink="/campus/cursos">
         Cursos
       </li>
-      <li routerLink="/campus/technologies">
+      <li *ngIf="isAdmin || isManager" routerLink="/campus/technologies">
         Tecnologias
       </li>
-      <li routerLink="/campus/users">
+      <li *ngIf="isAdmin" routerLink="/campus/users">
         Managers
       </li>
-      <li routerLink="/campus/students">
+      <li *ngIf="isAdmin || isManager" routerLink="/campus/students">
         Estudiantes
       </li>
-      <li routerLink="/campus/mentors">
+      <li *ngIf="isAdmin || isManager" routerLink="/campus/mentors">
         Mentores
       </li>
     </ul>

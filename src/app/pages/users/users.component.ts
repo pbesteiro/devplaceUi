@@ -47,7 +47,7 @@ export class UsersComponent implements OnInit {
     this.dialog.open(UserCreateEditComponent, {
       data: {
         role: 'MANAGER',
-        manager: {
+        user: {
           name: '',
           comments: '',
         }
