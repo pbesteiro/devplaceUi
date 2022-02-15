@@ -26,4 +26,8 @@ export class UserService {
   create(user: any) {
     return this.http.post(`${environment.apiUrl}/users`, user)
   }
+
+  update(userId: string, user: any) {
+    return this.http.patch(`${environment.apiUrl}/users/${userId}`, user)
+  }
 }

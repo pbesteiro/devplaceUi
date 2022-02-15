@@ -19,16 +19,16 @@ export class MentorCreateEditComponent implements OnInit {
   technologies: TechnologyModel[] = [];
 
   public userForm: FormGroup = this.fb.group({
-    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    lastname: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    email: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    dni: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    phone: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    name: new FormControl(this.data.mentor.name, [Validators.required, Validators.minLength(4)]),
+    lastname: new FormControl(this.data.mentor.lastName, [Validators.required, Validators.minLength(4)]),
+    email: new FormControl(this.data.mentor.email, [Validators.required, Validators.minLength(4)]),
+    dni: new FormControl(this.data.mentor.dni, [Validators.required, Validators.minLength(4)]),
+    phone: new FormControl(this.data.mentor.phone, [Validators.required, Validators.minLength(4)]),
     // picture: new FormControl('assets/img/default-img.png'),
-    picture: new FormControl(null),
-    technologies: new FormControl([], [Validators.required]),
-    linkedin: new FormControl('', [Validators.minLength(4)]),
-    comments: new FormControl('', [Validators.minLength(4)]),
+    picture: new FormControl(this.data.mentor.picture),
+    technologies: new FormControl(this.getTechnologiesIds(), [Validators.required]),
+    linkedin: new FormControl(this.data.mentor.linkedinProfile, [Validators.minLength(4)]),
+    comments: new FormControl(this.data.mentor.comments, [Validators.minLength(4)]),
   })
 
   constructor(
@@ -48,22 +48,53 @@ export class MentorCreateEditComponent implements OnInit {
     })
   }
 
+  getTechnologiesIds() {
+    if (this.data.mentor.technologies) {
+      return this.data.mentor.technologies.map( (tech: any) => tech._id )
+    } else {
+     return []
+    }
+  }
+
   createEditUser() {
     if ( this.data.isEdit ) {
-      this.editMentor(this.userForm.value)
+      this.editMentor()
     } else {
       this.createMentor()
     }
 
-    /*
     setTimeout( () => {
       window.location.reload();
     }, 1400)
-    */
   }
 
-  editMentor(mentor: any) {
+  editMentor() {
+    const user = {
+      name: this.userForm.value.name,
+      lastName: this.userForm.value.lastname,
+      email: this.userForm.value.email,
+      dni: this.userForm.value.dni,
+      phone: this.userForm.value.phone,
+      linkedinProfile: this.userForm.value.linkedin,
+      comments: this.userForm.value.comments,
+      techologiesId: this.userForm.value.technologies,
+    }
 
+    console.log(user)
+
+    this.userService.update(this.data.mentorId, user)
+      .subscribe( () => {
+        this.dialogRef.close();
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Mentor actualizado',
+          backdrop: 'rgba(103, 58, 183, 0.3)',
+          heightAuto: false,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
   }
 
   createMentor() {

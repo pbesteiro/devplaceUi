@@ -5,6 +5,8 @@ import {MatTableDataSource} from "@angular/material/table";
 import {UserModel} from "../../models/user.model";
 import {MatDialog} from "@angular/material/dialog";
 import {UserCreateEditComponent} from "./user-create-edit/user-create-edit.component";
+import {MentorCreateEditComponent} from "../mentors/mentor-create-edit/mentor-create-edit.component";
+import Swal from "sweetalert2";
 
 const ELEMENT_DATA: UserModel[] = [];
 
@@ -15,7 +17,7 @@ const ELEMENT_DATA: UserModel[] = [];
 })
 export class UsersComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'lastName', 'email'];
+  displayedColumns: string[] = ['name', 'lastName', 'email', 'actionEdit', 'actionDelete'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   applyFilter(event: Event) {
@@ -33,16 +35,69 @@ export class UsersComponent implements OnInit {
       .pipe(
         first()
       ).subscribe( response => {
-      this.dataSource.data = response
+      this.dataSource.data = response.filter( (user: any) => {
+        if (user.active) {
+          return user
+        }
+      })
     })
   }
 
   openDialog() {
     this.dialog.open(UserCreateEditComponent, {
       data: {
-        role: 'MANAGER'
+        role: 'MANAGER',
+        manager: {
+          name: '',
+          comments: '',
+        }
       }
     });
+  }
+
+  editUser(userId: string, user: any ) {
+    this.dialog.open(UserCreateEditComponent, {
+      data: {
+        role: 'MANAGER',
+        isEdit: true,
+        userId,
+        user,
+      }
+    });
+  }
+
+  removeUser( userId: string ) {
+    Swal.fire({
+      title: '¿Quiere eliminar al manager?',
+      text: ``,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar',
+      backdrop: 'rgba(103, 58, 183, 0.3)',
+      heightAuto: false,
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        this.userService.update(userId, {active: false})
+          .subscribe(() => {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Manager eliminado',
+              backdrop: 'rgba(103, 58, 183, 0.3)',
+              heightAuto: false,
+              showConfirmButton: false,
+              timer: 1500
+            })
+            setTimeout(() => {
+              window.location.reload();
+            }, 1400)
+          })
+
+      }
+    })
   }
 
 }

@@ -37,7 +37,7 @@
         <!-- dni mentor field -->
         <mat-form-field appearance="fill" class="field-course-create-edit-modal">
           <mat-label for="dni">DNI</mat-label>
-          <input autocomplete="off" id="dni" matInput placeholder="Ej: xxxxxxxx" required formControlName="dni">
+          <input type="number"  autocomplete="off" id="dni" matInput placeholder="Ej: xxxxxxxx" required formControlName="dni">
         </mat-form-field>
 
         <!-- phone mentor field -->
@@ -67,7 +67,7 @@
           <input autocomplete="off" id="comments" matInput formControlName="comments">
         </mat-form-field>
 
-        <!-- pincture mentor field -->
+        <!-- pincture mentor field
         <button mat-raised-button color="primary" (click)="imgFileInput.click()">
           <mat-icon
             matTooltip="Subir foto de perfil"
@@ -78,6 +78,7 @@
           <img *ngIf="userForm.value.picture" alt="profile" [src]="userForm.value.picture" class="profile-pic"/>
         </div>
         <input accept=".png,.jpg,.jpeg" hidden type="file" #imgFileInput (change)="addImage($event)"/>
+        -->
         <!--
         <div>
           <img [src]="userForm.value.picture" class="profile-pic"/>
