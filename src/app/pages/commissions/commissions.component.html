@@ -24,15 +24,22 @@
     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
   </ng-container>
 
-  <!-- View Column -->
-  <!--
-  <ng-container matColumnDef="actionView">
+  <!-- Count assists Column -->
+  <ng-container matColumnDef="count">
+    <th mat-header-cell *matHeaderCellDef> Inscriptos </th>
+    <td mat-cell *matCellDef="let element"> {{ element.students.length }} </td>
+  </ng-container>
+
+  <!-- Edit Column -->
+  <ng-container matColumnDef="actionCpyLink">
     <th mat-header-cell *matHeaderCellDef> </th>
-    <td mat-cell (click)="viewCommissionDetails(element._id, element)"  *matCellDef="let element" class="delete-assistant">
-      <mat-icon class="blue-icon">remove_red_eye</mat-icon>
+    <td mat-cell (click)="copyMeetLink()" [cdkCopyToClipboard]="element.meetLink" *matCellDef="let element" class="delete-assistant">
+      <mat-icon
+        matTooltip="Copiar link de la clase"
+        matTooltipClass="tooltip-primary"
+        class="blue-icon">link</mat-icon>
     </td>
   </ng-container>
-  -->
 
   <!-- Edit Column -->
   <ng-container matColumnDef="actionEdit">

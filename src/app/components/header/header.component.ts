@@ -9,11 +9,15 @@ import { AuthenticationService } from "../../services/auth.service";
 })
 export class HeaderComponent implements OnInit {
 
+  user: any
+
   constructor(
     private authService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
+    this.user = this.authService.userValue
+    console.log(this.user)
   }
 
   logout() {

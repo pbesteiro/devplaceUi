@@ -54,6 +54,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {CommissionAddStudentsComponent} from "./commissions/commission-add-students/commission-add-students.component";
 import {StudentCreateEditComponent} from "./students/student-create-edit/student-create-edit.component";
 import {MentorCreateEditComponent} from "./mentors/mentor-create-edit/mentor-create-edit.component";
+import {ClipboardModule} from "@angular/cdk/clipboard";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -114,6 +116,8 @@ FullCalendarModule.registerPlugins([
     MatAutocompleteModule,
     MatTooltipModule,
     MatCheckboxModule,
+    ClipboardModule,
+    MatSnackBarModule,
   ],
   exports: [
   ]

@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {CalendarEventsService} from "../../services/calendar-events.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
-import {EventCreateEditComponent} from "../calendar/event-create-edit/event-create-edit.component";
-import {EventDetailComponent} from "../calendar/event-detail/event-detail.component";
 import Swal from "sweetalert2";
 import {CommissionService} from "../../services/commission.service";
 import {CommissionCreateEditComponent} from "./commission-create-edit/commission-create-edit.component";
 import {CommissionDetailComponent} from "./commission-detail/commission-detail.component";
 import {CommissionViewDetailComponent} from "./commission-view-detail/commission-view-detail.component";
 import {CommissionAddStudentsComponent} from "./commission-add-students/commission-add-students.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 export interface CommissionElement {
   id: string;
@@ -27,7 +25,7 @@ const commissions: CommissionElement[] = [];
 })
 export class CommissionsComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'actionEdit', 'actionAddStudent', 'actionDelete'];
+  displayedColumns: string[] = ['id', 'name', 'count', 'actionCpyLink', 'actionEdit', 'actionAddStudent', 'actionDelete'];
   dataSource = new MatTableDataSource(commissions);
 
   applyFilter(event: Event) {
@@ -38,6 +36,7 @@ export class CommissionsComponent implements OnInit {
   constructor(
     private commissionService: CommissionService,
     private dialog: MatDialog,
+    private _snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -167,4 +166,13 @@ export class CommissionsComponent implements OnInit {
     })
   }
 
+  copyMeetLink() {
+    this._snackBar.open('Link copiado', '📃', {
+      duration: 1000,
+    });
+  }
+
+  getStudents() {
+    console.log(this.dataSource.data)
+  }
 }

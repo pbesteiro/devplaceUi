@@ -15,7 +15,8 @@ import {CalendarComponent} from "../../calendar/calendar.component";
 export class CommissionCreateEditComponent {
 
   public commissionForm: FormGroup = this.fb.group({
-    name: new FormControl(this.data.commission.name, [Validators.required, Validators.minLength(4)])
+    name: new FormControl(this.data.commission.name, [Validators.required, Validators.minLength(4)]),
+    meetLink: new FormControl(this.data.commission.meetLink, [Validators.required, Validators.minLength(4)]),
   })
 
 

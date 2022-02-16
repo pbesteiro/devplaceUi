@@ -15,3 +15,7 @@
   cursor: pointer;
   font-size: smaller;
 }
+
+.username {
+  font-size: 0.8em;
+}

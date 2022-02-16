@@ -17,9 +17,7 @@ export class PagesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // console.log(this.jwtHelper.decodeToken(document.cookie.split('=')[1]))
     this.role = this.authService.userValue.roles.toString()
-    console.log(this.role)
   }
 
   // @ts-ignore
