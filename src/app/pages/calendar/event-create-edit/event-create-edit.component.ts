@@ -8,7 +8,6 @@ import { first } from 'rxjs';
 import { CourseModel } from '../../../models/course.model';
 import { CalendarEventsService } from '../../../services/calendar-events.service';
 import { UserService } from '../../../services/user.services';
-import {CalendarComponent} from "../calendar.component";
 import {EventDetailComponent} from "../event-detail/event-detail.component";
 
 @Component({
@@ -46,6 +45,7 @@ export class EventCreateEditComponent implements OnInit {
   })
 
   mentors: any[] = []
+  activeMentors: any[] = []
   selectedMentors = this.mentors;
 
   constructor(
@@ -73,13 +73,26 @@ export class EventCreateEditComponent implements OnInit {
       .pipe(
         first()
       ).subscribe( response => {
-      this.courses = response
+      this.courses = response.filter( (course: any) => {
+        if (course.active) {
+          return course
+        }
+      })
     })
 
-    this.userService.getAllMentors()
-      .subscribe( ( response: any ) => {
-        this.mentors = response;
-      })
+      this.userService.getAllMentors()
+        .subscribe( ( response: any ) => {
+          this.activeMentors = response.filter((mentor: any) => {
+            if (mentor.active) {
+              return mentor
+            }
+          });
+          if (this.data.isEdit) {
+            this.setFilterMentors(this.data.calendarEvent.course._id)
+          } else {
+            this.mentors = this.activeMentors
+          }
+        })
   }
 
 
@@ -248,5 +261,18 @@ export class EventCreateEditComponent implements OnInit {
     return classesDate;
   }
 
+  setFilterMentors(courseId: any) {
+
+    this.courseService.getOneById(courseId)
+      .subscribe( (course: any) => {
+        this.mentors = this.activeMentors.filter( (mentor: any) => {
+          for ( const tech of mentor.technologies ) {
+            if ( tech.name === course.technology.name) {
+              return mentor;
+            }
+          }
+        })
+      })
+  }
 
 }

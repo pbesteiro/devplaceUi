@@ -11,7 +11,7 @@
 
         <mat-form-field appearance="fill" class="field-create-edit-modal">
           <mat-label> Tipo de clase</mat-label>
-          <mat-select formControlName="name">
+          <mat-select (selectionChange)="setFilterMentors($event.value)" formControlName="name">
             <mat-option *ngFor="let course of courses" [value]="course._id">
               {{course.name}}
             </mat-option>

@@ -16,7 +16,7 @@ const ELEMENT_DATA: UserModel[] = [];
 })
 export class MentorsComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'lastName', 'email', 'actionEdit', 'actionDelete'];
+  displayedColumns: string[] = ['name', 'lastName', 'asignaturas', 'actionEdit', 'actionDelete'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   applyFilter(event: Event) {
@@ -96,6 +96,10 @@ export class MentorsComponent implements OnInit {
 
       }
     })
+  }
+
+  getSignatures( signatures: any) {
+    return signatures.map( (tech: any) => ` ${tech.name}`).toString()
   }
 
 }

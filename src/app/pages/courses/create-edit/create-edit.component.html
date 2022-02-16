@@ -22,6 +22,16 @@
                  required formControlName="name">
         </mat-form-field>
 
+        <!-- Type -->
+        <mat-form-field appearance="fill" class="field-create-edit-modal">
+          <mat-label> Tipo de clase</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let type of types" [value]="type">
+              {{type}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
         <!-- Technology -->
         <mat-form-field appearance="fill" class="field-course-create-edit-modal">
           <mat-label>Tecnología</mat-label>

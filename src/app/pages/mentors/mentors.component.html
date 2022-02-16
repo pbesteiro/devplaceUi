@@ -21,9 +21,17 @@
   </ng-container>
 
   <!-- Email Column -->
-  <ng-container matColumnDef="email">
-    <th mat-header-cell *matHeaderCellDef> Mail </th>
-    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  <ng-container matColumnDef="asignaturas">
+    <th mat-header-cell *matHeaderCellDef> Asignaturas </th>
+    <td mat-cell *matCellDef="let element"
+        class="signatures"
+        matTooltip="{{getSignatures(element.technologies)}}"
+        matTooltipClass="tooltip-primary"
+    >{{
+    (getSignatures(element.technologies).length > 20) ?
+      (getSignatures(element.technologies) | slice:0:20) + '...' :
+      (getSignatures(element.technologies))
+    }}</td>
   </ng-container>
 
   <!-- Edit Column -->

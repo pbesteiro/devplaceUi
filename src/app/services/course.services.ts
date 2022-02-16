@@ -18,4 +18,8 @@ export class CourseService {
   update(id: string, course: any) {
     return this.http.patch(`${environment.apiUrl}/courses/${id}`, course)
   }
+
+  getOneById(id: string) {
+    return this.http.get(`${environment.apiUrl}/courses/${id}`)
+  }
 }

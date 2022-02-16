@@ -17,9 +17,11 @@ export class CreateEditComponent implements OnInit {
 
   technologies: TechnologyModel[] = [];
   messageTitle: string = '';
+  types: string[] = ['CURSO', 'BOOTCAMP']
 
   public courseForm: FormGroup = this.fb.group({
     name: new FormControl(this.data.course.name, [Validators.required]),
+    type: new FormControl(this.data.course.type, [Validators.required]),
     technologyId: new FormControl(this.data.course.technology ? this.data.course.technology._id : '', [Validators.required]),
     description: new FormControl(this.data.course.description, [Validators.required]),
     contents: new FormControl(this.data.course.contents, [Validators.required]),
@@ -44,6 +46,8 @@ export class CreateEditComponent implements OnInit {
   }
 
   createEditCourse() {
+
+    console.log(this.courseForm.value)
 
     // GET technology by ID
     const technology = this.technologies.find( tech => tech._id === this.courseForm.value.technologyId);
