@@ -8,9 +8,6 @@ const routes: Routes = [
     path: 'campus',
     component: PagesComponent,
     canActivate: [ AuthGuard ],
-    data: {
-      expectedRole: 'ADMIN'
-    },
     loadChildren: () => import('./child-routes.module').then( m => m.ChildRoutesModule )
   },
 ];

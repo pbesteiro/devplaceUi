@@ -45,7 +45,17 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          this.router.navigate([this.returnUrl]);
+          //TODO (Refactor para V2): para la V1 sólo pueden autenticarse los roles ADMIN y MANAGER
+          if (this.authService.role.every((i: any) => ['ADMIN', 'MANAGER'].includes(i))) {
+            this.router.navigate([this.returnUrl]);
+          } else {
+            this.authService.logout();
+            this.loading = false;
+            Swal.fire({
+              icon: 'error',
+              title: 'El usuario o la contraseña son inválidos'
+            })
+          }
         },
         error: () => {
           this.loading = false;

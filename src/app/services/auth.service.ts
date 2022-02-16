@@ -17,7 +17,7 @@ export class AuthenticationService {
 
   private userSubject: BehaviorSubject<any>
   public user: Observable<UserModel>;
-  private role: any;
+  public role: any;
 
   constructor(
     public jwtHelper: JwtHelperService,
@@ -52,6 +52,7 @@ export class AuthenticationService {
             response.accessToken
           )
           document.cookie = `refreshToken=${response.accessToken}; expires=${cookieExp} ; path=/`
+          this.role = tokenPayload.roles;
           this.userSubject.next(user);
           this.startRefreshTokenTimer();
           return user;
@@ -76,6 +77,7 @@ export class AuthenticationService {
             response.accessToken
           )
           document.cookie = `refreshToken=${response.accessToken}; expires=${cookieExp} ; path=/`
+          this.role = tokenPayload.roles;
           this.userSubject.next(user);
           this.startRefreshTokenTimer();
           return user;
@@ -104,5 +106,4 @@ export class AuthenticationService {
   private stopRefreshTokenTimer() {
     clearTimeout(this.refreshTokenTimeout);
   }
-
 }
