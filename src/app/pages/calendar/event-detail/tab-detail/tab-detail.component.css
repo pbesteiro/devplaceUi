@@ -56,3 +56,11 @@ mat-card-content {
 button {
   margin-bottom: 10px;
 }
+
+::ng-deep .tooltip-primary {
+  background: rgba(103, 58, 183, 0.9) !important;
+  font-size: 1em;
+}
+.blue-icon {
+  color: #5757a4;
+}

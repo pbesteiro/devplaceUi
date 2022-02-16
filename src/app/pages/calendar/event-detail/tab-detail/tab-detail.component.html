@@ -21,9 +21,18 @@
         <mat-card-content>
 
           <div class="detail-title-container">
-            <span class="detail-title"> Dias: </span>
-            <span *ngFor="let day of calendarEvent['days']">
-              {{ hashWeek[day] }}
+            <span class="detail-title"> Link de la clase: </span>
+            <span>
+              <a href="{{calendarEvent.commission.meetLink}}">
+                {{ calendarEvent.commission.meetLink }}
+              </a>
+            </span>
+            <span
+              matTooltip="Copiar link de la clase"
+              matTooltipClass="tooltip-primary"
+              [cdkCopyToClipboard]="calendarEvent.commission.meetLink"
+              style="cursor: pointer">
+              <mat-icon class="blue-icon">file_copy</mat-icon>
             </span>
           </div>
 
@@ -38,6 +47,20 @@
             <span class="detail-title"> Mentor: </span>
             <span>
               {{ calendarEvent.mentor.name }} {{ calendarEvent.mentor.lastName }}
+            </span>
+          </div>
+
+          <div class="detail-title-container">
+            <span class="detail-title"> Email: </span>
+            <span>
+              {{ calendarEvent.mentor.email }}
+            </span>
+            <span
+              matTooltip="Copiar email del mentor"
+              matTooltipClass="tooltip-primary"
+              [cdkCopyToClipboard]="calendarEvent.mentor.email"
+              style="cursor: pointer">
+              <mat-icon class="blue-icon">file_copy</mat-icon>
             </span>
           </div>
 
