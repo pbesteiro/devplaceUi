@@ -7,7 +7,7 @@
       <li routerLink="/campus">
         Dashboard
       </li>
-      <li *ngIf="isAdmin || isManager" routerLink="/campus/calendar">
+      <li *ngIf="isAdmin || isManager" [routerLink]="['calendar']">
         Calendar
       </li>
       <li *ngIf="isAdmin || isManager" routerLink="/campus/commissions">
