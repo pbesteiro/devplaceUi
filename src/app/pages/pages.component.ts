@@ -9,7 +9,7 @@ import {JwtHelperService} from "@auth0/angular-jwt";
 })
 export class PagesComponent implements OnInit {
 
-  role: any
+  role: any = '';
 
   constructor(
     private authService: AuthenticationService,
@@ -17,7 +17,9 @@ export class PagesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.role = this.authService.userValue.roles.toString()
+    if (this.authService.userValue) {
+      this.role = this.authService.userValue.roles.toString()
+    }
   }
 
   // @ts-ignore

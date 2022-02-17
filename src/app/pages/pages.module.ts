@@ -4,7 +4,7 @@ import { ComponentsModule } from "../components/components.module";
 import { PagesComponent } from './pages.component';
 import { UsersComponent } from "./users/users.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
-import { RouterModule } from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatIconModule } from "@angular/material/icon";
 import {CalendarComponent} from "./calendar/calendar.component";
@@ -56,6 +56,7 @@ import {StudentCreateEditComponent} from "./students/student-create-edit/student
 import {MentorCreateEditComponent} from "./mentors/mentor-create-edit/mentor-create-edit.component";
 import {ClipboardModule} from "@angular/cdk/clipboard";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {AuthGuard} from "../guards/auth.guard";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -63,6 +64,79 @@ FullCalendarModule.registerPlugins([
   listPlugin,
   interactionPlugin
 ])
+
+const pagesRoute: Routes = [
+  { path: '',
+    component: PagesComponent,
+    children: [
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [ AuthGuard ],
+        data: {
+          role: ['ADMIN', 'MANAGER', 'STUDENT', 'MENTOR']
+        },
+      },
+      {
+        path: 'users',
+        component: UsersComponent,
+        canActivate: [ AuthGuard ],
+        data: {
+          role: 'ADMIN'
+        },
+      },
+      {
+        path: 'calendar',
+        component: CalendarComponent,
+        canActivate: [ AuthGuard ],
+        data: {
+          role: ['ADMIN', 'MANAGER']
+        },
+      },
+      {
+        path: 'cursos', component: CoursesComponent,
+        canActivate: [ AuthGuard ],
+        data: {
+          role: ['ADMIN', 'MANAGER']
+        },
+      },
+      {
+        path: 'technologies', component: TechnologiesComponent,
+        canActivate: [ AuthGuard ],
+        data: {
+          role: ['ADMIN', 'MANAGER']
+        },
+      },
+      {
+        path: 'students', component: StudentsComponent,
+        canActivate: [ AuthGuard ],
+        data: {
+          role: ['ADMIN', 'MANAGER']
+        },
+      },
+      {
+        path: 'mentors', component: MentorsComponent,
+        canActivate: [ AuthGuard ],
+        data: {
+          role: ['ADMIN', 'MANAGER']
+        },
+      },
+      {
+        path: 'commissions', component: CommissionsComponent,
+        canActivate: [ AuthGuard ],
+        data: {
+          role: ['ADMIN', 'MANAGER']
+        },
+      },
+      /*
+      { path: ':id', component:ContactDetailComponent,
+        resolve:{ contact:ContactDetailResolverService }
+      }
+      */
+    ],
+    canActivate: [ AuthGuard ]
+  },
+];
 
 @NgModule({
   declarations: [
@@ -118,6 +192,7 @@ FullCalendarModule.registerPlugins([
     MatCheckboxModule,
     ClipboardModule,
     MatSnackBarModule,
+    RouterModule.forChild(pagesRoute)
   ],
   exports: [
   ]

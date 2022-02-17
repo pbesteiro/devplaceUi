@@ -1,20 +1,27 @@
-import { RouterModule, Routes } from "@angular/router";
+import {PreloadAllModules, RouterModule, Routes} from "@angular/router";
 import { NoPageFoundComponent } from "./components/no-page-found/no-page-found.component";
 import { NgModule } from "@angular/core";
-import { PagesRoutingModule } from "./pages/pages.routing.module";
-import { AuthRoutingModule } from "./auth/auth.routing";
+import {LoginComponent} from "./auth/login/login.component";
 import {AuthGuard} from "./guards/auth.guard";
 
 const routes: Routes = [
+  // { path: 'campus', component: PagesComponent, canActivate: [AuthGuard] },
+  { path: 'campus',
+    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule),
+    canActivate: [AuthGuard],
+  },
+  { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/campus', pathMatch: 'full' },
-  { path: '**', component: NoPageFoundComponent },
+  { path: 'not-found', component: NoPageFoundComponent, data:{title: "Ooops! 404"}},
+  { path: '**', redirectTo: 'not-found', pathMatch: 'full' }
 ]
 
 @NgModule({
   imports: [
-    RouterModule.forRoot( routes, { useHash: true }),
-    PagesRoutingModule,
-    AuthRoutingModule
+    RouterModule.forRoot( routes, {
+      useHash: true,
+      preloadingStrategy: PreloadAllModules
+    }),
   ],
   exports: [ RouterModule ]
 })
