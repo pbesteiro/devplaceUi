@@ -36,6 +36,7 @@ export class AuthenticationService {
 
   refreshToken() {
     const refreshToken = (document.cookie.split(';').find(x => x.includes('refreshToken')) || '=').split('=')[1];
+    // const refreshToken = document.cookie.split('=')[1];
     return this.http.post(`${ apiUrl }/auth/refresh`, { token: refreshToken })
       .pipe(
         map( (response: any) => {

@@ -13,6 +13,7 @@ import { appInitializer } from "./helpers/app.initializer";
 import { ErrorInterceptor } from "./interceptors/error.interceptor";
 import { jwtInterceptorProvider } from "./interceptors/jwt.interceptor";
 import {MAT_DATE_LOCALE} from "@angular/material/core";
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {MAT_DATE_LOCALE} from "@angular/material/core";
     })
   ],
   providers: [
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthenticationService] },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     jwtInterceptorProvider,

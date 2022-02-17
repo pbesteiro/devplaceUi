@@ -23,9 +23,10 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router
-  ) { if (this.authService.userValue) {
+  ) {
+    if (this.authService.userValue) {
     this.router.navigate(['/']);
-  }
+    }
   }
 
   ngOnInit(): void {
