@@ -102,6 +102,7 @@ export class AuthenticationService {
   logout() {
     this.stopRefreshTokenTimer();
     document.cookie = `refreshToken= ; expires= Thu, 01 Jan 1970 00:00:00 GMT`
+    localStorage.removeItem('roles')
     this.userSubject.next(null);
     this.router.navigate(['/login']);
   }
