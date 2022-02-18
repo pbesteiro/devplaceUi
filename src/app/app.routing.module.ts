@@ -9,6 +9,9 @@ const routes: Routes = [
   { path: 'campus',
     loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule),
     canActivate: [AuthGuard],
+    data: {
+      role: ['ADMIN', 'MANAGER', 'STUDENT', 'MENTOR']
+    },
   },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/campus', pathMatch: 'full' },

@@ -18,6 +18,7 @@ export class AuthenticationService {
   private userSubject: BehaviorSubject<any>
   public user: Observable<UserModel>;
   public role: any;
+  public redirectUrl: any = null;
 
   constructor(
     public jwtHelper: JwtHelperService,
@@ -31,6 +32,12 @@ export class AuthenticationService {
 
   public get userValue(): UserModel {
     return this.userSubject.value;
+  }
+
+  getRole() {
+    const token = (document.cookie.split(';').find(x => x.includes('refreshToken')) || '=').split('=')[1];
+    const tokenPayload = this.jwtHelper.decodeToken(token);
+    return tokenPayload.roles;
   }
 
 

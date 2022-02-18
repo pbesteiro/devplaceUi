@@ -82,7 +82,7 @@ const pagesRoute: Routes = [
         component: UsersComponent,
         canActivate: [ AuthGuard ],
         data: {
-          role: 'ADMIN'
+          role: ['ADMIN']
         },
       },
       {

@@ -17,9 +17,8 @@ export class PagesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.authService.userValue) {
-      this.role = this.authService.userValue.roles.toString()
-    }
+    this.role = this.authService.getRole()
+    console.log(this.role)
   }
 
   // @ts-ignore
