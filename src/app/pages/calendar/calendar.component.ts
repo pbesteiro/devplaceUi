@@ -23,6 +23,7 @@ export class CalendarComponent implements OnInit {
   initialLocaleCode = 'es';
   // public calendarOptions: any = this.initCalendar();
   public calendarOptions: any;
+  loading = true
 
   ngOnInit(): void {
     this.calendarEvensService.getAll()
@@ -44,11 +45,15 @@ export class CalendarComponent implements OnInit {
           }
 
         })
+        this.loading = false;
+        this.calendarOptions = this.initCalendar();
       })
 
+    /*
     setTimeout( () => {
       this.calendarOptions = this.initCalendar();
     }, 100)
+    */
   }
 
   constructor(
