@@ -57,6 +57,7 @@ import {MentorCreateEditComponent} from "./mentors/mentor-create-edit/mentor-cre
 import {ClipboardModule} from "@angular/cdk/clipboard";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {AuthGuard} from "../guards/auth.guard";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -192,6 +193,7 @@ const pagesRoute: Routes = [
     MatCheckboxModule,
     ClipboardModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
     RouterModule.forChild(pagesRoute)
   ],
   exports: [

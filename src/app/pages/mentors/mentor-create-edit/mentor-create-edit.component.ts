@@ -80,7 +80,6 @@ export class MentorCreateEditComponent implements OnInit {
       techologiesId: this.userForm.value.technologies,
     }
 
-    console.log(user)
 
     this.userService.update(this.data.mentorId, user)
       .subscribe( () => {
@@ -111,7 +110,6 @@ export class MentorCreateEditComponent implements OnInit {
       techologiesId: this.userForm.value.technologies,
       active: true,
     }
-    console.log(user)
     this.userService.create(user)
       .subscribe( () => {
         this.dialogRef.close();

@@ -19,6 +19,7 @@ export class UsersComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'lastName', 'email', 'actionEdit', 'actionDelete'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
+  loading = true
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -31,16 +32,17 @@ export class UsersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userService.getAllManagers()
-      .pipe(
-        first()
-      ).subscribe( response => {
-      this.dataSource.data = response.filter( (user: any) => {
-        if (user.active) {
-          return user
-        }
+      this.userService.getAllManagers()
+        .pipe(
+          first()
+        ).subscribe( response => {
+        this.dataSource.data = response.filter( (user: any) => {
+          if (user.active) {
+            return user
+          }
+        })
+        this.loading = false
       })
-    })
   }
 
   openDialog() {

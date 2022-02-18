@@ -1,4 +1,10 @@
-<div class="technologies-toolbar">
+<div *ngIf="loading" class="wrapper">
+  <div class="inner">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+
+<div *ngIf="!loading" class="technologies-toolbar">
   <mat-form-field appearance="standard">
     <mat-label>Buscar</mat-label>
     <input matInput autocomplete="off" (keyup)="applyFilter($event)" placeholder="Tecnología..." #input>
@@ -7,7 +13,7 @@
 </div>
 
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table *ngIf="!loading" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <!-- Name Column -->
   <ng-container matColumnDef="name">
@@ -36,6 +42,6 @@
 
   <!-- Row shown when there is no matching data. -->
   <tr class="mat-row" *matNoDataRow>
-    <td class="mat-cell" colspan="3">No se encontraron tecnologias</td>
+    <td class="mat-cell" colspan="3">Sin reultados</td>
   </tr>
 </table>

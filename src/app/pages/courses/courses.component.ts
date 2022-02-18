@@ -19,6 +19,7 @@ export class CoursesComponent implements OnInit {
 
   course: CourseModel = new CourseModel('', '', '', '', '', '', new TechnologyModel('', '', false))
   editAction: boolean = false;
+  loading = true
 
   constructor(
     private courseService: CourseService,
@@ -43,6 +44,7 @@ export class CoursesComponent implements OnInit {
           return course
         }
       })
+      this.loading = false
     })
   }
 

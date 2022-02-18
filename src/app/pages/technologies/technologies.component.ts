@@ -18,6 +18,7 @@ export class TechnologiesComponent implements OnInit {
 
   technology: TechnologyModel = new TechnologyModel('', '', false);
   editAction: boolean = false;
+  loading = true
 
   constructor(
     private dialog: MatDialog,
@@ -42,6 +43,7 @@ export class TechnologiesComponent implements OnInit {
           return technology;
         }
       })
+      this.loading = false;
     })
   }
 

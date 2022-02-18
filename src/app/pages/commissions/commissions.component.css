@@ -36,3 +36,13 @@ table {
   background: rgba(167, 52, 52, 0.9) !important;
   font-size: 1em;
 }
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 20px);
+}
+.inner {
+  padding: 12px;
+}

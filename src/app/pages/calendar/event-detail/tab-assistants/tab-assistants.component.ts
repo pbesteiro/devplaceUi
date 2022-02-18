@@ -39,7 +39,6 @@ export class TabAssistantsComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    console.log(this.data)
     this.dataSource.data = this.data.commission.students;
     this.getStudentsIds(this.data.commission.students)
   }

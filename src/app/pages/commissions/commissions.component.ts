@@ -27,6 +27,7 @@ export class CommissionsComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'name', 'count', 'actionCpyLink', 'actionEdit', 'actionAddStudent', 'actionDelete'];
   dataSource = new MatTableDataSource(commissions);
+  loading = true
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -47,6 +48,7 @@ export class CommissionsComponent implements OnInit {
             return commission
           }
         })
+        this.loading = false
       })
   }
 
@@ -173,6 +175,5 @@ export class CommissionsComponent implements OnInit {
   }
 
   getStudents() {
-    console.log(this.dataSource.data)
   }
 }

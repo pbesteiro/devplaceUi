@@ -47,8 +47,6 @@ export class CreateEditComponent implements OnInit {
 
   createEditCourse() {
 
-    console.log(this.courseForm.value)
-
     // GET technology by ID
     const technology = this.technologies.find( tech => tech._id === this.courseForm.value.technologyId);
 

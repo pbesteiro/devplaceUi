@@ -19,6 +19,7 @@ export class StudentsComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'lastName', 'email', 'actionEdit', 'actionDelete'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
+  loading = true
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -38,6 +39,7 @@ export class StudentsComponent implements OnInit {
             return user
           }
         })
+        this.loading = false
       })
   }
 

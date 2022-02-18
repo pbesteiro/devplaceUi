@@ -23,7 +23,6 @@ export class CommissionAddStudentsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data)
     this.commissionId = this.data.commissionId;
     this.commission = this.data.commission;
   }

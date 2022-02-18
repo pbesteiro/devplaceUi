@@ -18,7 +18,6 @@ export class PagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.role = this.authService.getRole()
-    console.log(this.role)
   }
 
   // @ts-ignore

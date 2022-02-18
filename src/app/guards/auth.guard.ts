@@ -44,8 +44,6 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
   checkLogin(route: ActivatedRouteSnapshot, url: string) {
     if (this.authService.userValue != null) {
       const userRole = this.authService.getRole();
-      console.log(route.data['role'])  // array de roles
-      console.log(userRole) // array de roles
       const containsAll = route.data['role'].some((r: any)=> userRole.indexOf(r) >= 0)
       // const containsAll = true
       if (route.data['role'] && !containsAll) {
