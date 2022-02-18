@@ -35,9 +35,13 @@ export class AuthenticationService {
   }
 
   getRole() {
+    /*
     const token = (document.cookie.split(';').find(x => x.includes('refreshToken')) || '=').split('=')[1];
     const tokenPayload = this.jwtHelper.decodeToken(token);
     return tokenPayload.roles;
+    */
+    // @ts-ignore
+    return JSON.parse(localStorage.getItem('roles')) || []
   }
 
 
@@ -86,6 +90,7 @@ export class AuthenticationService {
           )
           document.cookie = `refreshToken=${response.accessToken}; expires=${cookieExp} ; path=/`
           this.role = tokenPayload.roles;
+          localStorage.setItem('roles', JSON.stringify(this.role))
           this.userSubject.next(user);
           this.startRefreshTokenTimer();
           return user;
