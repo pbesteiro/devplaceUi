@@ -44,6 +44,7 @@ export class MentorsComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(MentorCreateEditComponent, {
+      maxHeight: window.innerHeight + 'px',
       data: {
         role: 'MENTOR',
         mentor: {
@@ -57,6 +58,7 @@ export class MentorsComponent implements OnInit {
 
   editMentor(mentorId: string, mentor: any ) {
     this.dialog.open(MentorCreateEditComponent, {
+      maxHeight: window.innerHeight + 'px',
       data: {
         role: 'MENTOR',
         isEdit: true,

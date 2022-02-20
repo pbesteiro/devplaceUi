@@ -45,6 +45,7 @@ export class StudentsComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(StudentCreateEditComponent, {
+      maxHeight: window.innerHeight + 'px',
       data: {
         role: 'STUDENT',
         student: {
@@ -57,6 +58,7 @@ export class StudentsComponent implements OnInit {
 
   editStudent(studentId: string, student: any ) {
     this.dialog.open(StudentCreateEditComponent, {
+      maxHeight: window.innerHeight + 'px',
       data: {
         role: 'STUDENT',
         isEdit: true,
