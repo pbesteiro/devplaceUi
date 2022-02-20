@@ -49,6 +49,21 @@ export class CommissionsComponent implements OnInit {
           }
         })
         this.loading = false
+      }, (error: any) => {
+        this.loading = false;
+        Swal.fire({
+          title: 'Ha ocurrido un problema',
+          text: error.message,
+          icon: 'error',
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          backdrop: 'rgba(103, 58, 183, 0.3)',
+          confirmButtonText: 'Reintentar'
+        }).then((result: any) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
+        })
       })
   }
 
@@ -108,32 +123,6 @@ export class CommissionsComponent implements OnInit {
       })
   }
 
-
-  /*
-  removeCalendarEvent(element: any) {
-    Swal.fire({
-      title: '¿Quiere eliminar la comision?',
-      text: ``,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Eliminar',
-      cancelButtonText: 'Cancelar',
-      backdrop: 'rgba(103, 58, 183, 0.3)',
-      heightAuto: false,
-    }).then((result: any) => {
-      if (result.isConfirmed) {
-        console.log(`Delete calendarEvent id: ${element._id}`)
-        this.commissionService.remove( element._id )
-          .subscribe( () => {
-            window.location.reload();
-          })
-
-      }
-    })
-  }
-  */
   removeCommission(commissionId: string) {
     Swal.fire({
       title: '¿Quiere eliminar la comision?',
@@ -162,6 +151,21 @@ export class CommissionsComponent implements OnInit {
             setTimeout( () => {
               window.location.reload();
             }, 1400)
+          }, (error: any) => {
+            this.loading = false;
+            Swal.fire({
+              title: 'Ha ocurrido un problema',
+              text: error.message,
+              icon: 'error',
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              backdrop: 'rgba(103, 58, 183, 0.3)',
+              confirmButtonText: 'Reintentar'
+            }).then((result: any) => {
+              if (result.isConfirmed) {
+                window.location.reload();
+              }
+            })
           })
 
       }
@@ -172,8 +176,5 @@ export class CommissionsComponent implements OnInit {
     this._snackBar.open('Link copiado', '📃', {
       duration: 1000,
     });
-  }
-
-  getStudents() {
   }
 }
