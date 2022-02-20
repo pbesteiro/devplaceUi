@@ -117,7 +117,6 @@ export class TabAssistantsComponent implements OnInit {
   }
 
   saveAssistants() {
-
     Swal.fire({
       title: '¿Confirma los cambios?',
       icon: 'warning',
@@ -144,6 +143,16 @@ export class TabAssistantsComponent implements OnInit {
               timer: 1500
             })
             this.dialogRef.close()
+          }, (error: any) => {
+            Swal.fire({
+              title: 'Ha ocurrido un problema',
+              text: error.message,
+              icon: 'error',
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              backdrop: 'rgba(103, 58, 183, 0.3)',
+              confirmButtonText: 'Reintentar'
+            })
           })
       }
     })
@@ -152,5 +161,4 @@ export class TabAssistantsComponent implements OnInit {
   private getStudentsIds(students: any) {
     this.studentIds = students.map( (student: any) => student._id )
   }
-
 }

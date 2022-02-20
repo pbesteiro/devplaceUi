@@ -1,3 +1,7 @@
+:host {
+  width: 100%;
+}
+
 .calendar-toolbar {
   display: flex;
   flex-direction: row-reverse;
@@ -34,4 +38,8 @@
 }
 .inner {
   padding: 12px;
+}
+
+#externalTitle {
+  padding: 25px;
 }

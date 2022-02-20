@@ -1,14 +1,12 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {CalendarOptions, DateSelectArg, EventClickArg, EventInput} from "@fullcalendar/angular";
-import {EventApi} from "@fullcalendar/core";
-import {createEventId, INITIAL_EVENTS} from "../../events/event-utils";
+import { Component, OnInit } from '@angular/core';
+import { CalendarOptions, EventClickArg } from "@fullcalendar/angular";
+import { EventApi } from "@fullcalendar/core";
 import esLocale from "@fullcalendar/core/locales/es-us"
-import {CreateEditComponent} from "../courses/create-edit/create-edit.component";
-import {EventCreateEditComponent} from "./event-create-edit/event-create-edit.component";
-import {MatDialog} from "@angular/material/dialog";
-import {first} from "rxjs";
-import {CalendarEventsService} from "../../services/calendar-events.service";
-import {EventDetailComponent} from "./event-detail/event-detail.component";
+import { EventCreateEditComponent } from "./event-create-edit/event-create-edit.component";
+import { MatDialog } from "@angular/material/dialog";
+import { CalendarEventsService } from "../../services/calendar-events.service";
+import { EventDetailComponent } from "./event-detail/event-detail.component";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-calendar',
@@ -21,39 +19,44 @@ export class CalendarComponent implements OnInit {
   currentEvents: EventApi[] = [];
   calendarEvents: any[] = []
   initialLocaleCode = 'es';
-  // public calendarOptions: any = this.initCalendar();
   public calendarOptions: any;
   loading = true
 
   ngOnInit(): void {
     this.calendarEvensService.getAll()
-      .subscribe( (response: any) => {
-        response.forEach( (calendarEvent: any) => {
+      .subscribe(
+        (response: any) => {
+          response.forEach( (calendarEvent: any) => {
 
-          if ( calendarEvent['active']) {
-            this.calendarEvents.push({
-              title: `${calendarEvent['commission']['name']} - ${calendarEvent['course']['name']}`,
-              // daysOfWeek: calendarEvent['days'],
-              date: `${calendarEvent['date']}T${calendarEvent['timeFrom']}:00`,
-              end: `${calendarEvent['date']}T${calendarEvent['timeTo']}:00`,
-              // startTime: calendarEvent['timeFrom'],
-              // endTime: calendarEvent['timeTo'],
-              // startRecur: calendarEvent['dateFrom'],
-              // endRecur: calendarEvent['dateTo'],
-              extendedProps: { calendarEvent}
-            })
-          }
+            if ( calendarEvent['active']) {
+              this.calendarEvents.push({
+                title: `${calendarEvent['commission']['name']} - ${calendarEvent['course']['name']}`,
+                date: `${calendarEvent['date']}T${calendarEvent['timeFrom']}:00`,
+                end: `${calendarEvent['date']}T${calendarEvent['timeTo']}:00`,
+                extendedProps: { calendarEvent}
+              })
+            }
 
-        })
-        this.loading = false;
-        this.calendarOptions = this.initCalendar();
-      })
-
-    /*
-    setTimeout( () => {
-      this.calendarOptions = this.initCalendar();
-    }, 100)
-    */
+          })
+          this.loading = false;
+          this.calendarOptions = this.initCalendar();
+      }, (error: any) => {
+          this.loading = false;
+          Swal.fire({
+            title: 'Ha ocurrido un problema',
+            text: error.message,
+            icon: 'error',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            backdrop: 'rgba(103, 58, 183, 0.3)',
+            confirmButtonText: 'Reintentar'
+          }).then((result: any) => {
+            if (result.isConfirmed) {
+              window.location.reload();
+            }
+          })
+        }
+      )
   }
 
   constructor(
@@ -65,14 +68,12 @@ export class CalendarComponent implements OnInit {
   private initCalendar(): CalendarOptions {
     return {
       initialView: 'dayGridMonth',
-      // initialView: 'listWeek',
       headerToolbar: {
         left: 'prev,next',
-        center: 'today',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        center: 'title',
+        right: 'today,dayGridMonth,timeGridWeek,timeGridDay',
       },
       locale: esLocale,
-      //initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
       events: this.calendarEvents,
       contentHeight: 'auto',
       buttonIcons: false,
@@ -81,15 +82,7 @@ export class CalendarComponent implements OnInit {
       selectable: false,
       selectMirror: true,
       dayMaxEvents: true,
-      // select: this.handleDateSelect.bind(this),
       eventClick: this.handleEventClick.bind(this),
-      // eventsSet: this.handleEvents.bind(this)
-      /*
-      you can update a remote database when these fire:
-      eventAdd:
-      eventChange:
-      eventRemove:
-      */
     };
   }
 

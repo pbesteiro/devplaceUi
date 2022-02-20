@@ -38,6 +38,7 @@ import {HashLocationStrategy, LocationStrategy} from "@angular/common";
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthenticationService] },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     jwtInterceptorProvider,
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
 

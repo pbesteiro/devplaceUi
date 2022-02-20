@@ -78,6 +78,20 @@ export class EventCreateEditComponent implements OnInit {
           return course
         }
       })
+    }, (error: any) => {
+      Swal.fire({
+        title: 'Ha ocurrido un problema',
+        text: error.message,
+        icon: 'error',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        backdrop: 'rgba(103, 58, 183, 0.3)',
+        confirmButtonText: 'Reintentar'
+      }).then((result: any) => {
+        if (result.isConfirmed) {
+          window.location.reload();
+        }
+      })
     })
 
       this.userService.getAllMentors()
@@ -92,6 +106,16 @@ export class EventCreateEditComponent implements OnInit {
           } else {
             this.mentors = this.activeMentors
           }
+        }, (error: any) => {
+          Swal.fire({
+            title: 'Ha ocurrido un problema',
+            text: error.message,
+            icon: 'error',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            backdrop: 'rgba(103, 58, 183, 0.3)',
+            confirmButtonText: 'Reintentar'
+          })
         })
   }
 
@@ -146,6 +170,16 @@ export class EventCreateEditComponent implements OnInit {
           heightAuto: false,
           showConfirmButton: false,
           timer: 1500
+        })
+      }, (error: any) => {
+        Swal.fire({
+          title: 'Ha ocurrido un problema',
+          text: error.message,
+          icon: 'error',
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          backdrop: 'rgba(103, 58, 183, 0.3)',
+          confirmButtonText: 'Reintentar'
         })
       })
 
@@ -205,6 +239,16 @@ export class EventCreateEditComponent implements OnInit {
           heightAuto: false,
           showConfirmButton: false,
           timer: 1500
+        })
+      }, (error: any) => {
+        Swal.fire({
+          title: 'Ha ocurrido un problema',
+          text: error.message,
+          icon: 'error',
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          backdrop: 'rgba(103, 58, 183, 0.3)',
+          confirmButtonText: 'Reintentar'
         })
       })
   }
@@ -270,6 +314,20 @@ export class EventCreateEditComponent implements OnInit {
             if ( tech.name === course.technology.name) {
               return mentor;
             }
+          }
+        })
+      }, (error: any) => {
+        Swal.fire({
+          title: 'Ha ocurrido un problema',
+          text: error.message,
+          icon: 'error',
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          backdrop: 'rgba(103, 58, 183, 0.3)',
+          confirmButtonText: 'Reintentar'
+        }).then((result: any) => {
+          if (result.isConfirmed) {
+            window.location.reload();
           }
         })
       })
