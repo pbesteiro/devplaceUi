@@ -1,8 +1,5 @@
 import {Component, Inject, OnInit} from "@angular/core";
-import Swal from "sweetalert2";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {CalendarComponent} from "../../calendar/calendar.component";
-import {CommissionsComponent} from "../commissions.component";
 import {CommissionDetailComponent} from "../commission-detail/commission-detail.component";
 
 @Component({

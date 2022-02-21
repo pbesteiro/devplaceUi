@@ -6,6 +6,7 @@ import {map} from "rxjs/operators";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {CoursesComponent} from "../../../../courses/courses.component";
 import Swal from "sweetalert2";
+import {errorCommunicationWithRetry} from "../../../../../helpers/error.communication";
 
 @Component({
   selector: 'app-add-assistants',
@@ -47,15 +48,7 @@ export class AddAssistantsComponent implements OnInit {
           map(name => (name ? this._filter(name) : this.students.slice())),
         );
       }, (error: any) => {
-        Swal.fire({
-          title: 'Ha ocurrido un problema',
-          text: error.message,
-          icon: 'error',
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          backdrop: 'rgba(103, 58, 183, 0.3)',
-          confirmButtonText: 'Reintentar'
-        })
+          errorCommunicationWithRetry(error)
       })
   }
 

@@ -6,7 +6,7 @@ import { EventCreateEditComponent } from "./event-create-edit/event-create-edit.
 import { MatDialog } from "@angular/material/dialog";
 import { CalendarEventsService } from "../../services/calendar-events.service";
 import { EventDetailComponent } from "./event-detail/event-detail.component";
-import Swal from "sweetalert2";
+import { errorCommunicationWithRetry } from "../../helpers/error.communication";
 
 @Component({
   selector: 'app-calendar',
@@ -42,19 +42,7 @@ export class CalendarComponent implements OnInit {
           this.calendarOptions = this.initCalendar();
       }, (error: any) => {
           this.loading = false;
-          Swal.fire({
-            title: 'Ha ocurrido un problema',
-            text: error.message,
-            icon: 'error',
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            backdrop: 'rgba(103, 58, 183, 0.3)',
-            confirmButtonText: 'Reintentar'
-          }).then((result: any) => {
-            if (result.isConfirmed) {
-              window.location.reload();
-            }
-          })
+          errorCommunicationWithRetry(error)
         }
       )
   }

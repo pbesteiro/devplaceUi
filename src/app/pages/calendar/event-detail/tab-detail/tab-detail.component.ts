@@ -1,11 +1,6 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {EventCreateEditComponent} from "../../event-create-edit/event-create-edit.component";
-import {Observable, startWith} from "rxjs";
-import {map} from "rxjs/operators";
-import {UserService} from "../../../../services/user.services";
-import {FormControl, Validators} from "@angular/forms";
-import {CalendarComponent} from "../../calendar.component";
 import {EventDetailComponent} from "../event-detail.component";
 import Swal from "sweetalert2";
 import {CalendarEventsService} from "../../../../services/calendar-events.service";

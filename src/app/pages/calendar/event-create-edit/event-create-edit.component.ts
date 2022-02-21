@@ -9,6 +9,7 @@ import { CourseModel } from '../../../models/course.model';
 import { CalendarEventsService } from '../../../services/calendar-events.service';
 import { UserService } from '../../../services/user.services';
 import {EventDetailComponent} from "../event-detail/event-detail.component";
+import {errorCommunicationWithRetry} from "../../../helpers/error.communication";
 
 @Component({
   selector: 'app-event-create-edit',
@@ -317,19 +318,7 @@ export class EventCreateEditComponent implements OnInit {
           }
         })
       }, (error: any) => {
-        Swal.fire({
-          title: 'Ha ocurrido un problema',
-          text: error.message,
-          icon: 'error',
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          backdrop: 'rgba(103, 58, 183, 0.3)',
-          confirmButtonText: 'Reintentar'
-        }).then((result: any) => {
-          if (result.isConfirmed) {
-            window.location.reload();
-          }
-        })
+        errorCommunicationWithRetry(error)
       })
   }
 

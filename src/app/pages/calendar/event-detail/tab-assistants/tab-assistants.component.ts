@@ -7,6 +7,7 @@ import {CalendarEventsService} from "../../../../services/calendar-events.servic
 import {EventDetailComponent} from "../event-detail.component";
 import Swal from "sweetalert2";
 import {CommissionService} from "../../../../services/commission.service";
+import {errorCommunicationWithRetry} from "../../../../helpers/error.communication";
 
 const ELEMENT_DATA: any[] = [];
 
@@ -144,15 +145,7 @@ export class TabAssistantsComponent implements OnInit {
             })
             this.dialogRef.close()
           }, (error: any) => {
-            Swal.fire({
-              title: 'Ha ocurrido un problema',
-              text: error.message,
-              icon: 'error',
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              backdrop: 'rgba(103, 58, 183, 0.3)',
-              confirmButtonText: 'Reintentar'
-            })
+            errorCommunicationWithRetry(error)
           })
       }
     })

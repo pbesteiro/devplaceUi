@@ -2,10 +2,9 @@ import {Component, Inject} from "@angular/core";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {CommissionService} from "../../../services/commission.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {CoursesComponent} from "../../courses/courses.component";
 import {CommissionsComponent} from "../commissions.component";
 import Swal from "sweetalert2";
-import {CalendarComponent} from "../../calendar/calendar.component";
+import {errorCommunicationWithRetry} from "../../../helpers/error.communication";
 
 @Component({
   selector: 'app-commission-create-edit',
@@ -46,19 +45,7 @@ export class CommissionCreateEditComponent {
             window.location.reload();
           }, 1400)
         }, (error: any) => {
-          Swal.fire({
-            title: 'Ha ocurrido un problema',
-            text: error.message,
-            icon: 'error',
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            backdrop: 'rgba(103, 58, 183, 0.3)',
-            confirmButtonText: 'Reintentar'
-          }).then((result: any) => {
-            if (result.isConfirmed) {
-              window.location.reload();
-            }
-          })
+          errorCommunicationWithRetry(error)
         })
     } else {
       this.commissionService.create(this.commissionForm.value)
@@ -76,19 +63,7 @@ export class CommissionCreateEditComponent {
             window.location.reload();
           }, 1400)
         }, (error: any) => {
-          Swal.fire({
-            title: 'Ha ocurrido un problema',
-            text: error.message,
-            icon: 'error',
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            backdrop: 'rgba(103, 58, 183, 0.3)',
-            confirmButtonText: 'Reintentar'
-          }).then((result: any) => {
-            if (result.isConfirmed) {
-              window.location.reload();
-            }
-          })
+          errorCommunicationWithRetry(error)
         })
     }
 

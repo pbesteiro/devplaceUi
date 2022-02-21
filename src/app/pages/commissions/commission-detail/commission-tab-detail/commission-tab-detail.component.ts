@@ -5,6 +5,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import { CalendarEventsService } from "../../../../services/calendar-events.service";
 import Swal from "sweetalert2";
 import {CommissionCreateEditComponent} from "../../commission-create-edit/commission-create-edit.component";
+import {errorCommunicationWithRetry} from "../../../../helpers/error.communication";
 
 export interface EventElement {
   name:string;
@@ -67,19 +68,7 @@ export class CommissionTabDetailComponent implements OnInit {
           }
         });
       }, (error: any) => {
-        Swal.fire({
-          title: 'Ha ocurrido un problema',
-          text: error.message,
-          icon: 'error',
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          backdrop: 'rgba(103, 58, 183, 0.3)',
-          confirmButtonText: 'Reintentar'
-        }).then((result: any) => {
-          if (result.isConfirmed) {
-            window.location.reload();
-          }
-        })
+        errorCommunicationWithRetry(error)
       })
   }
 
