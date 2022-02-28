@@ -7,6 +7,7 @@ import {CourseService} from "../../../services/course.services";
 import {TechnologyService} from "../../../services/technology.service";
 import {first} from "rxjs";
 import {TechnologyModel} from "../../../models/technology.model";
+import {errorCommunicationWithRetry} from "../../../helpers/error.communication";
 
 @Component({
   selector: 'app-create-edit',
@@ -40,9 +41,13 @@ export class CreateEditComponent implements OnInit {
     this.technologyService.getAll()
       .pipe(
         first()
-      ).subscribe( response => {
+      ).subscribe(
+        (response: any) => {
         this.technologies = response;
-    })
+      },
+      (error: any) => {
+        errorCommunicationWithRetry(error)
+      })
   }
 
   createEditCourse() {

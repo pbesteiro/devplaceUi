@@ -1,0 +1,142 @@
+<div class="course-create-edit-container">
+
+  <mat-card>
+
+    <div class="close-dialog-button">
+      <mat-icon (click)="closeDialog()" color="primary">
+        close
+      </mat-icon>
+    </div>
+
+    <form [formGroup]="publicationForm" (ngSubmit)="createEditPublication()">
+
+      <mat-card-header>
+        <mat-card-title> Publicacion</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content class="card-course-create-edit-container">
+
+        <!-- Name publication -->
+        <mat-form-field appearance="fill" class="field-user-create-edit-modal">
+          <mat-label for="name">Nombre</mat-label>
+          <input autocomplete="off" id="name" matInput placeholder="Ej: Curso de React" required formControlName="name">
+        </mat-form-field>
+
+        <!-- Type -->
+        <mat-form-field appearance="fill" class="field-create-edit-modal">
+          <mat-label> Tipo de clase</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let type of types" [value]="type">
+              {{type}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Technology -->
+        <mat-form-field appearance="fill" class="field-course-create-edit-modal">
+          <mat-label>Tecnología</mat-label>
+          <mat-select formControlName="technologyId">
+            <mat-option *ngFor="let technology of technologies" [value]="technology._id">
+              {{technology.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Price -->
+        <mat-form-field appearance="fill" class="field-capacity-create-edit-modal">
+          <mat-label for="price">Precio</mat-label>
+          <input type="number" id="price" matInput required formControlName="price">
+        </mat-form-field>
+
+        <!-- Link publication -->
+        <mat-form-field appearance="fill" class="field-user-create-edit-modal">
+          <mat-label for="link">Redierecciona a:</mat-label>
+          <input autocomplete="off" id="link" matInput placeholder="https://example.com" required formControlName="link">
+        </mat-form-field>
+
+        <!-- Status -->
+        <mat-form-field appearance="fill" class="field-course-create-edit-modal">
+          <mat-label>Estado</mat-label>
+          <mat-select formControlName="active">
+            <mat-option *ngFor="let item of statusList" [value]="item.value">
+              {{ item.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Detail publication -->
+        <mat-form-field appearance="fill" class="field-user-create-edit-modal">
+          <mat-label for="detail">Detalle</mat-label>
+          <input autocomplete="off" id="detail" matInput placeholder="Detalles del curso" required formControlName="detail">
+        </mat-form-field>
+
+        <!-- Duration publication -->
+        <mat-form-field appearance="fill" class="field-user-create-edit-modal">
+          <mat-label for="duration">Duracion</mat-label>
+          <input autocomplete="off" id="duration" matInput placeholder="Duracion" required formControlName="duration">
+        </mat-form-field>
+
+        <!-- Mentor name Column -->
+        <mat-form-field appearance="fill" class="field-create-edit-modal">
+          <mat-label>Mentor</mat-label>
+          <mat-select formControlName="mentorId">
+            <mat-option *ngFor="let mentor of activeMentors" [value]="mentor._id">
+              {{ mentor.name }} {{ mentor.lastName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Days publication -->
+        <mat-form-field appearance="fill" class="field-user-create-edit-modal">
+          <mat-label for="detail">Dias</mat-label>
+          <input autocomplete="off" id="days" matInput placeholder="Dias" required formControlName="days">
+        </mat-form-field>
+
+        <!-- Horarios -->
+        <mat-form-field appearance="fill" class="field-user-create-edit-modal">
+          <mat-label for="detail">Horarios</mat-label>
+          <input autocomplete="off" id="hours" matInput placeholder="Horarios" required formControlName="hours">
+        </mat-form-field>
+
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Inicia</mat-label>
+            <input matInput [matDatepicker]="dateStart" formControlName="dateStart">
+            <mat-datepicker-toggle matSuffix [for]="dateStart"></mat-datepicker-toggle>
+            <mat-datepicker #dateStart></mat-datepicker>
+          </mat-form-field>
+          <span class="separator-dates"></span>
+          <mat-form-field appearance="fill">
+            <mat-label>Finaliza</mat-label>
+            <input matInput [matDatepicker]="dateEnd" formControlName="dateEnd">
+            <mat-datepicker-toggle matSuffix [for]="dateEnd"></mat-datepicker-toggle>
+            <mat-datepicker #dateEnd></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+
+
+        <div>
+          <img [src]="publicationForm.value.image" class="profile-pic"/>
+          <input
+            type="file"
+            name=""
+            accept=".png,.jpg,.jpeg"
+            (change)="addImage($event)"
+          />
+        </div>
+      </mat-card-content>
+
+      <mat-card-footer>
+        <mat-dialog-actions align="center">
+          <button mat-button
+                  [disabled]="publicationForm.invalid"
+          >Confirmar
+          </button>
+        </mat-dialog-actions>
+      </mat-card-footer>
+
+    </form>
+  </mat-card>
+
+</div>

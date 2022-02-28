@@ -3,10 +3,9 @@ import {UserService} from "../../services/user.services";
 import {UserModel} from "../../models/user.model";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
-import {UserCreateEditComponent} from "../users/user-create-edit/user-create-edit.component";
-import {MentorCreateEditComponent} from "../mentors/mentor-create-edit/mentor-create-edit.component";
 import Swal from "sweetalert2";
 import {StudentCreateEditComponent} from "./student-create-edit/student-create-edit.component";
+import {errorCommunicationWithRetry} from "../../helpers/error.communication";
 
 const ELEMENT_DATA: UserModel[] = [];
 
@@ -40,6 +39,9 @@ export class StudentsComponent implements OnInit {
           }
         })
         this.loading = false
+      }, (error: any) => {
+        this.loading = false
+        errorCommunicationWithRetry(error)
       })
   }
 

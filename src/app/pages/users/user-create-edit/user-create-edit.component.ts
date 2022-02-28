@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {MentorsComponent} from "../../mentors/mentors.component";
 import {UsersComponent} from "../users.component";
 import {UserService} from "../../../services/user.services";
 import Swal from "sweetalert2";

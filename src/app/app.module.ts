@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from "@angular/core";
+import {APP_INITIALIZER, LOCALE_ID, NgModule} from "@angular/core";
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -13,7 +13,9 @@ import { appInitializer } from "./helpers/app.initializer";
 import { ErrorInterceptor } from "./interceptors/error.interceptor";
 import { jwtInterceptorProvider } from "./interceptors/jwt.interceptor";
 import {MAT_DATE_LOCALE} from "@angular/material/core";
-import {HashLocationStrategy, LocationStrategy} from "@angular/common";
+import {HashLocationStrategy, LocationStrategy, registerLocaleData} from "@angular/common";
+import localeEs from '@angular/common/locales/es'
+registerLocaleData(localeEs, 'es')
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import {HashLocationStrategy, LocationStrategy} from "@angular/common";
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     jwtInterceptorProvider,
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+    { provide: LOCALE_ID, useValue: 'es' },
 
 ],
   bootstrap: [AppComponent]

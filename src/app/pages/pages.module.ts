@@ -58,6 +58,9 @@ import {ClipboardModule} from "@angular/cdk/clipboard";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {AuthGuard} from "../guards/auth.guard";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {PublicationsComponent} from "./publications/publications.component";
+import {MatChipsModule} from "@angular/material/chips";
+import {PublicationCreateEditComponent} from "./publications/publication-create-edit/publication-create-edit.component";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -127,7 +130,15 @@ const pagesRoute: Routes = [
         canActivate: [ AuthGuard ],
         data: {
           role: ['ADMIN', 'MANAGER']
+        }
+      },
+      {
+        path: 'publications', component: PublicationsComponent,
+        canActivate: [ AuthGuard ],
+        data: {
+          role: ['ADMIN', 'MANAGER']
         },
+
       },
       /*
       { path: ':id', component:ContactDetailComponent,
@@ -166,6 +177,8 @@ const pagesRoute: Routes = [
     CommissionAddStudentsComponent,
     StudentCreateEditComponent,
     MentorCreateEditComponent,
+    PublicationsComponent,
+    PublicationCreateEditComponent,
   ],
   imports: [
     CommonModule,
@@ -194,6 +207,7 @@ const pagesRoute: Routes = [
     ClipboardModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatChipsModule,
     RouterModule.forChild(pagesRoute)
   ],
   exports: [

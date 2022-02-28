@@ -7,6 +7,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {UserCreateEditComponent} from "./user-create-edit/user-create-edit.component";
 import {MentorCreateEditComponent} from "../mentors/mentor-create-edit/mentor-create-edit.component";
 import Swal from "sweetalert2";
+import {errorCommunicationWithRetry} from "../../helpers/error.communication";
 
 const ELEMENT_DATA: UserModel[] = [];
 
@@ -42,6 +43,10 @@ export class UsersComponent implements OnInit {
           }
         })
         this.loading = false
+      }, (error:any) => {
+        this.loading = false
+        errorCommunicationWithRetry(error)
+
       })
   }
 
@@ -96,6 +101,9 @@ export class UsersComponent implements OnInit {
             setTimeout(() => {
               window.location.reload();
             }, 1400)
+          }, (error: any) => {
+            this.loading = false
+            errorCommunicationWithRetry(error)
           })
 
       }
