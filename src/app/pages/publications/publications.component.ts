@@ -17,6 +17,9 @@ export class PublicationsComponent implements OnInit {
   displayedColumns: string[] = ['name', 'dateStart', 'technology', 'active', 'actionEdit'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   loading = true
+  checked = false;
+  allPublications: any[] = []
+  activePublications: any[] = []
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -33,7 +36,13 @@ export class PublicationsComponent implements OnInit {
     this.publicationsService.getAll()
       .subscribe(
         (response: any) => {
-          this.dataSource.data = response
+          this.allPublications = response
+          this.activePublications = response.filter( (publication: any) => {
+            if (publication.active) {
+              return publication
+            }
+          })
+          this.dataSource.data = this.activePublications
           this.loading = false
         },
         (error: any) => {
@@ -48,7 +57,10 @@ export class PublicationsComponent implements OnInit {
       maxHeight: window.innerHeight + 'px',
       data: {
         publication: {
-          name: ''
+          name: '',
+          mentor: {
+            _id: '',
+          }
         },
       },
     })
@@ -64,6 +76,17 @@ export class PublicationsComponent implements OnInit {
         publication,
       }
     })
+  }
+
+  filterActivesPublications() {
+
+    if (this.checked) {
+      this.dataSource.data = this.allPublications
+    } else {
+      this.dataSource.data = this.activePublications
+    }
+
+
   }
 
 

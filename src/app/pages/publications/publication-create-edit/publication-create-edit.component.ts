@@ -20,8 +20,8 @@ export class PublicationCreateEditComponent implements OnInit {
 
   technologies: TechnologyModel[] = [];
   statusList: any = [
-    { name: 'ACTIVO', value: true },
-    { name: 'INACTIVO', value: false },
+    {name: 'ACTIVO', value: true},
+    {name: 'INACTIVO', value: false},
   ]
   types: string[] = ['CURSO', 'BOOTCAMP']
   mentors: any[] = []
@@ -37,12 +37,12 @@ export class PublicationCreateEditComponent implements OnInit {
     active: new FormControl(this.data.publication.active, [Validators.required]),
     detail: new FormControl(this.data.publication.detail, [Validators.required, Validators.minLength(4)]),
     duration: new FormControl(this.data.publication.duration, [Validators.required, Validators.minLength(4)]),
-    mentorId: new FormControl(this.data.publication.mentor._id, [Validators.required]),
+    mentorId: new FormControl(this.data.publication.mentor._id),
     days: new FormControl(this.data.publication.days, [Validators.required]),
     hours: new FormControl(this.data.publication.hours, [Validators.required]),
-    dateStart: new FormControl(this.fixDatePicker(), [Validators.required]),
-    dateEnd: new FormControl(this.data.publication.dateEnd, [Validators.required]),
-    image: new FormControl('assets/img/default-img.png'),
+    dateStart: new FormControl(this.fixDatePicker(this.data.publication.dateStart), [Validators.required]),
+    dateEnd: new FormControl(this.fixDatePicker(this.data.publication.dateEnd), [Validators.required]),
+    image: new FormControl(this.data.publication.image, [Validators.required]),
 
   })
 
@@ -57,9 +57,9 @@ export class PublicationCreateEditComponent implements OnInit {
   ) {
   }
 
-  fixDatePicker() {
-    const realDate = new Date( this.data.publication.dateStart );
-    realDate.setMinutes( realDate.getMinutes() + realDate.getTimezoneOffset() )
+  fixDatePicker(date: any) {
+    const realDate = new Date(date);
+    realDate.setMinutes(realDate.getMinutes() + realDate.getTimezoneOffset())
     return realDate
   }
 
@@ -76,7 +76,7 @@ export class PublicationCreateEditComponent implements OnInit {
       })
 
     this.userService.getAllMentors()
-      .subscribe( ( response: any ) => {
+      .subscribe((response: any) => {
         this.activeMentors = response.filter((mentor: any) => {
           if (mentor.active) {
             // TODO: evaluar field technology
@@ -91,10 +91,10 @@ export class PublicationCreateEditComponent implements OnInit {
   setFilterMentors(courseId: any) {
 
     this.courseService.getOneById(courseId)
-      .subscribe( (course: any) => {
-        this.mentors = this.activeMentors.filter( (mentor: any) => {
-          for ( const tech of mentor.technologies ) {
-            if ( tech.name === course.technology.name) {
+      .subscribe((course: any) => {
+        this.mentors = this.activeMentors.filter((mentor: any) => {
+          for (const tech of mentor.technologies) {
+            if (tech.name === course.technology.name) {
               return mentor;
             }
           }
@@ -104,8 +104,8 @@ export class PublicationCreateEditComponent implements OnInit {
       })
   }
 
-  createEditPublication(){
-    if ( this.data.isEdit ) {
+  createEditPublication() {
+    if (this.data.isEdit) {
       this.editPublication()
     } else {
       this.createPublication()
@@ -118,6 +118,16 @@ export class PublicationCreateEditComponent implements OnInit {
       name: this.publicationForm.value.name,
       type: this.publicationForm.value.type,
       technologyId: this.publicationForm.value.technologyId,
+      price: this.publicationForm.value.price,
+      link: this.publicationForm.value.link,
+      active: this.publicationForm.value.active,
+      detail: this.publicationForm.value.detail,
+      duration: this.publicationForm.value.duration,
+      mentorId: this.publicationForm.value.mentorId,
+      days: this.publicationForm.value.days,
+      hours: this.publicationForm.value.hours,
+      dateStart: this.publicationForm.value.dateStart.toISOString().split('T')[0],
+      dateEnd: this.publicationForm.value.dateEnd.toISOString().split('T')[0],
     }
 
     this.publicationsService.update(this.data.publicationId, publication)
@@ -134,13 +144,51 @@ export class PublicationCreateEditComponent implements OnInit {
             timer: 1500
           })
         },
-        ( error: any ) => {
+        (error: any) => {
           errorCommunicationWithRetry(error)
         }
       )
   }
 
-  createPublication() {}
+  createPublication() {
+
+    const publication = {
+      name: this.publicationForm.value.name,
+      type: this.publicationForm.value.type,
+      technologyId: this.publicationForm.value.technologyId,
+      price: this.publicationForm.value.price,
+      link: this.publicationForm.value.link,
+      active: this.publicationForm.value.active,
+      detail: this.publicationForm.value.detail,
+      duration: this.publicationForm.value.duration,
+      mentorId: this.publicationForm.value.mentorId,
+      days: this.publicationForm.value.days,
+      hours: this.publicationForm.value.hours,
+      dateStart: this.publicationForm.value.dateStart.toISOString().split('T')[0],
+      dateEnd: this.publicationForm.value.dateEnd.toISOString().split('T')[0],
+      image: this.publicationForm.value.image,
+    }
+
+    this.publicationsService.create(publication)
+      .subscribe(
+        () => {
+          this.dialogRef.close();
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Publicacion creada',
+            backdrop: 'rgba(103, 58, 183, 0.3)',
+            heightAuto: false,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        },
+        (error: any) => {
+          errorCommunicationWithRetry(error)
+        }
+      )
+
+  }
 
   closeDialog() {
     this.dialogRef.close()
@@ -148,12 +196,34 @@ export class PublicationCreateEditComponent implements OnInit {
 
   addImage(event: any) {
     const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = (evt) => {
-      this.publicationForm.patchValue({
-        image: reader.result
-      })
+
+    const img = new Image()
+    img.src = window.URL.createObjectURL(file)
+
+    img.onload = () => {
+      console.log(img)
+      console.log(img.width, img.height)
+
+      if (img.width !== 540 || img.height !== 420) {
+        console.log('error')
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'La imagen debe ser exactamente de 540px de ancho por 420px de alto',
+          backdrop: 'rgba(103, 58, 183, 0.3)',
+          heightAuto: false,
+          showConfirmButton: true,
+          confirmButtonText: 'Entendido'
+        })
+      } else {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (evt) => {
+          this.publicationForm.patchValue({
+            image: reader.result
+          })
+        }
+      }
     }
   }
 

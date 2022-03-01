@@ -7,9 +7,15 @@
 <div *ngIf="!loading" class="users-toolbar">
   <mat-form-field appearance="standard">
     <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Publicacion..." #input>
+    <input matInput autocomplete="off" (keyup)="applyFilter($event)" placeholder="Publicacion..." #input>
   </mat-form-field>
   <button mat-fab color="primary" (click)="createPublication()">+</button>
+</div>
+
+<div>
+  <section class="checkbox-section">
+    <mat-checkbox color="primary" (change)="filterActivesPublications()" class="filter-actives-publications"  [(ngModel)]="checked">Incluir inactivas</mat-checkbox>
+  </section>
 </div>
 
 <table *ngIf="!loading" mat-table [dataSource]="dataSource" class="mat-elevation-z8">

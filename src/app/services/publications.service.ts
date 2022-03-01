@@ -17,4 +17,8 @@ export class PublicationsService {
     return this.http.patch(`${environment.apiUrl}/publications/${publicationId}`, body)
   }
 
+  create(body: any) {
+    return this.http.post(`${environment.apiUrl}/publications`, body)
+  }
+
 }

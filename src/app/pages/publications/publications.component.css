@@ -50,3 +50,14 @@ table {
 .inactive-chip{
   background-color: red !important;
 }
+
+.checkbox-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.filter-actives-publications {
+  margin: 0 10px;
+}
