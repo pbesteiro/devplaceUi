@@ -37,7 +37,7 @@ export class PublicationCreateEditComponent implements OnInit {
     active: new FormControl(this.data.publication.active, [Validators.required]),
     detail: new FormControl(this.data.publication.detail, [Validators.required, Validators.minLength(4)]),
     duration: new FormControl(this.data.publication.duration, [Validators.required, Validators.minLength(4)]),
-    mentorId: new FormControl(this.data.publication.mentor._id),
+    mentorId: new FormControl(this.getMentor()),
     days: new FormControl(this.data.publication.days, [Validators.required]),
     hours: new FormControl(this.data.publication.hours, [Validators.required]),
     dateStart: new FormControl(this.fixDatePicker(this.data.publication.dateStart), [Validators.required]),
@@ -61,6 +61,16 @@ export class PublicationCreateEditComponent implements OnInit {
     const realDate = new Date(date);
     realDate.setMinutes(realDate.getMinutes() + realDate.getTimezoneOffset())
     return realDate
+  }
+
+  getMentor() {
+
+    if (this.data.publication.mentor) {
+      return this.data.publication.mentor._id
+    } else  {
+      return ''
+    }
+
   }
 
   ngOnInit() {
@@ -110,9 +120,15 @@ export class PublicationCreateEditComponent implements OnInit {
     } else {
       this.createPublication()
     }
+
+    setTimeout( () => {
+      window.location.reload();
+    }, 1400)
   }
 
   editPublication() {
+
+
 
     const publication = {
       name: this.publicationForm.value.name,
