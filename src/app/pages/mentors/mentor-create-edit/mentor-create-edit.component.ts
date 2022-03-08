@@ -22,6 +22,7 @@ export class MentorCreateEditComponent implements OnInit {
     name: new FormControl(this.data.mentor.name, [Validators.required, Validators.minLength(4)]),
     lastname: new FormControl(this.data.mentor.lastName, [Validators.required, Validators.minLength(4)]),
     email: new FormControl(this.data.mentor.email, [Validators.required, Validators.minLength(4)]),
+    password: new FormControl(this.data.mentor.password, [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z].{7,20}'), Validators.minLength(8)]),
     dni: new FormControl(this.data.mentor.dni, [Validators.required, Validators.minLength(4)]),
     phone: new FormControl(this.data.mentor.phone, [Validators.required, Validators.minLength(4)]),
     // picture: new FormControl('assets/img/default-img.png'),
@@ -46,6 +47,11 @@ export class MentorCreateEditComponent implements OnInit {
       ).subscribe( response => {
       this.technologies = response;
     })
+
+    if (this.data.isEdit) {
+      // @ts-ignore
+      this.userForm.get('password').clearValidators()
+    }
   }
 
   getTechnologiesIds() {
@@ -102,6 +108,7 @@ export class MentorCreateEditComponent implements OnInit {
       name: this.userForm.value.name,
       lastName: this.userForm.value.lastname,
       email: this.userForm.value.email,
+      password: this.userForm.value.password,
       dni: this.userForm.value.dni,
       phone: this.userForm.value.phone,
       linkedinProfile: this.userForm.value.linkedin,
