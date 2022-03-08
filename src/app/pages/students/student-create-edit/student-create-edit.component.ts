@@ -17,7 +17,7 @@ export class StudentCreateEditComponent implements OnInit {
     name: new FormControl(this.data.student.name, [Validators.required, Validators.minLength(4)]),
     lastname: new FormControl(this.data.student.lastName, [Validators.required, Validators.minLength(4)]),
     email: new FormControl(this.data.student.email, [Validators.required, Validators.minLength(4)]),
-    password: new FormControl(this.data.mentor.password, [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z].{7,20}'), Validators.minLength(8)]),
+    password: new FormControl(this.data.student.password, [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z].{7,20}'), Validators.minLength(8)]),
     dni: new FormControl(this.data.student.dni, [Validators.required, Validators.minLength(4)]),
     phone: new FormControl(this.data.student.phone, [Validators.required, Validators.minLength(4)]),
     comments: new FormControl(this.data.student.comments, [Validators.minLength(4)]),
@@ -34,6 +34,8 @@ export class StudentCreateEditComponent implements OnInit {
     if (this.data.isEdit) {
       // @ts-ignore
       this.userForm.get('password').clearValidators()
+      // @ts-ignore
+      this.userForm.get('email').disable()
     }
   }
 

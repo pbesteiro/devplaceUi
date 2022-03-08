@@ -51,6 +51,8 @@ export class MentorCreateEditComponent implements OnInit {
     if (this.data.isEdit) {
       // @ts-ignore
       this.userForm.get('password').clearValidators()
+      // @ts-ignore
+      this.userForm.get('email').disable()
     }
   }
 
