@@ -6,6 +6,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {UserCreateEditComponent} from "../users/user-create-edit/user-create-edit.component";
 import {MentorCreateEditComponent} from "./mentor-create-edit/mentor-create-edit.component";
 import Swal from "sweetalert2";
+import {ChangePasswordComponent} from "../profile/change-password/change-password.component";
 
 const ELEMENT_DATA: UserModel[] = [];
 
@@ -16,7 +17,7 @@ const ELEMENT_DATA: UserModel[] = [];
 })
 export class MentorsComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'lastName', 'asignaturas', 'actionEdit', 'actionDelete'];
+  displayedColumns: string[] = ['name', 'lastName', 'asignaturas', 'actionEdit', 'cleanEdit', 'actionDelete'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   loading = true
 
@@ -40,6 +41,15 @@ export class MentorsComponent implements OnInit {
         })
         this.loading = false
       })
+  }
+
+  cleanPassword(userId: string, user: any) {
+    this.dialog.open(ChangePasswordComponent, {
+      data: {
+        user,
+        isClean: true,
+      }
+    });
   }
 
   openDialog() {

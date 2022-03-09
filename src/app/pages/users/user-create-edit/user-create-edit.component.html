@@ -34,6 +34,13 @@
           <input autocomplete="off" id="email" matInput placeholder="Ej: example@gmail.com" required formControlName="email">
         </mat-form-field>
 
+        <!-- Password -->
+        <mat-form-field appearance="fill" *ngIf="!data.isEdit" class="field-course-create-edit-modal">
+          <mat-label for="password">Password</mat-label>
+          <input matTooltip="Debe contener al menos 8 caracteres entre los cuales contener al menos una letra minuscula, una mayuscula y un numero"
+                 matTooltipClass="tooltip-primary" autocomplete="off" required id="password" placeholder="Ej: ABcd1234" matInput formControlName="password" type="text">
+        </mat-form-field>
+
         <!-- dni mentor field -->
         <mat-form-field appearance="fill" class="field-course-create-edit-modal">
           <mat-label for="dni">DNI</mat-label>

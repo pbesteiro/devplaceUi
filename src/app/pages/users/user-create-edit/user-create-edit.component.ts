@@ -83,6 +83,7 @@ export class UserCreateEditComponent implements OnInit {
       name: this.userForm.value.name,
       lastName: this.userForm.value.lastname,
       email: this.userForm.value.email,
+      password: this.userForm.value.password,
       dni: this.userForm.value.dni,
       phone: this.userForm.value.phone,
       comments: this.userForm.value.comments,

@@ -8,6 +8,7 @@ import {UserCreateEditComponent} from "./user-create-edit/user-create-edit.compo
 import {MentorCreateEditComponent} from "../mentors/mentor-create-edit/mentor-create-edit.component";
 import Swal from "sweetalert2";
 import {errorCommunicationWithRetry} from "../../helpers/error.communication";
+import {ChangePasswordComponent} from "../profile/change-password/change-password.component";
 
 const ELEMENT_DATA: UserModel[] = [];
 
@@ -18,7 +19,7 @@ const ELEMENT_DATA: UserModel[] = [];
 })
 export class UsersComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'lastName', 'email', 'actionEdit', 'actionDelete'];
+  displayedColumns: string[] = ['name', 'lastName', 'email', 'actionEdit', 'cleanEdit', 'actionDelete'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   loading = true
 
@@ -48,6 +49,15 @@ export class UsersComponent implements OnInit {
         errorCommunicationWithRetry(error)
 
       })
+  }
+
+  cleanPassword(userId: string, user: any) {
+    this.dialog.open(ChangePasswordComponent, {
+      data: {
+        user,
+        isClean: true,
+      }
+    });
   }
 
   openDialog() {

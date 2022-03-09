@@ -43,6 +43,17 @@
     </td>
   </ng-container>
 
+  <!-- Clean Pass Column -->
+  <ng-container matColumnDef="cleanEdit">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell (click)="cleanPassword(element._id, element)" *matCellDef="let element" class="delete-assistant">
+      <mat-icon
+        matTooltip="Reestablecer contraseña"
+        matTooltipClass="tooltip-primary"
+        class="blue-icon">lock_open</mat-icon>
+    </td>
+  </ng-container>
+
   <!-- Delete Column -->
   <ng-container matColumnDef="actionDelete">
     <th mat-header-cell *matHeaderCellDef> </th>

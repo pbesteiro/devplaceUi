@@ -6,6 +6,7 @@ import {MatDialog} from "@angular/material/dialog";
 import Swal from "sweetalert2";
 import {StudentCreateEditComponent} from "./student-create-edit/student-create-edit.component";
 import {errorCommunicationWithRetry} from "../../helpers/error.communication";
+import {ChangePasswordComponent} from "../profile/change-password/change-password.component";
 
 const ELEMENT_DATA: UserModel[] = [];
 
@@ -16,7 +17,7 @@ const ELEMENT_DATA: UserModel[] = [];
 })
 export class StudentsComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'lastName', 'email', 'actionEdit', 'actionDelete'];
+  displayedColumns: string[] = ['name', 'lastName', 'email', 'actionEdit', 'cleanEdit', 'actionDelete'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   loading = true
 
@@ -43,6 +44,15 @@ export class StudentsComponent implements OnInit {
         this.loading = false
         errorCommunicationWithRetry(error)
       })
+  }
+
+  cleanPassword(userId: string, user: any) {
+    this.dialog.open(ChangePasswordComponent, {
+      data: {
+        user,
+        isClean: true,
+      }
+    });
   }
 
   openDialog() {

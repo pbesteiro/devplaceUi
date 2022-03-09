@@ -45,31 +45,56 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   updatePassword() {
-    console.log(this.changePasswordForm.value)
+
     const body = {
       password: this.changePasswordForm.value.password,
     }
 
-    this.userService.updatePassword(this.data.user._id, body)
-      .subscribe(
-        () => {
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Password actualizada',
-            backdrop: 'rgba(103, 58, 183, 0.3)',
-            heightAuto: false,
-            showConfirmButton: false,
-            timer: 1500
-          })
-          setTimeout( () => {
-            window.location.reload();
-          }, 1400)
-        },
-        (error: any) => {
-          errorCommunicationWithRetry(error)
-        }
-      )
+    if (this.data.isClean) {
+      this.userService.cleanPassword(this.data.user._id, body)
+        .subscribe(
+          () => {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Password actualizada',
+              backdrop: 'rgba(103, 58, 183, 0.3)',
+              heightAuto: false,
+              showConfirmButton: false,
+              timer: 1500
+            })
+            setTimeout( () => {
+              window.location.reload();
+            }, 1400)
+          },
+          (error: any) => {
+            errorCommunicationWithRetry(error)
+          }
+        )
+
+    } else {
+      this.userService.updatePassword(this.data.user._id, body)
+        .subscribe(
+          () => {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Password actualizada',
+              backdrop: 'rgba(103, 58, 183, 0.3)',
+              heightAuto: false,
+              showConfirmButton: false,
+              timer: 1500
+            })
+            setTimeout( () => {
+              window.location.reload();
+            }, 1400)
+          },
+          (error: any) => {
+            errorCommunicationWithRetry(error)
+          }
+        )
+
+    }
   }
 
 }
