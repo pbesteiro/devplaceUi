@@ -1,0 +1,19 @@
+.profile-card {
+  min-width: 450px;
+}
+
+.mat-card-title {
+  margin: 30px 0px;
+  font-size: 1.6em;
+}
+
+.profile-field {
+  font-size: 1.2em;
+  margin: 25px 0px;
+  font-weight: lighter;
+}
+
+.password-button {
+  border-radius: 6px;
+  margin: 20px 0px;
+}

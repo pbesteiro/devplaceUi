@@ -6,6 +6,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
 import { RouterModule } from "@angular/router";
 import { MenuComponent } from './menu/menu.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { MenuComponent } from './menu/menu.component';
     RouterModule,
     MatToolbarModule,
     MatIconModule,
+    MatTooltipModule,
   ],
   declarations: [
     NoPageFoundComponent,

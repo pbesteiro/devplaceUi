@@ -1,0 +1,29 @@
+
+  <mat-card class="profile-card">
+
+      <mat-card-header class="mat-card-title">
+        <mat-card-title> Tu Perfil </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <!-- Name course field -->
+        <div class="profile-field"> Nombre: {{ user.name }}</div>
+        <div class="profile-field"> Apellido: {{ user.lastName }}</div>
+        <div class="profile-field"> Email: {{ user.email }}</div>
+
+        <button class="password-button" mat-raised-button color="primary" (click)="openDialog()">
+          Cambiar contraseña
+          <mat-icon
+            class="blue-icon">lock</mat-icon>
+        </button>
+
+      </mat-card-content>
+
+      <mat-card-footer>
+
+      </mat-card-footer>
+
+
+  </mat-card>
+

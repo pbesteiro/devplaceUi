@@ -61,6 +61,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {PublicationsComponent} from "./publications/publications.component";
 import {MatChipsModule} from "@angular/material/chips";
 import {PublicationCreateEditComponent} from "./publications/publication-create-edit/publication-create-edit.component";
+import { ProfileComponent } from './profile/profile.component';
+import { ChangePasswordComponent } from './profile/change-password/change-password.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -140,6 +142,13 @@ const pagesRoute: Routes = [
         },
 
       },
+      {
+        path: 'profile', component: ProfileComponent,
+        canActivate: [ AuthGuard ],
+        data: {
+          role: ['ADMIN', 'MANAGER', 'MENTOR', 'STUDENT']
+        },
+      },
       /*
       { path: ':id', component:ContactDetailComponent,
         resolve:{ contact:ContactDetailResolverService }
@@ -179,6 +188,8 @@ const pagesRoute: Routes = [
     MentorCreateEditComponent,
     PublicationsComponent,
     PublicationCreateEditComponent,
+    ProfileComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     CommonModule,

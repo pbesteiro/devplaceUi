@@ -30,4 +30,8 @@ export class UserService {
   update(userId: string, user: any) {
     return this.http.patch(`${environment.apiUrl}/users/${userId}`, user)
   }
+
+  updatePassword(userId: string, body: any) {
+    return this.http.patch(`${environment.apiUrl}/users/${userId}/update-password`, body)
+  }
 }
