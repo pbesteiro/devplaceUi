@@ -30,4 +30,13 @@ export class PagesComponent implements OnInit {
     return this.role.includes('MANAGER')
   }
 
+  // @ts-ignore
+  get isMentor() {
+    return this.role.includes('MENTOR')
+  }
+
+  // @ts-ignore
+  get isStudent() {
+    return this.role.includes('STUDENT')
+  }
 }

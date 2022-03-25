@@ -63,6 +63,7 @@ import {MatChipsModule} from "@angular/material/chips";
 import {PublicationCreateEditComponent} from "./publications/publication-create-edit/publication-create-edit.component";
 import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './profile/change-password/change-password.component';
+import { MentorListClassesComponent } from './mentors/mentor-list-classes/mentor-list-classes.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -149,6 +150,13 @@ const pagesRoute: Routes = [
           role: ['ADMIN', 'MANAGER', 'MENTOR', 'STUDENT']
         },
       },
+      {
+        path: 'mentor-classes', component: MentorListClassesComponent,
+        canActivate: [ AuthGuard ],
+        data: {
+          role: ['ADMIN', 'MANAGER', 'MENTOR']
+        },
+      },
       /*
       { path: ':id', component:ContactDetailComponent,
         resolve:{ contact:ContactDetailResolverService }
@@ -190,6 +198,7 @@ const pagesRoute: Routes = [
     PublicationCreateEditComponent,
     ProfileComponent,
     ChangePasswordComponent,
+    MentorListClassesComponent,
   ],
   imports: [
     CommonModule,

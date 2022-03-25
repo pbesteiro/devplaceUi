@@ -1,0 +1,44 @@
+:host {
+  width: 100%;
+}
+table {
+  width: 100% !important;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.users-toolbar {
+  display: flex;
+}
+
+.red-icon {
+  cursor: pointer;
+  color: red;
+}
+
+.blue-icon {
+  cursor: pointer;
+  color: #5757a4;
+}
+::ng-deep .tooltip-primary {
+  background: rgba(103, 58, 183, 0.9) !important;
+  font-size: 1em;
+}
+
+::ng-deep .tooltip-danger {
+  background: rgba(167, 52, 52, 0.9) !important;
+  font-size: 1em;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 20px);
+}
+.inner {
+  padding: 12px;
+}

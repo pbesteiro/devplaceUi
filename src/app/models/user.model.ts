@@ -5,6 +5,7 @@ export class UserModel {
   email: string;
   active: boolean;
   roles: string[];
+  classes: any[];
   accessToken?: string | undefined;
 
   constructor(
@@ -14,6 +15,7 @@ export class UserModel {
     email: string,
     active: boolean,
     roles: string[],
+    classes: any[],
     accessToken?: string) {
     this._id = _id;
     this.name = name;
@@ -21,6 +23,7 @@ export class UserModel {
     this.email = email;
     this.active = active;
     this.roles = roles;
+    this.classes = classes;
     this.accessToken = accessToken
   }
 }

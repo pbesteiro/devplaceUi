@@ -61,10 +61,13 @@ export class AuthenticationService {
             tokenPayload.email,
             tokenPayload.active,
             tokenPayload.roles,
+            tokenPayload.classes,
             response.accessToken
           )
           document.cookie = `refreshToken=${response.accessToken}; expires=${cookieExp} ; path=/`
           this.role = tokenPayload.roles;
+          localStorage.setItem('roles', JSON.stringify(this.role))
+          localStorage.setItem('classes', JSON.stringify(tokenPayload.classes))
           this.userSubject.next(user);
           this.startRefreshTokenTimer();
           return user;
@@ -86,11 +89,13 @@ export class AuthenticationService {
             tokenPayload.email,
             tokenPayload.active,
             tokenPayload.roles,
+            tokenPayload.classes,
             response.accessToken
           )
           document.cookie = `refreshToken=${response.accessToken}; expires=${cookieExp} ; path=/`
           this.role = tokenPayload.roles;
           localStorage.setItem('roles', JSON.stringify(this.role))
+          localStorage.setItem('classes', JSON.stringify(tokenPayload.classes))
           this.userSubject.next(user);
           this.startRefreshTokenTimer();
           return user;
@@ -103,6 +108,7 @@ export class AuthenticationService {
     this.stopRefreshTokenTimer();
     document.cookie = `refreshToken= ; expires= Thu, 01 Jan 1970 00:00:00 GMT`
     localStorage.removeItem('roles')
+    localStorage.removeItem('classes')
     this.userSubject.next(null);
     this.router.navigate(['/login']);
   }
