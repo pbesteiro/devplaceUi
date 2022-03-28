@@ -65,6 +65,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './profile/change-password/change-password.component';
 import { MentorListClassesComponent } from './mentors/mentor-list-classes/mentor-list-classes.component';
 import { MentorUpdateStatusClassComponent } from './mentors/mentor-update-status-class/mentor-update-status-class.component';
+import { StudentListClassesComponent } from './students/student-list-classes/student-list-classes.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -158,6 +159,13 @@ const pagesRoute: Routes = [
           role: ['ADMIN', 'MANAGER', 'MENTOR']
         },
       },
+      {
+        path: 'student-classes', component: StudentListClassesComponent,
+        canActivate: [ AuthGuard ],
+        data: {
+          role: ['ADMIN', 'MANAGER', 'STUDENT']
+        },
+      },
       /*
       { path: ':id', component:ContactDetailComponent,
         resolve:{ contact:ContactDetailResolverService }
@@ -201,6 +209,7 @@ const pagesRoute: Routes = [
     ChangePasswordComponent,
     MentorListClassesComponent,
     MentorUpdateStatusClassComponent,
+    StudentListClassesComponent,
   ],
   imports: [
     CommonModule,
