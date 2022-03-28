@@ -50,9 +50,12 @@ export class StudentCreateEditComponent implements OnInit {
       this.createStudent()
     }
 
+    /*
     setTimeout( () => {
       window.location.reload();
     }, 1400)
+
+     */
   }
 
   editStudent() {
