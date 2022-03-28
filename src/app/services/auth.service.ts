@@ -67,7 +67,7 @@ export class AuthenticationService {
           document.cookie = `refreshToken=${response.accessToken}; expires=${cookieExp} ; path=/`
           this.role = tokenPayload.roles;
           localStorage.setItem('roles', JSON.stringify(this.role))
-          localStorage.setItem('classes', JSON.stringify(tokenPayload.classes))
+          // localStorage.setItem('classes', JSON.stringify(tokenPayload.classes))
           this.userSubject.next(user);
           this.startRefreshTokenTimer();
           return user;
@@ -95,7 +95,7 @@ export class AuthenticationService {
           document.cookie = `refreshToken=${response.accessToken}; expires=${cookieExp} ; path=/`
           this.role = tokenPayload.roles;
           localStorage.setItem('roles', JSON.stringify(this.role))
-          localStorage.setItem('classes', JSON.stringify(tokenPayload.classes))
+          // localStorage.setItem('classes', JSON.stringify(tokenPayload.classes))
           this.userSubject.next(user);
           this.startRefreshTokenTimer();
           return user;

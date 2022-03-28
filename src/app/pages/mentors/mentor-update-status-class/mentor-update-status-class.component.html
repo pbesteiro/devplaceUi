@@ -1,0 +1,44 @@
+<div class="create-edit-container">
+  <mat-card>
+
+    <div class="close-dialog-button">
+      <mat-icon (click)="closeDialog()" color="primary">
+        close
+      </mat-icon>
+    </div>
+
+    <form [formGroup]="changestatusForm" (ngSubmit)="updateStatus()">
+
+      <mat-card-header>
+        <mat-card-title> {{ data.class.commission.name }} - {{ data.class.course.name }}</mat-card-title>
+        <mat-card-subtitle> Clase {{ data.class.date | date }} </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content class="card-create-edit-container">
+
+        <mat-form-field appearance="fill" class="field-create-edit-modal">
+          <mat-label for="name"> Ingrese los temas de la clase </mat-label>
+          <input
+            placeholder="Ej: Variables, POO, Funciones, etc."
+            autocomplete="off" id="comments" matInput required formControlName="comments">
+        </mat-form-field>
+
+        <button color="primary" mat-button matSuffix mat-stroked-button mat-raised-button aria-label="upload" (click)="openDrive(data.class.linkContentClass)">
+          Subir documentos
+          <mat-icon>cloud_upload</mat-icon>
+        </button>
+
+      </mat-card-content>
+
+      <div>
+        <mat-dialog-actions align="center">
+          <button mat-button
+                  [disabled]="changestatusForm.invalid"
+          >Cerrar la clase
+          </button>
+        </mat-dialog-actions>
+      </div>
+
+    </form>
+  </mat-card>
+</div>

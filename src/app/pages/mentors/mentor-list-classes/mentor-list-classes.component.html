@@ -9,11 +9,12 @@
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <!-- Class Column -->
+  <!-- Class Column
   <ng-container matColumnDef="class">
     <th mat-header-cell *matHeaderCellDef> Clase </th>
     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
   </ng-container>
+  -->
 
   <!-- date Column -->
   <ng-container matColumnDef="date">
@@ -42,22 +43,24 @@
   <!-- subject Column -->
   <ng-container matColumnDef="subject">
     <th mat-header-cell *matHeaderCellDef> Tema </th>
-    <td mat-cell *matCellDef="let element"> Link Drive </td>
+    <td mat-cell *matCellDef="let element"> {{ element.comments }} </td>
   </ng-container>
 
   <!-- documents Column -->
   <ng-container matColumnDef="documents">
-    <th mat-header-cell *matHeaderCellDef> Estado </th>
-    <td mat-cell *matCellDef="let element">  </td>
+    <th mat-header-cell *matHeaderCellDef> Documentos </th>
+    <td mat-cell *matCellDef="let element"> {{ element.linkContentClass }} </td>
   </ng-container>
 
   <!-- state Column -->
   <ng-container matColumnDef="state">
-    <th mat-header-cell *matHeaderCellDef> </th>
+    <th mat-header-cell *matHeaderCellDef> Estado </th>
     <td mat-cell
+        class="change-status-class"
         matTooltip="Actualizar estado de la clase"
         matTooltipClass="tooltip-primary"
-        (click)="changeState(element._id, element)" *matCellDef="let element" class="delete-assistant">
+        (click)="changeState(element._id, element)" *matCellDef="let element">
+      {{ element.status }}
     </td>
   </ng-container>
 

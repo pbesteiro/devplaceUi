@@ -1,0 +1,22 @@
+.field-create-edit-modal {
+  min-width: 450px;
+}
+
+.close-dialog-button {
+  cursor: pointer;
+  float: right;
+}
+
+.card-create-edit-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.password-icon {
+  cursor: pointer !important;
+}
+
+::ng-deep .tooltip-primary {
+  background: rgba(103, 58, 183, 0.9) !important;
+  font-size: 1em;
+}

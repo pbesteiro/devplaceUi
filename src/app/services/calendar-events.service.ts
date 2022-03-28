@@ -20,6 +20,10 @@ export class CalendarEventsService {
     return this.http.patch(`${environment.apiUrl}/classes/${calendarEventId}`, assistants);
   }
 
+  updateStatus(calendarEventId: string, assistants: any) {
+    return this.http.patch(`${environment.apiUrl}/classes/${calendarEventId}/update-status`, assistants);
+  }
+
   remove(calendarEventId: string) {
     return this.http.delete(`${environment.apiUrl}/calendar-events/${calendarEventId}`);
   }

@@ -11,6 +11,10 @@ export class UserService {
     return this.http.get<UserModel[]>(`${environment.apiUrl}/users`);
   }
 
+  getUserByEmail(email: string) {
+    return this.http.get<UserModel[]>(`${environment.apiUrl}/users/${email}`);
+  }
+
   getAllManagers() {
     return this.http.get<UserModel[]>(`${environment.apiUrl}/users?role=MANAGER`);
   }

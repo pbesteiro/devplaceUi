@@ -64,6 +64,7 @@ import {PublicationCreateEditComponent} from "./publications/publication-create-
 import { ProfileComponent } from './profile/profile.component';
 import { ChangePasswordComponent } from './profile/change-password/change-password.component';
 import { MentorListClassesComponent } from './mentors/mentor-list-classes/mentor-list-classes.component';
+import { MentorUpdateStatusClassComponent } from './mentors/mentor-update-status-class/mentor-update-status-class.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -199,6 +200,7 @@ const pagesRoute: Routes = [
     ProfileComponent,
     ChangePasswordComponent,
     MentorListClassesComponent,
+    MentorUpdateStatusClassComponent,
   ],
   imports: [
     CommonModule,

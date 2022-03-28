@@ -42,3 +42,7 @@ table {
 .inner {
   padding: 12px;
 }
+
+.change-status-class {
+  cursor: pointer;
+}
