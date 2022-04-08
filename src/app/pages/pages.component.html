@@ -5,37 +5,37 @@
   <mat-drawer #drawer class="sidenav" mode="side" opened>
     <ul>
       <li routerLink="/campus">
-        Dashboard
+        <mat-icon class="menu-icon">home</mat-icon>  <span class="menu-text"> Inicio</span>
       </li>
       <li *ngIf="isMentor" routerLink="/campus/mentor-classes">
-        Clases
+        <mat-icon class="menu-icon">event</mat-icon>  <span class="menu-text">Clases</span>
       </li>
       <li *ngIf="isStudent" routerLink="/campus/student-classes">
-        Clases
+        <mat-icon class="menu-icon">event</mat-icon> <span class="menu-text">Clases</span>
       </li>
       <li *ngIf="isAdmin || isManager" routerLink="/campus/calendar">
-        Calendar
+        <mat-icon class="menu-icon">calendar_today</mat-icon> <span class="menu-text">Calendario</span>
       </li>
       <li *ngIf="isAdmin || isManager" routerLink="/campus/commissions">
-        Comisiones
+        <mat-icon class="menu-icon">group</mat-icon> <span class="menu-text">Comisiones</span>
       </li>
       <li *ngIf="isAdmin || isManager" routerLink="/campus/cursos">
-        Cursos
+        <mat-icon class="menu-icon">library_books</mat-icon> <span class="menu-text">Cursos</span>
       </li>
       <li *ngIf="isAdmin || isManager" routerLink="/campus/technologies">
-        Tecnologias
+        <mat-icon class="menu-icon">android</mat-icon> <span class="menu-text">Tecnologias</span>
       </li>
       <li *ngIf="isAdmin" routerLink="/campus/users">
-        Managers
+        <mat-icon class="menu-icon">build</mat-icon> <span class="menu-text">Managers</span>
       </li>
       <li *ngIf="isAdmin || isManager" routerLink="/campus/students">
-        Estudiantes
+        <mat-icon class="menu-icon">school</mat-icon> <span class="menu-text">Estudiantes</span>
       </li>
       <li *ngIf="isAdmin || isManager" routerLink="/campus/mentors">
-        Mentores
+        <mat-icon class="menu-icon">record_voice_over</mat-icon> <span class="menu-text">Mentores</span>
       </li>
       <li *ngIf="isAdmin || isManager" routerLink="/campus/publications">
-        Publicaciones
+        <mat-icon class="menu-icon"> list_alt</mat-icon> <span class="menu-text">Publicaciones</span>
       </li>
     </ul>
 

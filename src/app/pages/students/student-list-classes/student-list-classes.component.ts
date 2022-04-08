@@ -13,7 +13,7 @@ const ELEMENT_DATA: any[] = [];
 export class StudentListClassesComponent implements OnInit {
 
   user: any
-  displayedColumns: string[] = ['date', 'hour', 'commission', 'course', 'subject', 'mentor', 'documents'];
+  displayedColumns: string[] = ['date', 'hour', 'course', 'subject', 'documents','meet'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   loading = true
   classes: any[] = []

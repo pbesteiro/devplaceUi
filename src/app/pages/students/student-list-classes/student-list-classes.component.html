@@ -1,11 +1,16 @@
 
 
+<h1 style="font-size:40px; font-family:'DMSans'; font-weight: 600;">Hola {{user.name}} {{user.lastName}}!</h1>
+
 <div class="users-toolbar">
   <mat-form-field appearance="standard">
     <mat-label>Buscar</mat-label>
     <input matInput autocomplete="off" (keyup)="applyFilter($event)" placeholder="Clase" #input>
   </mat-form-field>
 </div>
+
+
+
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -18,44 +23,39 @@
 
   <!-- date Column -->
   <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef> Fecha </th>
-    <td mat-cell *matCellDef="let element"> {{element.date | date }} </td>
+    <th mat-header-cell *matHeaderCellDef class="th-student-list"> Fecha </th>
+    <td mat-cell *matCellDef="let element" class="td-student-list"> {{element.date | date }} </td>
   </ng-container>
 
   <!-- hour Column -->
   <ng-container matColumnDef="hour">
-    <th mat-header-cell *matHeaderCellDef> Hora </th>
-    <td mat-cell *matCellDef="let element"> {{element.timeFrom}} </td>
+    <th mat-header-cell *matHeaderCellDef class="th-student-list"> Hora </th>
+    <td mat-cell *matCellDef="let element" class="td-student-list"> {{element.timeFrom}} </td>
   </ng-container>
 
-  <!-- commission Column -->
-  <ng-container matColumnDef="commission">
-    <th mat-header-cell *matHeaderCellDef> Comisión </th>
-    <td mat-cell *matCellDef="let element"> {{element.commission.name}} </td>
-  </ng-container>
 
   <!-- course Column -->
   <ng-container matColumnDef="course">
-    <th mat-header-cell *matHeaderCellDef> Curso </th>
-    <td mat-cell *matCellDef="let element"> {{element.course.name}} </td>
+    <th mat-header-cell *matHeaderCellDef class="th-student-list"> Curso </th>
+    <td mat-cell *matCellDef="let element" class="td-student-list"> {{element.course.name}} </td>
   </ng-container>
 
   <!-- subject Column -->
   <ng-container matColumnDef="subject">
-    <th mat-header-cell *matHeaderCellDef> Tema </th>
-    <td mat-cell *matCellDef="let element"> {{ element.comments }} </td>
+    <th mat-header-cell *matHeaderCellDef class="th-student-list"> Topic </th>
+    <td mat-cell *matCellDef="let element" class="td-student-list"> {{ element.comments }} </td>
   </ng-container>
-
-  <!-- mentor Column -->
-  <ng-container matColumnDef="mentor">
-    <th mat-header-cell *matHeaderCellDef> Mentor </th>
-    <td mat-cell *matCellDef="let element"> {{ element.mentor }} </td>
-  </ng-container>
-
+  
   <!-- documents Column -->
   <ng-container matColumnDef="documents">
-    <th mat-header-cell *matHeaderCellDef> Documentos </th>
-    <td mat-cell *matCellDef="let element"> {{ element.linkContentClass }} </td>
+    <th mat-header-cell *matHeaderCellDef class="th-student-list"> Docs </th>
+    <td mat-cell *matCellDef="let element" class="td-student-list"> <a href="{{ element.linkContentClass }}" target="_blank">Material</a> </td>
+  </ng-container>
+
+   <!-- documents Column -->
+   <ng-container matColumnDef="meet">
+    <th mat-header-cell *matHeaderCellDef class="th-student-list"> Meet </th>
+    <td mat-cell *matCellDef="let element" class="td-student-list"> <a href="{{ element.linkContentClass }}" target="_blank">Entrar</a> </td>
   </ng-container>
 
 

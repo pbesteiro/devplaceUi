@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000/devplaces-campus-api'
+  apiUrl: 'https://devplace-api.herokuapp.com/devplaces-campus-api'
 };
 
 /*
