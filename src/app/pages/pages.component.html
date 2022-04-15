@@ -4,14 +4,14 @@
 <mat-drawer-container class="pages-container" autosize>
   <mat-drawer #drawer class="sidenav" mode="side" opened>
     <ul>
-      <li routerLink="/campus">
+      <!--li routerLink="/campus">
         <mat-icon class="menu-icon">home</mat-icon>  <span class="menu-text"> Inicio</span>
-      </li>
+      </li-->
       <li *ngIf="isMentor" routerLink="/campus/mentor-classes">
-        <mat-icon class="menu-icon">event</mat-icon>  <span class="menu-text">Clases</span>
+        <mat-icon class="menu-icon">event</mat-icon>  <span class="menu-text">Mis Clases</span>
       </li>
       <li *ngIf="isStudent" routerLink="/campus/student-classes">
-        <mat-icon class="menu-icon">event</mat-icon> <span class="menu-text">Clases</span>
+        <mat-icon class="menu-icon">event</mat-icon> <span class="menu-text">Mis Clases</span>
       </li>
       <li *ngIf="isAdmin || isManager" routerLink="/campus/calendar">
         <mat-icon class="menu-icon">calendar_today</mat-icon> <span class="menu-text">Calendario</span>

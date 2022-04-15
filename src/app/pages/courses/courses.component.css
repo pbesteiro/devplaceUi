@@ -5,6 +5,13 @@
 table {
   width: 100% !important;
 }
+td.mat-cell{
+  border-bottom-style: none;
+}
+
+th.mat-header-cell{
+  border-bottom-style: none;
+}
 
 .mat-column-name {
   word-wrap: break-word !important;

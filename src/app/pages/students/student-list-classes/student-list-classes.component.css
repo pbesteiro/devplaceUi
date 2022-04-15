@@ -48,11 +48,9 @@ table {
 }
 
 .th-student-list{
-  font-family: DMSans;
   font-weight: 500;
   color: #5603ad;
   font-size: 18px;
-  font-family: 'DMSans';
   text-align: center;
 }
 
@@ -82,9 +80,7 @@ a {
   width: 10% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  font-family: 'DMSans';
   text-align: center;
-
   word-break: break-word;
 
   -ms-hyphens: auto;
@@ -100,7 +96,6 @@ a {
   width: 10% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  font-family: 'DMSans';
   text-align: center;
 
   word-break: break-word;
@@ -118,7 +113,6 @@ a {
   width: 40% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  font-family: 'DMSans';
   text-align: center;
 
   word-break: break-word;
@@ -136,7 +130,6 @@ a {
   width: 20% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  font-family: 'DMSans';
   text-align: center;
 
   word-break: break-word;
@@ -156,7 +149,6 @@ a {
   width: 10% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  font-family: 'DMSans';
   text-align: center;
 
   word-break: break-word;
@@ -173,8 +165,7 @@ a {
   flex: 0 0 10% !important;
   width: 10% !important;
   overflow-wrap: break-word;
-  word-wrap: break-word;
-  font-family: 'DMSans';
+  word-wrap: break-word;  
   text-align: center;
 
   word-break: break-word;

@@ -5,6 +5,29 @@ table {
   width: 100% !important;
 }
 
+td.mat-cell{
+  border-bottom-style: none;
+}
+
+th.mat-header-cell{
+  border-bottom-style: none;
+}
+
+.th-student-list{
+  font-family: DMSans;
+  font-weight: 500;
+  color: #5603ad;
+  font-size: 18px;
+  font-family: 'DMSans';
+  text-align: center;
+}
+
+.td-student-list{
+  color: #393c41;
+  font-size: 14px;
+  text-align: left;
+}
+
 .mat-form-field {
   font-size: 14px;
   width: 100%;
