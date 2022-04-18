@@ -15,7 +15,7 @@ const ELEMENT_DATA: any[] = [];
 export class MentorListClassesComponent implements OnInit {
 
   user: any
-  displayedColumns: string[] = ['date', 'hour', 'commission', 'course', 'subject', 'documents', 'state'];
+  displayedColumns: string[] = ['date', 'hour', 'course', 'subject', 'documents', 'state', 'meet'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   loading = true
   classes: any[] = []

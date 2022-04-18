@@ -5,6 +5,14 @@ table {
   width: 100% !important;
 }
 
+td.mat-cell{
+  border-bottom-style: none;
+}
+
+th.mat-header-cell{
+  border-bottom-style: none;
+}
+
 .mat-form-field {
   font-size: 14px;
   width: 100%;

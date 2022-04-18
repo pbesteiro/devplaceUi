@@ -28,12 +28,6 @@
     <td mat-cell *matCellDef="let element"> {{element.timeFrom}} </td>
   </ng-container>
 
-  <!-- commission Column -->
-  <ng-container matColumnDef="commission">
-    <th mat-header-cell *matHeaderCellDef> Comisión </th>
-    <td mat-cell *matCellDef="let element"> {{element.commission.name}} </td>
-  </ng-container>
-
   <!-- course Column -->
   <ng-container matColumnDef="course">
     <th mat-header-cell *matHeaderCellDef> Curso </th>
@@ -49,7 +43,7 @@
   <!-- documents Column -->
   <ng-container matColumnDef="documents">
     <th mat-header-cell *matHeaderCellDef> Documentos </th>
-    <td mat-cell *matCellDef="let element"> {{ element.linkContentClass }} </td>
+    <td mat-cell *matCellDef="let element"> <a href="{{ element.linkContentClass }}" target="_blank">Material</a> </td>
   </ng-container>
 
   <!-- state Column -->
@@ -64,6 +58,11 @@
     </td>
   </ng-container>
 
+    <!-- documents Column -->
+    <ng-container matColumnDef="meet">
+      <th mat-header-cell *matHeaderCellDef> Meet </th>
+      <td mat-cell *matCellDef="let element"> <a href="{{ element.linkContentClass }}" target="_blank">Entrar</a> </td>
+    </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
