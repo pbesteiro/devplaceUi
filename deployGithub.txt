@@ -1,0 +1,12 @@
+DEPLOY GITHUB(Front)
+
+ng build --prod --base-href https://pbesteiro.github.io/devplaceUi/
+npx angular-cli-ghpages --dir=dist/devplaces-campus-ui
+
+--para instalar angular-cli-ghpages
+npm i -g angular-cli-ghpages
+
+
+Generar el attlas
+
+mongodb+srv://sa:D3vPl4c3@dpcampus.cywgo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
