@@ -1,32 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import {TechnologyModel} from "../../models/technology.model";
-import {TechnologyService} from "../../services/technology.service";
+import {Component, OnInit} from "@angular/core";
 import {MatDialog} from "@angular/material/dialog";
 import {MatTableDataSource} from "@angular/material/table";
 import {first} from "rxjs";
-import {TechnologyCreateEditComponent} from "./technology-create-edit/technology-create-edit.component";
+import {
+  TechnologyCreateEditComponent
+} from "../technologies/technology-create-edit/technology-create-edit.component";
 import Swal from "sweetalert2";
+import {CategoryModel} from "../../models/category.model";
+import {CategoryService} from "../../services/category.service";
+import {CategoryCreateEditComponent} from "./category-create-edit/category-create-edit.component";
 
-const technologies: TechnologyModel[] = []
+const categories: CategoryModel[] = []
 
 @Component({
-  selector: 'app-technologies',
-  templateUrl: './technologies.component.html',
-  styleUrls: ['./technologies.component.css']
+  selector: 'app-categories',
+  templateUrl: './categories.component.html',
+  styleUrls: ['./categories.component.css']
 })
-export class TechnologiesComponent implements OnInit {
+export class CategoriesComponent implements OnInit {
 
-  technology: TechnologyModel = new TechnologyModel('', '', false);
+  category: any = new CategoryModel('', '', false);
   editAction: boolean = false;
   loading = true
 
   constructor(
     private dialog: MatDialog,
-    private technologiesService: TechnologyService
+    private categoriesService: CategoryService
   ) { }
 
-  displayedColumns: string[] = ['name', 'category', 'actionEdit', 'actionDelete'];
-  dataSource = new MatTableDataSource(technologies);
+  displayedColumns: string[] = ['name', 'actionEdit', 'actionDelete'];
+  dataSource = new MatTableDataSource(categories);
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -34,30 +37,30 @@ export class TechnologiesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.technologiesService.getAll()
+    this.categoriesService.getAll()
       .pipe(
         first()
       ).subscribe( (response: any) => {
-      this.dataSource.data = response.filter( (technology: any) => {
-        if (technology.active) {
-          return technology;
+      this.dataSource.data = response.filter( (category: any) => {
+        if (category.active) {
+          return category;
         }
       })
       this.loading = false;
     })
   }
 
-  openDialog(technology?: TechnologyModel) {
+  openDialog(category?: CategoryModel) {
 
-    if (technology) {
-      this.technology = technology;
+    if (category) {
+      this.category = category;
       this.editAction = true;
     }
 
-    const dialogRef = this.dialog.open(TechnologyCreateEditComponent, {
+    const dialogRef = this.dialog.open(CategoryCreateEditComponent, {
       // disableClose: true,
       data: {
-        technology: this.technology,
+        category: this.category,
         editAction: this.editAction,
       }
     });
@@ -72,7 +75,7 @@ export class TechnologiesComponent implements OnInit {
 
   removeTechnology(id: string) {
     Swal.fire({
-      title: '¿Quiere eliminar la tecnologia?',
+      title: '¿Quiere eliminar la categoría?',
       text: ``,
       icon: 'warning',
       showCancelButton: true,
@@ -84,22 +87,21 @@ export class TechnologiesComponent implements OnInit {
       heightAuto: false,
     }).then((result: any) => {
       if (result.isConfirmed) {
-        this.technologiesService.update(id, { active: false })
-          .subscribe( () => {
+        this.categoriesService.update(id, {active: false})
+          .subscribe(() => {
             Swal.fire({
               position: 'center',
               icon: 'success',
-              title: 'Curso eliminado',
+              title: 'Categoría eliminada',
               backdrop: 'rgba(103, 58, 183, 0.3)',
               heightAuto: false,
               showConfirmButton: false,
               timer: 1500
             })
-            setTimeout( () => {
+            setTimeout(() => {
               window.location.reload();
             }, 1400)
           })
-
       }
     })
   }

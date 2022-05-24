@@ -4,6 +4,10 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {CoursesComponent} from "../../courses/courses.component";
 import {TechnologyService} from "../../../services/technology.service";
+import {CategoryService} from "../../../services/category.service";
+import {CategoryModel} from "../../../models/category.model";
+import {first} from "rxjs";
+import {errorCommunicationWithRetry} from "../../../helpers/error.communication";
 
 @Component({
   selector: 'app-technology-create-edit',
@@ -12,20 +16,33 @@ import {TechnologyService} from "../../../services/technology.service";
 })
 export class TechnologyCreateEditComponent implements OnInit {
 
+  categories: CategoryModel[] = [];
   messageTitle: string = '';
 
   public technologyForm: FormGroup = this.fb.group({
-    name: new FormControl(this.data.technology.name, [Validators.required, Validators.minLength(2)])
+    name: new FormControl(this.data.technology.name, [Validators.required, Validators.minLength(2)]),
+    categoryId: new FormControl(this.data.technology.category ? this.data.technology.category._id : '', [Validators.required]),
   })
 
   constructor(
     private technologyService: TechnologyService,
+    private categoryService: CategoryService,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<CoursesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   ngOnInit(): void {
+    this.categoryService.getAll()
+      .pipe(
+        first()
+      ).subscribe(
+      (response: any) => {
+        this.categories = response;
+      },
+      (error: any) => {
+        errorCommunicationWithRetry(error)
+      })
   }
 
   createEditTechnology() {
@@ -33,7 +50,11 @@ export class TechnologyCreateEditComponent implements OnInit {
     // EDIT
     if (this.data.editAction) {
       this.messageTitle = 'Tecnología actualizada';
-      this.technologyService.update(this.data.technology._id, this.technologyForm.value)
+      const updateTech = {
+        name: this.technologyForm.value.name,
+        categoryId: this.technologyForm.value.categoryId,
+      }
+      this.technologyService.update(this.data.technology._id, updateTech)
         .subscribe( () => {
           this.dialogRef.close({
             formValue: this.technologyForm.value,
@@ -45,7 +66,11 @@ export class TechnologyCreateEditComponent implements OnInit {
     // CREATE
     else {
       this.messageTitle = 'Tecnología Creada';
-      this.technologyService.create(this.technologyForm.value.name)
+      const newTech = {
+        name: this.technologyForm.value.name,
+        categoryId: this.technologyForm.value.categoryId,
+      }
+      this.technologyService.create(newTech)
         .subscribe( () => {
           this.dialogRef.close({
             edited: false

@@ -1,0 +1,13 @@
+.field-technology-create-edit-modal {
+  min-width: 450px;
+}
+
+.card-technology-create-edit-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.close-dialog-button {
+  cursor: pointer;
+  float: right;
+}

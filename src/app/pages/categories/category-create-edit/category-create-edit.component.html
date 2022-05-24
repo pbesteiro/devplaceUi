@@ -8,10 +8,10 @@
       </mat-icon>
     </div>
 
-    <form [formGroup]="technologyForm" (ngSubmit)="createEditTechnology()">
+    <form [formGroup]="categoryForm" (ngSubmit)="createEditCategory()">
 
       <mat-card-header>
-        <mat-card-title> Tecnología </mat-card-title>
+        <mat-card-title> Categoría </mat-card-title>
       </mat-card-header>
 
       <mat-card-content class="card-technology-create-edit-container">
@@ -19,17 +19,7 @@
         <!-- Name -->
         <mat-form-field appearance="fill" class="field-login" class="field-technology-create-edit-modal">
           <mat-label for="name">Nombre</mat-label>
-          <input autocomplete="off" id="name" matInput placeholder="Ej: javascript" required formControlName="name">
-        </mat-form-field>
-
-        <!-- Category -->
-        <mat-form-field appearance="fill" class="field-technology-create-edit-modal">
-          <mat-label>Categoría</mat-label>
-          <mat-select formControlName="categoryId">
-            <mat-option *ngFor="let category of categories" [value]="category._id">
-              {{category.name}}
-            </mat-option>
-          </mat-select>
+          <input id="name" matInput placeholder="Ej: base de datos" required formControlName="name">
         </mat-form-field>
 
       </mat-card-content>
@@ -37,7 +27,7 @@
       <div>
         <mat-dialog-actions align="center">
           <button mat-button
-                  [disabled]="technologyForm.invalid"
+                  [disabled]="categoryForm.invalid"
           >Confirmar
           </button>
         </mat-dialog-actions>

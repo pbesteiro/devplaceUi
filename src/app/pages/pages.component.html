@@ -25,6 +25,9 @@
       <li *ngIf="isAdmin || isManager" routerLink="/campus/technologies">
         <mat-icon class="menu-icon">android</mat-icon> <span class="menu-text">Tecnologias</span>
       </li>
+      <li *ngIf="isAdmin || isManager" routerLink="/campus/categories">
+        <mat-icon class="menu-icon">category</mat-icon> <span class="menu-text">Categorías</span>
+      </li>
       <li *ngIf="isAdmin" routerLink="/campus/users">
         <mat-icon class="menu-icon">build</mat-icon> <span class="menu-text">Managers</span>
       </li>

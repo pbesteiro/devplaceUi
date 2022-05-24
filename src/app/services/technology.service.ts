@@ -13,8 +13,8 @@ export class TechnologyService {
     return this.http.get<TechnologyModel[]>(`${environment.apiUrl}/technologies`);
   }
 
-  create(technology: string) {
-    return this.http.post(`${environment.apiUrl}/technologies`, {name: technology})
+  create(technology: any) {
+    return this.http.post(`${environment.apiUrl}/technologies`, technology)
   }
 
   update(id: string, body: any) {
