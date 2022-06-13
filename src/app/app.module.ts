@@ -15,6 +15,7 @@ import { jwtInterceptorProvider } from "./interceptors/jwt.interceptor";
 import {MAT_DATE_LOCALE} from "@angular/material/core";
 import {HashLocationStrategy, LocationStrategy, registerLocaleData} from "@angular/common";
 import localeEs from '@angular/common/locales/es'
+import {NgxWhastappButtonModule} from "ngx-whatsapp-button";
 registerLocaleData(localeEs, 'es')
 
 @NgModule({
@@ -28,6 +29,7 @@ registerLocaleData(localeEs, 'es')
     AuthModule,
     BrowserModule,
     BrowserAnimationsModule,
+    NgxWhastappButtonModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

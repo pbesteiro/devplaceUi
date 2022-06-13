@@ -13,6 +13,9 @@ import { LoginUserModel } from "../../models/login.model";
 })
 export class LoginComponent implements OnInit {
 
+  public phone = "+54 9 11 5962-1707"
+  public title = "DevPlaces";
+
   loginForm: any;
   hide = true;
   loading = false;

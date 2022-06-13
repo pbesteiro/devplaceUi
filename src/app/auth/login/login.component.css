@@ -1,5 +1,5 @@
 .login-container {
-  height: 80vh;
+  height: 40vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,7 +35,19 @@ mat-card-title {
 }
 
 .login-button {
-  min-width: 250px;
+  width: 100%;
+  font-size: 18px;
+  height: 50px;
+  border-radius: 30px;
+  min-width: 300px;
+  color: white;
+  background-color: #145ade !important;
+  opacity: 1;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+  justify-content: center;
+  margin: 0px;
+  border: 0px;
 }
 
 
@@ -58,3 +70,260 @@ mat-card-title {
   border-top-color: #000000;
   animation: spinner .8s linear infinite;
 }
+
+header {
+  text-align: center;
+  padding: 25px 0px;
+}
+
+.logo {
+  max-width: 185px;
+  vertical-align: middle;
+}
+
+h3 {
+  font-family: "DM Sans", sans-serif;
+  font-size: 30px;
+  letter-spacing: -0.25px;
+  color: #1f1735;
+  text-align: start;
+  margin-bottom: 45px;
+}
+
+.btn-text {
+  flex: 1 0 0%;
+}
+
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'DM Sans', sans-serif;
+}
+
+
+/* VARIABLES */
+:root{
+  --color-tittle: #000000;
+  --color-subtittle: #425466;
+  --color-border-gray: #c2bfbf;
+  --color-gray: #f2f2f2;
+  --buttom-submit: #145ade;
+  --buttom-whatsapp: #25d366;
+}
+
+
+/* BOTON DE WHATSAPP */
+.whatsapp{
+  position: fixed;
+  z-index: 1;
+  bottom: 50px;
+  right: 45px;
+  height: 60px;
+  width: 60px;
+  background-color: var(--buttom-whatsapp);
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.whatsapp i{
+  font-size: 30px;
+  color: #fff;
+}
+
+/* CONTENIDO */
+.main{
+  position: relative;
+  width: 100vw;
+  margin-top: 36px;
+  padding: 0 24px;
+  max-width: 500px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+
+/* LOGO */
+.header{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__logo{
+  max-width: 185px;
+}
+
+/* FORMULARIO */
+.form{
+  width: 100%;
+  margin-top: 55px;
+  margin-bottom: 15px;
+}
+
+.form__title{
+  display: inline-block;
+  color: #201634;
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.form__label{
+  display: block;
+  font-weight: 700;
+  color: var(--color-subtittle);
+  padding-left: 16px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.form__input{
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-gray);
+  background-color: #f2f2f2;
+  border-radius: 25px;
+  font-size: 18px;
+  height: 50px;
+  width: 100%;
+  color: #201634;
+  padding-left: 16px;
+  transition: outline 1s ease-in-out;
+}
+
+.form__input:hover{
+  outline: 2px solid #c2bfbf;
+
+}
+
+.form__submit{
+  width: 100%;
+  margin-top: 40px;
+  padding: 10px 0;
+  border-radius: 22px;
+  cursor: pointer;
+  border: 1px solid #145ade;
+  background-color: #145ade;
+  font-weight: 700px;
+  margin-bottom: 10px;
+}
+
+.form__submit span{
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* FINAL */
+.footer{
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+
+}
+
+.footer__loss-pass{
+  text-align: center;
+  color: #425466;
+  font-size: 14px;
+  padding-bottom: 10px;
+}
+
+.footer__new-user{
+  margin-top: 30px;
+  border-top: 3px solid var(--color-gray);
+  padding: 40px 0;
+}
+
+.footer__new-user a{
+  display: block;
+  text-align: center;
+  width: 100%;
+  border: 2px solid #425466;
+  text-decoration: none;
+  color: black;
+  border-radius: 25px;
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+
+
+
+
+
+/* RESPONSIVE: DESKTOP */
+
+@media screen and (min-width: 700px){
+
+  .main{
+    margin-top: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: none;
+    overflow: hidden;
+  }
+
+  .header__logo{
+    max-width: 255px;
+  }
+
+
+  .form{
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    margin-top: 55px;
+    margin-bottom: 30px;
+  }
+
+  .form__title{
+    text-align: center;
+    margin-top: 29px;
+    font-size: 40px;
+  }
+
+  .form__label{
+    font-size: 20px;
+  }
+
+  .form__input{
+    display: flex;
+    align-items: center;
+    width: 500px;
+  }
+
+
+  .form__submit span{
+    font-size: 20px;
+  }
+
+
+  .footer__new-user a{
+    padding: 12px 0;
+    font-weight: 700;
+    font-size: 20px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

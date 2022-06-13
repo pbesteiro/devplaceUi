@@ -1,43 +1,27 @@
-<div class="login-container">
-
-  <mat-card>
-
-    <form [formGroup]="loginForm" (ngSubmit)="login()">
-
-      <mat-card-header>
-        <mat-card-title> Dev Place</mat-card-title>
-      </mat-card-header>
-
-      <mat-card-content class="card-login-container">
-
-        <!-- Email -->
-        <mat-form-field appearance="fill" class="field-login">
-          <mat-label for="name">Enter your email</mat-label>
-          <input autocomplete="off" id="email" matInput placeholder="pat@example.com" required formControlName="email">
-          <mat-icon class="email-icon" matSuffix>'email'</mat-icon>
-        </mat-form-field>
-
-        <!-- Password -->
-        <mat-form-field appearance="fill" class="field-login">
-          <mat-label for="password">Enter your password</mat-label>
-          <input required id="password" matInput formControlName="password" [type]="hide ? 'password' : 'text'">
-          <span mat-icon-button class="password-icon" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                  [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </span>
-        </mat-form-field>
-
-        <mat-card-actions>
-
-          <!-- Submit -->
-          <button class="login-button" [class.spinner]="loading" [disabled]="loading" mat-raised-button color="primary" type="submit">Login</button>
-
-        </mat-card-actions>
-
-      </mat-card-content>
-
-    </form>
-
-  </mat-card>
-
+<div class="whatsapp">
+  <jjva-ngx-whatsapp-button [ngx_whatsapp_phone]="phone" [ngx_whatsapp_text]="title"></jjva-ngx-whatsapp-button>
 </div>
+<main class="main">
+  <div class="main-cont">
+    <div class="header">
+      <img class="header__logo" src="assets/img/logo.png" alt="logo">
+    </div>
+    <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
+      <h3 class="form__title">Ingresar</h3>
+      <label class="form__label">e-Mail</label>
+      <input autocomplete="off" class="form__input" type="mail" required formControlName="email"><br>
+      <label class="form__label">Contraseña</label>
+      <input class="form__input" type="password" formControlName="password">
+      <button class="form__submit" type="submit">
+        <span>Ingresar</span>
+      </button>
+    </form>
+    <footer class="footer" style="display: none">
+      <a class="footer__loss-pass" href="#">¿Olvidaste la contraseña?</a>
+      <div class="footer__new-user">
+        <a href="#">Crear una cuenta</a>
+      </div>
+    </footer>
+  </div>
+</main>
+

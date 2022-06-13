@@ -8,6 +8,7 @@
 
 .menu-title {
   font-size: xx-large;
+  cursor: pointer;
   /*background-image: url('/assets/img/logo.png');*/
 }
 
